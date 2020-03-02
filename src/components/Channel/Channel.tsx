@@ -28,10 +28,15 @@ export const Channel: FunctionComponent<ChannelProps> = props => {
   const { progress, isPlaying } = usePlayoutStatus();
   const canvases: HTMLCanvasElement[] = [];
 
-  const canvasRef = useCallback((canvas: HTMLCanvasElement) => {
-    const index: number = parseInt(canvas.dataset.index!, 10);
-    canvases[index] = canvas;
-  }, []);
+  const canvasRef = useCallback(
+    (canvas: HTMLCanvasElement | null) => {
+      if (canvas !== null) {
+        const index: number = parseInt(canvas.dataset.index!, 10);
+        canvases[index] = canvas;
+      }
+    },
+    [data, bits, waveHeight, waveOutlineColor, scale, length]
+  );
 
   useEffect(() => {
     let offset = 0;
@@ -61,7 +66,7 @@ export const Channel: FunctionComponent<ChannelProps> = props => {
 
       offset += MAX_CANVAS_WIDTH;
     }
-  }, [data, bits, waveHeight, waveOutlineColor, scale]);
+  }, [data, bits, waveHeight, waveOutlineColor, scale, length]);
 
   let totalWidth = length;
   let waveformCount = 0;
