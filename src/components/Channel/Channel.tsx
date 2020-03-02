@@ -4,24 +4,25 @@ import React, {
   useContext,
   useCallback,
 } from 'react';
-import { withTheme, ThemeContext } from 'styled-components';
+import { withTheme, ThemeContext, DefaultTheme } from 'styled-components';
 import { Progress } from './Progress';
 import { Wrapper } from './Wrapper';
 import { Waveform } from './Waveform';
 import { useDevicePixelRatio } from '../../contexts/DevicePixelRatio';
-import { useWPSettings } from '../../contexts/Waveform';
+import { usePeaks } from '../../contexts/Peaks';
 import { usePlayoutStatus } from '../../contexts/Playout';
 
 const MAX_CANVAS_WIDTH = 1000;
 
 export interface ChannelProps {
   className?: string;
-  index?: number;
+  index: number;
+  theme?: DefaultTheme;
 }
 
 export const Channel: FunctionComponent<ChannelProps> = props => {
   const scale = useDevicePixelRatio();
-  const { peaks, bits } = useWPSettings();
+  const { data, bits, length } = usePeaks();
   const { waveHeight, waveOutlineColor } = useContext(ThemeContext);
   const { index, className } = props;
   const { progress, isPlaying } = usePlayoutStatus();
@@ -46,8 +47,8 @@ export const Channel: FunctionComponent<ChannelProps> = props => {
 
       const peakSegmentLength = canvas.width / scale;
       for (let i = 0; i < peakSegmentLength; i += 1) {
-        const minPeak = peaks[(i + offset) * 2] / maxValue;
-        const maxPeak = peaks[(i + offset) * 2 + 1] / maxValue;
+        const minPeak = data[(i + offset) * 2] / maxValue;
+        const maxPeak = data[(i + offset) * 2 + 1] / maxValue;
 
         const min = Math.abs(minPeak * h2);
         const max = Math.abs(maxPeak * h2);
@@ -60,16 +61,16 @@ export const Channel: FunctionComponent<ChannelProps> = props => {
 
       offset += MAX_CANVAS_WIDTH;
     }
-  }, [peaks, bits, waveHeight, waveOutlineColor, scale]);
+  }, [data, bits, waveHeight, waveOutlineColor, scale]);
 
-  let totalWidth = peaks.length;
+  let totalWidth = length;
   let waveformCount = 0;
   const waveforms = [];
   while (totalWidth > 0) {
     const currentWidth = Math.min(totalWidth, MAX_CANVAS_WIDTH);
     const waveform = (
       <Waveform
-        key={`${peaks.length}-${waveformCount}`}
+        key={`${length}-${waveformCount}`}
         cssWidth={currentWidth}
         width={currentWidth * scale}
         height={waveHeight * scale}
@@ -85,7 +86,7 @@ export const Channel: FunctionComponent<ChannelProps> = props => {
   }
 
   return (
-    <Wrapper index={index} cssWidth={peaks.length} className={className}>
+    <Wrapper index={index} cssWidth={length} className={className}>
       <Progress progress={progress} />
       {waveforms}
     </Wrapper>
