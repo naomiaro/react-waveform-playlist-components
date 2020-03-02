@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-interface ProgressProps {
+export interface ProgressProps {
   readonly progress: number;
 }
 

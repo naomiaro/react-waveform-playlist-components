@@ -4,7 +4,7 @@ import React, {
   useContext,
   useCallback,
 } from 'react';
-import { withTheme, DefaultTheme, ThemeContext } from 'styled-components';
+import { withTheme, ThemeContext } from 'styled-components';
 import { Progress } from './Progress';
 import { Wrapper } from './Wrapper';
 import { Waveform } from './Waveform';
@@ -14,10 +14,9 @@ import { usePlayoutStatus } from 'contexts/Playout';
 
 const MAX_CANVAS_WIDTH = 1000;
 
-interface ChannelProps {
-  theme?: DefaultTheme;
+export interface ChannelProps {
   className?: string;
-  index: number;
+  index?: number;
 }
 
 export const Channel: FunctionComponent<ChannelProps> = props => {
