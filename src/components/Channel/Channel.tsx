@@ -1,6 +1,5 @@
 import React, {
   FunctionComponent,
-  useRef,
   useEffect,
   useContext,
   useCallback,
@@ -27,7 +26,6 @@ export const Channel: FunctionComponent<ChannelProps> = props => {
   const { waveHeight, waveOutlineColor } = useContext(ThemeContext);
   const { index, className } = props;
   const { progress, isPlaying } = usePlayoutStatus();
-  //   const canvases = useRef([]);
   const canvases: HTMLCanvasElement[] = [];
 
   const canvasRef = useCallback((canvas: HTMLCanvasElement) => {
@@ -88,13 +86,8 @@ export const Channel: FunctionComponent<ChannelProps> = props => {
   }
 
   return (
-    <Wrapper
-      index={index}
-      cssWidth={peaks.length}
-      waveHeight={waveHeight}
-      className={className}
-    >
-      <Progress progress={progress} waveHeight={waveHeight} />
+    <Wrapper index={index} cssWidth={peaks.length} className={className}>
+      <Progress progress={progress} />
       {waveforms}
     </Wrapper>
   );
