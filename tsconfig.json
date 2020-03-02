@@ -1,5 +1,11 @@
 {
-  "include": ["src", "types", "test"],
+  "include": [
+    "src",
+    "types",
+    "test",
+    "stories/Thing.stories.tsx",
+    "stories/Channel.stories.tsx"
+  ],
   "exclude": ["node_modules"],
   "compilerOptions": {
     "target": "es5",
@@ -20,7 +26,7 @@
     "noImplicitReturns": true,
     "noFallthroughCasesInSwitch": true,
     "moduleResolution": "node",
-    "rootDir": "src",
+    "rootDirs": ["src", "stories"],
     "baseUrl": "src",
     "jsx": "react",
     "esModuleInterop": true,

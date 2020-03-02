@@ -8,9 +8,9 @@ import { withTheme, ThemeContext } from 'styled-components';
 import { Progress } from './Progress';
 import { Wrapper } from './Wrapper';
 import { Waveform } from './Waveform';
-import { useDevicePixelRatio } from 'contexts/DevicePixelRatio';
-import { useWPSettings } from 'contexts/Waveform';
-import { usePlayoutStatus } from 'contexts/Playout';
+import { useDevicePixelRatio } from '../../contexts/DevicePixelRatio';
+import { useWPSettings } from '../../contexts/Waveform';
+import { usePlayoutStatus } from '../../contexts/Playout';
 
 const MAX_CANVAS_WIDTH = 1000;
 
