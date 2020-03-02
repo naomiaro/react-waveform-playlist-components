@@ -2,7 +2,6 @@ import styled from 'styled-components';
 
 export interface ControlsProps {
   readonly controlWidth: number;
-  readonly controlHeight: number;
 }
 
 export const Controls = styled.div<ControlsProps>`
@@ -12,5 +11,5 @@ export const Controls = styled.div<ControlsProps>`
   background: white;
   text-align: center;
   width: ${props => props.controlWidth}px;
-  height: ${props => props.controlHeight}px;
+  height: ${props => props.theme.waveHeight}px;
 `;
