@@ -22,9 +22,13 @@ export default class extends Loader {
         fr.addEventListener('load', e => {
           const decoderPromise = super.fileLoad(e);
 
-          decoderPromise.then(audioBuffer => {
-            resolve(audioBuffer);
-          });
+          decoderPromise
+            .then(audioBuffer => {
+              resolve(audioBuffer);
+            })
+            .catch(e => {
+              reject(e);
+            });
         });
 
         fr.addEventListener('error', err => {

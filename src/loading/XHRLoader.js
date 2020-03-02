@@ -19,9 +19,13 @@ export default class extends Loader {
       xhr.addEventListener('load', e => {
         const decoderPromise = super.fileLoad(e);
 
-        decoderPromise.then(audioBuffer => {
-          resolve(audioBuffer);
-        });
+        decoderPromise
+          .then(audioBuffer => {
+            resolve(audioBuffer);
+          })
+          .catch(e => {
+            reject(e);
+          });
       });
 
       xhr.addEventListener('error', () => {
