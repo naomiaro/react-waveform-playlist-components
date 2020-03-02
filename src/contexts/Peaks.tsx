@@ -18,14 +18,8 @@ type Props = {
   samplesPerPixel: number;
   length: number;
 };
-export const PeaksProvider = ({ children, ...props }: Props) => {
+export const PeaksProvider = ({ children, ...props }: Partial<Props>) => {
   const [settings] = useState(Object.assign({}, defaultSettings, props));
-  //   React.useEffect(() => {
-  //     // We'd get the theme from a web API / local storage in a real app
-  //     // We've hardcoded the theme in our example
-  //     const currentTheme = 'lightblue';
-  //     setTheme(currentTheme);
-  //   }, []);
 
   return (
     <PeaksContext.Provider value={settings}>{children}</PeaksContext.Provider>
@@ -33,4 +27,3 @@ export const PeaksProvider = ({ children, ...props }: Props) => {
 };
 
 export const usePeaks = () => useContext(PeaksContext);
-// export const PeaksProvider = PeaksContext.Provider;

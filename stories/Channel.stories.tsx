@@ -36,6 +36,4 @@ export default {
   decorators: [withContexts(contexts)],
 };
 
-// By passing optional props to this story, you can control the props of the component when
-// you consume the story in a test.
 export const Default = () => <StyledChannel index={0} />;
