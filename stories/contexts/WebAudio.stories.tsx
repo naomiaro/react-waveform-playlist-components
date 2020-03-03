@@ -7,14 +7,32 @@ export default {
 };
 
 export const Default = () => (
-  <WebAudioProvider
-    samplesPerPixel={1000}
-    bits={16}
-    source={'/audio/Vocals30.mp3'}
-  >
+  <WebAudioProvider source={'/audio/Vocals30.mp3'}>
     {(peaks, bits, length) =>
       peaks.map((data, index) => (
-        <StyledChannel index={index} data={data} bits={bits} length={length} />
+        <StyledChannel
+          key={index}
+          index={index}
+          data={data}
+          bits={bits}
+          length={length}
+        />
+      ))
+    }
+  </WebAudioProvider>
+);
+
+export const MultiChannel = () => (
+  <WebAudioProvider source={'/audio/Vocals30.mp3'} showMultiChannel={true}>
+    {(peaks, bits, length) =>
+      peaks.map((data, index) => (
+        <StyledChannel
+          key={index}
+          index={index}
+          data={data}
+          bits={bits}
+          length={length}
+        />
       ))
     }
   </WebAudioProvider>

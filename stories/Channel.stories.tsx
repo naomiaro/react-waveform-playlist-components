@@ -37,7 +37,7 @@ export default {
 
 export const Default = () => (
   <StyledChannel
-    data={BBCWaveformData.data}
+    data={new Int16Array(BBCWaveformData.data)}
     bits={BBCWaveformData.bits}
     length={BBCWaveformData.length}
     index={0}

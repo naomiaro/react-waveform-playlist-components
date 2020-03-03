@@ -6,8 +6,8 @@ import { load } from '../loading';
 type AudioDataSource = string | Blob;
 type Props = {
   children: (peaks: Peaks[], bits: number, length: number) => JSX.Element[];
-  samplesPerPixel: number;
-  bits: number;
+  samplesPerPixel?: number;
+  bits?: number;
   showMultiChannel?: boolean;
   source: AudioDataSource;
 };
@@ -18,7 +18,7 @@ export const WebAudioProvider = ({
   children,
   source,
   bits = 16,
-  samplesPerPixel,
+  samplesPerPixel = 1000,
   showMultiChannel = false,
 }: Props) => {
   const asyncAudioData = useAsync(loadAudioData, [source]);
