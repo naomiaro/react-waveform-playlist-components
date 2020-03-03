@@ -12,6 +12,10 @@ export const Default = () => (
     bits={16}
     source={'/audio/Vocals30.mp3'}
   >
-    <StyledChannel index={0} />
+    {(peaks, bits, length) =>
+      peaks.map((data, index) => (
+        <StyledChannel index={index} data={data} bits={bits} length={length} />
+      ))
+    }
   </WebAudioProvider>
 );

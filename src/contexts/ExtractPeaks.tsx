@@ -1,38 +1,29 @@
-import React, { ReactNode } from 'react';
+import React, { Fragment } from 'react';
 import extractPeaks from 'webaudio-peaks';
-import { PeaksProvider } from './Peaks';
 
 type Props = {
-  children?: ReactNode;
+  children: (peaks: Number[][], bits: number, length: number) => JSX.Element[];
   samplesPerPixel: number;
   bits: number;
   source: AudioBuffer;
+  showMultiChannel: boolean;
 };
 
 export const ExtractPeacksProvider = ({
   children,
   source,
-  bits,
+  bits = 16,
   samplesPerPixel,
+  showMultiChannel = false,
 }: Props) => {
   const peaks = extractPeaks(
     source,
     samplesPerPixel,
-    true,
+    !showMultiChannel,
     0,
     source.length,
     bits
   );
 
-  return (
-    <PeaksProvider
-      data={peaks.data[0]} //TODO work with multiple channels
-      bits={bits}
-      sampleRate={source.sampleRate}
-      samplesPerPixel={samplesPerPixel}
-      length={peaks.length}
-    >
-      {children}
-    </PeaksProvider>
-  );
+  return <Fragment>{children(peaks.data, peaks.bits, peaks.length)}}</Fragment>;
 };

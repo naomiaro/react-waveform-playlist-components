@@ -1,13 +1,14 @@
-import React, { ReactNode } from 'react';
+import React from 'react';
 import { useAsync } from 'react-async-hook';
 import { ExtractPeacksProvider } from './ExtractPeaks';
 import { load } from '../loading';
 
 type AudioDataSource = string | Blob;
 type Props = {
-  children?: ReactNode;
+  children: (data: Number[][], bits: number, length: number) => JSX.Element[];
   samplesPerPixel: number;
   bits: number;
+  showMultiChannel?: boolean;
   source: AudioDataSource;
 };
 
@@ -16,8 +17,9 @@ const loadAudioData = async (source: AudioDataSource) => await load(source);
 export const WebAudioProvider = ({
   children,
   source,
-  bits,
+  bits = 16,
   samplesPerPixel,
+  showMultiChannel = false,
 }: Props) => {
   const asyncAudioData = useAsync(loadAudioData, [source]);
   return (
@@ -29,6 +31,7 @@ export const WebAudioProvider = ({
           source={asyncAudioData.result}
           bits={bits}
           samplesPerPixel={samplesPerPixel}
+          showMultiChannel={showMultiChannel}
         >
           {children}
         </ExtractPeacksProvider>
