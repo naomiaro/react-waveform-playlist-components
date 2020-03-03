@@ -2,7 +2,7 @@ import React, { Fragment } from 'react';
 import extractPeaks from 'webaudio-peaks';
 
 type Props = {
-  children: (peaks: Number[][], bits: number, length: number) => JSX.Element[];
+  children: (peaks: number[][], bits: number, length: number) => JSX.Element[];
   samplesPerPixel: number;
   bits: number;
   source: AudioBuffer;

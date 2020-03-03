@@ -1,11 +1,5 @@
 {
-  "include": [
-    "src",
-    "types",
-    "test",
-    "stories/Thing.stories.tsx",
-    "stories/Channel.stories.tsx"
-  ],
+  "include": ["src", "types", "test", "stories"],
   "exclude": ["node_modules"],
   "compilerOptions": {
     "target": "es5",

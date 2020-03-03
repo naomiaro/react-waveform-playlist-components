@@ -17,7 +17,7 @@ export interface ChannelProps {
   className?: string;
   index: number;
   theme?: DefaultTheme;
-  data: Number[];
+  data: number[];
   bits: number;
   length: number;
 }
@@ -28,8 +28,6 @@ export const Channel: FunctionComponent<ChannelProps> = props => {
   const { data, bits, length, index, className } = props;
   const { progress, isPlaying } = usePlayoutStatus();
   const canvases: HTMLCanvasElement[] = [];
-
-  console.log(data);
 
   const canvasRef = useCallback(
     (canvas: HTMLCanvasElement | null) => {
