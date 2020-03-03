@@ -8,7 +8,7 @@ const base = {
   waveHeight: 80,
   timeColor: 'grey',
   timeScaleHeight: 10,
-  controlWidth: 0,
+  controlWidth: 200,
 };
 
 const reverse = {

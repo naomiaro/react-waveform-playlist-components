@@ -5,7 +5,7 @@ import { load } from '../loading';
 
 type AudioDataSource = string | Blob;
 type Props = {
-  children: (peaks: Peaks[], bits: Bits, length: number) => JSX.Element[];
+  children: (peaks: Peaks[], bits: Bits, length: number) => JSX.Element;
   samplesPerPixel?: number;
   bits?: Bits;
   showMultiChannel?: boolean;

@@ -1,15 +1,11 @@
 import styled from 'styled-components';
 
-export interface ControlsProps {
-  readonly controlWidth: number;
-}
-
-export const Controls = styled.div<ControlsProps>`
+export const Controls = styled.div`
   position: absolute;
   z-index: 1;
   left: 0;
   background: white;
   text-align: center;
-  width: ${props => props.controlWidth}px;
+  width: ${props => props.theme.controlWidth}px;
   height: ${props => props.theme.waveHeight}px;
 `;

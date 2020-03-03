@@ -3,7 +3,7 @@ import { StyledChannel } from '../src/components/Channel/Channel';
 import BBCWaveformData from '../media/json/vocals.json';
 
 export default {
-  title: 'Channel',
+  title: 'Styled Channel',
   component: StyledChannel,
 };
 
