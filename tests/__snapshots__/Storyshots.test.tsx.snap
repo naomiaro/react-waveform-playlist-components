@@ -1,11 +1,901 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Storyshots Channel Default 1`] = `null`;
+exports[`Storyshots Channel Default 1`] = `
+<mapProps(withState(withHandlers(lifecycle(branch(BaseComponent)))))
+  themes={
+    Immutable.List [
+      Object {
+        "controlWidth": 0,
+        "name": "Reverse",
+        "timeColor": "grey",
+        "timeScaleHeight": 10,
+        "waveFillColor": "black",
+        "waveHeight": 80,
+        "waveOutlineColor": "green",
+        "waveProgressColor": "orange",
+      },
+      Object {
+        "controlWidth": 0,
+        "name": "Base",
+        "timeColor": "grey",
+        "timeScaleHeight": 10,
+        "waveFillColor": "green",
+        "waveHeight": 80,
+        "waveOutlineColor": "black",
+        "waveProgressColor": "orange",
+      },
+    ]
+  }
+>
+  <withState(withHandlers(lifecycle(branch(BaseComponent))))
+    Provider={[Function]}
+    themes={
+      Immutable.List [
+        Object {
+          "controlWidth": 0,
+          "name": "Reverse",
+          "timeColor": "grey",
+          "timeScaleHeight": 10,
+          "waveFillColor": "black",
+          "waveHeight": 80,
+          "waveOutlineColor": "green",
+          "waveProgressColor": "orange",
+        },
+        Object {
+          "controlWidth": 0,
+          "name": "Base",
+          "timeColor": "grey",
+          "timeScaleHeight": 10,
+          "waveFillColor": "green",
+          "waveHeight": 80,
+          "waveOutlineColor": "black",
+          "waveProgressColor": "orange",
+        },
+      ]
+    }
+  >
+    <withHandlers(lifecycle(branch(BaseComponent)))
+      Provider={[Function]}
+      setTheme={[Function]}
+      theme={null}
+      themes={
+        Immutable.List [
+          Object {
+            "controlWidth": 0,
+            "name": "Reverse",
+            "timeColor": "grey",
+            "timeScaleHeight": 10,
+            "waveFillColor": "black",
+            "waveHeight": 80,
+            "waveOutlineColor": "green",
+            "waveProgressColor": "orange",
+          },
+          Object {
+            "controlWidth": 0,
+            "name": "Base",
+            "timeColor": "grey",
+            "timeScaleHeight": 10,
+            "waveFillColor": "green",
+            "waveHeight": 80,
+            "waveOutlineColor": "black",
+            "waveProgressColor": "orange",
+          },
+        ]
+      }
+    >
+      <lifecycle(branch(BaseComponent))
+        Provider={[Function]}
+        onSelectTheme={[Function]}
+        setTheme={[Function]}
+        theme={null}
+        themes={
+          Immutable.List [
+            Object {
+              "controlWidth": 0,
+              "name": "Reverse",
+              "timeColor": "grey",
+              "timeScaleHeight": 10,
+              "waveFillColor": "black",
+              "waveHeight": 80,
+              "waveOutlineColor": "green",
+              "waveProgressColor": "orange",
+            },
+            Object {
+              "controlWidth": 0,
+              "name": "Base",
+              "timeColor": "grey",
+              "timeScaleHeight": 10,
+              "waveFillColor": "green",
+              "waveHeight": 80,
+              "waveOutlineColor": "black",
+              "waveProgressColor": "orange",
+            },
+          ]
+        }
+      >
+        <branch(BaseComponent)
+          Provider={[Function]}
+          onSelectTheme={[Function]}
+          setTheme={[Function]}
+          theme={null}
+          themes={
+            Immutable.List [
+              Object {
+                "controlWidth": 0,
+                "name": "Reverse",
+                "timeColor": "grey",
+                "timeScaleHeight": 10,
+                "waveFillColor": "black",
+                "waveHeight": 80,
+                "waveOutlineColor": "green",
+                "waveProgressColor": "orange",
+              },
+              Object {
+                "controlWidth": 0,
+                "name": "Base",
+                "timeColor": "grey",
+                "timeScaleHeight": 10,
+                "waveFillColor": "green",
+                "waveHeight": 80,
+                "waveOutlineColor": "black",
+                "waveProgressColor": "orange",
+              },
+            ]
+          }
+        >
+          <Nothing
+            Provider={[Function]}
+            onSelectTheme={[Function]}
+            setTheme={[Function]}
+            theme={null}
+            themes={
+              Immutable.List [
+                Object {
+                  "controlWidth": 0,
+                  "name": "Reverse",
+                  "timeColor": "grey",
+                  "timeScaleHeight": 10,
+                  "waveFillColor": "black",
+                  "waveHeight": 80,
+                  "waveOutlineColor": "green",
+                  "waveProgressColor": "orange",
+                },
+                Object {
+                  "controlWidth": 0,
+                  "name": "Base",
+                  "timeColor": "grey",
+                  "timeScaleHeight": 10,
+                  "waveFillColor": "green",
+                  "waveHeight": 80,
+                  "waveOutlineColor": "black",
+                  "waveProgressColor": "orange",
+                },
+              ]
+            }
+          />
+        </branch(BaseComponent)>
+      </lifecycle(branch(BaseComponent))>
+    </withHandlers(lifecycle(branch(BaseComponent)))>
+  </withState(withHandlers(lifecycle(branch(BaseComponent))))>
+</mapProps(withState(withHandlers(lifecycle(branch(BaseComponent)))))>
+`;
 
-exports[`Storyshots Track Controls Default 1`] = `null`;
+exports[`Storyshots Track Controls Default 1`] = `
+<mapProps(withState(withHandlers(lifecycle(branch(BaseComponent)))))
+  themes={
+    Immutable.List [
+      Object {
+        "controlWidth": 0,
+        "name": "Reverse",
+        "timeColor": "grey",
+        "timeScaleHeight": 10,
+        "waveFillColor": "black",
+        "waveHeight": 80,
+        "waveOutlineColor": "green",
+        "waveProgressColor": "orange",
+      },
+      Object {
+        "controlWidth": 0,
+        "name": "Base",
+        "timeColor": "grey",
+        "timeScaleHeight": 10,
+        "waveFillColor": "green",
+        "waveHeight": 80,
+        "waveOutlineColor": "black",
+        "waveProgressColor": "orange",
+      },
+    ]
+  }
+>
+  <withState(withHandlers(lifecycle(branch(BaseComponent))))
+    Provider={[Function]}
+    themes={
+      Immutable.List [
+        Object {
+          "controlWidth": 0,
+          "name": "Reverse",
+          "timeColor": "grey",
+          "timeScaleHeight": 10,
+          "waveFillColor": "black",
+          "waveHeight": 80,
+          "waveOutlineColor": "green",
+          "waveProgressColor": "orange",
+        },
+        Object {
+          "controlWidth": 0,
+          "name": "Base",
+          "timeColor": "grey",
+          "timeScaleHeight": 10,
+          "waveFillColor": "green",
+          "waveHeight": 80,
+          "waveOutlineColor": "black",
+          "waveProgressColor": "orange",
+        },
+      ]
+    }
+  >
+    <withHandlers(lifecycle(branch(BaseComponent)))
+      Provider={[Function]}
+      setTheme={[Function]}
+      theme={null}
+      themes={
+        Immutable.List [
+          Object {
+            "controlWidth": 0,
+            "name": "Reverse",
+            "timeColor": "grey",
+            "timeScaleHeight": 10,
+            "waveFillColor": "black",
+            "waveHeight": 80,
+            "waveOutlineColor": "green",
+            "waveProgressColor": "orange",
+          },
+          Object {
+            "controlWidth": 0,
+            "name": "Base",
+            "timeColor": "grey",
+            "timeScaleHeight": 10,
+            "waveFillColor": "green",
+            "waveHeight": 80,
+            "waveOutlineColor": "black",
+            "waveProgressColor": "orange",
+          },
+        ]
+      }
+    >
+      <lifecycle(branch(BaseComponent))
+        Provider={[Function]}
+        onSelectTheme={[Function]}
+        setTheme={[Function]}
+        theme={null}
+        themes={
+          Immutable.List [
+            Object {
+              "controlWidth": 0,
+              "name": "Reverse",
+              "timeColor": "grey",
+              "timeScaleHeight": 10,
+              "waveFillColor": "black",
+              "waveHeight": 80,
+              "waveOutlineColor": "green",
+              "waveProgressColor": "orange",
+            },
+            Object {
+              "controlWidth": 0,
+              "name": "Base",
+              "timeColor": "grey",
+              "timeScaleHeight": 10,
+              "waveFillColor": "green",
+              "waveHeight": 80,
+              "waveOutlineColor": "black",
+              "waveProgressColor": "orange",
+            },
+          ]
+        }
+      >
+        <branch(BaseComponent)
+          Provider={[Function]}
+          onSelectTheme={[Function]}
+          setTheme={[Function]}
+          theme={null}
+          themes={
+            Immutable.List [
+              Object {
+                "controlWidth": 0,
+                "name": "Reverse",
+                "timeColor": "grey",
+                "timeScaleHeight": 10,
+                "waveFillColor": "black",
+                "waveHeight": 80,
+                "waveOutlineColor": "green",
+                "waveProgressColor": "orange",
+              },
+              Object {
+                "controlWidth": 0,
+                "name": "Base",
+                "timeColor": "grey",
+                "timeScaleHeight": 10,
+                "waveFillColor": "green",
+                "waveHeight": 80,
+                "waveOutlineColor": "black",
+                "waveProgressColor": "orange",
+              },
+            ]
+          }
+        >
+          <Nothing
+            Provider={[Function]}
+            onSelectTheme={[Function]}
+            setTheme={[Function]}
+            theme={null}
+            themes={
+              Immutable.List [
+                Object {
+                  "controlWidth": 0,
+                  "name": "Reverse",
+                  "timeColor": "grey",
+                  "timeScaleHeight": 10,
+                  "waveFillColor": "black",
+                  "waveHeight": 80,
+                  "waveOutlineColor": "green",
+                  "waveProgressColor": "orange",
+                },
+                Object {
+                  "controlWidth": 0,
+                  "name": "Base",
+                  "timeColor": "grey",
+                  "timeScaleHeight": 10,
+                  "waveFillColor": "green",
+                  "waveHeight": 80,
+                  "waveOutlineColor": "black",
+                  "waveProgressColor": "orange",
+                },
+              ]
+            }
+          />
+        </branch(BaseComponent)>
+      </lifecycle(branch(BaseComponent))>
+    </withHandlers(lifecycle(branch(BaseComponent)))>
+  </withState(withHandlers(lifecycle(branch(BaseComponent))))>
+</mapProps(withState(withHandlers(lifecycle(branch(BaseComponent)))))>
+`;
 
-exports[`Storyshots WebAudio Default 1`] = `null`;
+exports[`Storyshots WebAudio Default 1`] = `
+<mapProps(withState(withHandlers(lifecycle(branch(BaseComponent)))))
+  themes={
+    Immutable.List [
+      Object {
+        "controlWidth": 0,
+        "name": "Reverse",
+        "timeColor": "grey",
+        "timeScaleHeight": 10,
+        "waveFillColor": "black",
+        "waveHeight": 80,
+        "waveOutlineColor": "green",
+        "waveProgressColor": "orange",
+      },
+      Object {
+        "controlWidth": 0,
+        "name": "Base",
+        "timeColor": "grey",
+        "timeScaleHeight": 10,
+        "waveFillColor": "green",
+        "waveHeight": 80,
+        "waveOutlineColor": "black",
+        "waveProgressColor": "orange",
+      },
+    ]
+  }
+>
+  <withState(withHandlers(lifecycle(branch(BaseComponent))))
+    Provider={[Function]}
+    themes={
+      Immutable.List [
+        Object {
+          "controlWidth": 0,
+          "name": "Reverse",
+          "timeColor": "grey",
+          "timeScaleHeight": 10,
+          "waveFillColor": "black",
+          "waveHeight": 80,
+          "waveOutlineColor": "green",
+          "waveProgressColor": "orange",
+        },
+        Object {
+          "controlWidth": 0,
+          "name": "Base",
+          "timeColor": "grey",
+          "timeScaleHeight": 10,
+          "waveFillColor": "green",
+          "waveHeight": 80,
+          "waveOutlineColor": "black",
+          "waveProgressColor": "orange",
+        },
+      ]
+    }
+  >
+    <withHandlers(lifecycle(branch(BaseComponent)))
+      Provider={[Function]}
+      setTheme={[Function]}
+      theme={null}
+      themes={
+        Immutable.List [
+          Object {
+            "controlWidth": 0,
+            "name": "Reverse",
+            "timeColor": "grey",
+            "timeScaleHeight": 10,
+            "waveFillColor": "black",
+            "waveHeight": 80,
+            "waveOutlineColor": "green",
+            "waveProgressColor": "orange",
+          },
+          Object {
+            "controlWidth": 0,
+            "name": "Base",
+            "timeColor": "grey",
+            "timeScaleHeight": 10,
+            "waveFillColor": "green",
+            "waveHeight": 80,
+            "waveOutlineColor": "black",
+            "waveProgressColor": "orange",
+          },
+        ]
+      }
+    >
+      <lifecycle(branch(BaseComponent))
+        Provider={[Function]}
+        onSelectTheme={[Function]}
+        setTheme={[Function]}
+        theme={null}
+        themes={
+          Immutable.List [
+            Object {
+              "controlWidth": 0,
+              "name": "Reverse",
+              "timeColor": "grey",
+              "timeScaleHeight": 10,
+              "waveFillColor": "black",
+              "waveHeight": 80,
+              "waveOutlineColor": "green",
+              "waveProgressColor": "orange",
+            },
+            Object {
+              "controlWidth": 0,
+              "name": "Base",
+              "timeColor": "grey",
+              "timeScaleHeight": 10,
+              "waveFillColor": "green",
+              "waveHeight": 80,
+              "waveOutlineColor": "black",
+              "waveProgressColor": "orange",
+            },
+          ]
+        }
+      >
+        <branch(BaseComponent)
+          Provider={[Function]}
+          onSelectTheme={[Function]}
+          setTheme={[Function]}
+          theme={null}
+          themes={
+            Immutable.List [
+              Object {
+                "controlWidth": 0,
+                "name": "Reverse",
+                "timeColor": "grey",
+                "timeScaleHeight": 10,
+                "waveFillColor": "black",
+                "waveHeight": 80,
+                "waveOutlineColor": "green",
+                "waveProgressColor": "orange",
+              },
+              Object {
+                "controlWidth": 0,
+                "name": "Base",
+                "timeColor": "grey",
+                "timeScaleHeight": 10,
+                "waveFillColor": "green",
+                "waveHeight": 80,
+                "waveOutlineColor": "black",
+                "waveProgressColor": "orange",
+              },
+            ]
+          }
+        >
+          <Nothing
+            Provider={[Function]}
+            onSelectTheme={[Function]}
+            setTheme={[Function]}
+            theme={null}
+            themes={
+              Immutable.List [
+                Object {
+                  "controlWidth": 0,
+                  "name": "Reverse",
+                  "timeColor": "grey",
+                  "timeScaleHeight": 10,
+                  "waveFillColor": "black",
+                  "waveHeight": 80,
+                  "waveOutlineColor": "green",
+                  "waveProgressColor": "orange",
+                },
+                Object {
+                  "controlWidth": 0,
+                  "name": "Base",
+                  "timeColor": "grey",
+                  "timeScaleHeight": 10,
+                  "waveFillColor": "green",
+                  "waveHeight": 80,
+                  "waveOutlineColor": "black",
+                  "waveProgressColor": "orange",
+                },
+              ]
+            }
+          />
+        </branch(BaseComponent)>
+      </lifecycle(branch(BaseComponent))>
+    </withHandlers(lifecycle(branch(BaseComponent)))>
+  </withState(withHandlers(lifecycle(branch(BaseComponent))))>
+</mapProps(withState(withHandlers(lifecycle(branch(BaseComponent)))))>
+`;
 
-exports[`Storyshots WebAudio Multi Channel 1`] = `null`;
+exports[`Storyshots WebAudio Multi Channel 1`] = `
+<mapProps(withState(withHandlers(lifecycle(branch(BaseComponent)))))
+  themes={
+    Immutable.List [
+      Object {
+        "controlWidth": 0,
+        "name": "Reverse",
+        "timeColor": "grey",
+        "timeScaleHeight": 10,
+        "waveFillColor": "black",
+        "waveHeight": 80,
+        "waveOutlineColor": "green",
+        "waveProgressColor": "orange",
+      },
+      Object {
+        "controlWidth": 0,
+        "name": "Base",
+        "timeColor": "grey",
+        "timeScaleHeight": 10,
+        "waveFillColor": "green",
+        "waveHeight": 80,
+        "waveOutlineColor": "black",
+        "waveProgressColor": "orange",
+      },
+    ]
+  }
+>
+  <withState(withHandlers(lifecycle(branch(BaseComponent))))
+    Provider={[Function]}
+    themes={
+      Immutable.List [
+        Object {
+          "controlWidth": 0,
+          "name": "Reverse",
+          "timeColor": "grey",
+          "timeScaleHeight": 10,
+          "waveFillColor": "black",
+          "waveHeight": 80,
+          "waveOutlineColor": "green",
+          "waveProgressColor": "orange",
+        },
+        Object {
+          "controlWidth": 0,
+          "name": "Base",
+          "timeColor": "grey",
+          "timeScaleHeight": 10,
+          "waveFillColor": "green",
+          "waveHeight": 80,
+          "waveOutlineColor": "black",
+          "waveProgressColor": "orange",
+        },
+      ]
+    }
+  >
+    <withHandlers(lifecycle(branch(BaseComponent)))
+      Provider={[Function]}
+      setTheme={[Function]}
+      theme={null}
+      themes={
+        Immutable.List [
+          Object {
+            "controlWidth": 0,
+            "name": "Reverse",
+            "timeColor": "grey",
+            "timeScaleHeight": 10,
+            "waveFillColor": "black",
+            "waveHeight": 80,
+            "waveOutlineColor": "green",
+            "waveProgressColor": "orange",
+          },
+          Object {
+            "controlWidth": 0,
+            "name": "Base",
+            "timeColor": "grey",
+            "timeScaleHeight": 10,
+            "waveFillColor": "green",
+            "waveHeight": 80,
+            "waveOutlineColor": "black",
+            "waveProgressColor": "orange",
+          },
+        ]
+      }
+    >
+      <lifecycle(branch(BaseComponent))
+        Provider={[Function]}
+        onSelectTheme={[Function]}
+        setTheme={[Function]}
+        theme={null}
+        themes={
+          Immutable.List [
+            Object {
+              "controlWidth": 0,
+              "name": "Reverse",
+              "timeColor": "grey",
+              "timeScaleHeight": 10,
+              "waveFillColor": "black",
+              "waveHeight": 80,
+              "waveOutlineColor": "green",
+              "waveProgressColor": "orange",
+            },
+            Object {
+              "controlWidth": 0,
+              "name": "Base",
+              "timeColor": "grey",
+              "timeScaleHeight": 10,
+              "waveFillColor": "green",
+              "waveHeight": 80,
+              "waveOutlineColor": "black",
+              "waveProgressColor": "orange",
+            },
+          ]
+        }
+      >
+        <branch(BaseComponent)
+          Provider={[Function]}
+          onSelectTheme={[Function]}
+          setTheme={[Function]}
+          theme={null}
+          themes={
+            Immutable.List [
+              Object {
+                "controlWidth": 0,
+                "name": "Reverse",
+                "timeColor": "grey",
+                "timeScaleHeight": 10,
+                "waveFillColor": "black",
+                "waveHeight": 80,
+                "waveOutlineColor": "green",
+                "waveProgressColor": "orange",
+              },
+              Object {
+                "controlWidth": 0,
+                "name": "Base",
+                "timeColor": "grey",
+                "timeScaleHeight": 10,
+                "waveFillColor": "green",
+                "waveHeight": 80,
+                "waveOutlineColor": "black",
+                "waveProgressColor": "orange",
+              },
+            ]
+          }
+        >
+          <Nothing
+            Provider={[Function]}
+            onSelectTheme={[Function]}
+            setTheme={[Function]}
+            theme={null}
+            themes={
+              Immutable.List [
+                Object {
+                  "controlWidth": 0,
+                  "name": "Reverse",
+                  "timeColor": "grey",
+                  "timeScaleHeight": 10,
+                  "waveFillColor": "black",
+                  "waveHeight": 80,
+                  "waveOutlineColor": "green",
+                  "waveProgressColor": "orange",
+                },
+                Object {
+                  "controlWidth": 0,
+                  "name": "Base",
+                  "timeColor": "grey",
+                  "timeScaleHeight": 10,
+                  "waveFillColor": "green",
+                  "waveHeight": 80,
+                  "waveOutlineColor": "black",
+                  "waveProgressColor": "orange",
+                },
+              ]
+            }
+          />
+        </branch(BaseComponent)>
+      </lifecycle(branch(BaseComponent))>
+    </withHandlers(lifecycle(branch(BaseComponent)))>
+  </withState(withHandlers(lifecycle(branch(BaseComponent))))>
+</mapProps(withState(withHandlers(lifecycle(branch(BaseComponent)))))>
+`;
 
-exports[`Storyshots WebAudio With Knobs 1`] = `null`;
+exports[`Storyshots WebAudio With Knobs 1`] = `
+<mapProps(withState(withHandlers(lifecycle(branch(BaseComponent)))))
+  themes={
+    Immutable.List [
+      Object {
+        "controlWidth": 0,
+        "name": "Reverse",
+        "timeColor": "grey",
+        "timeScaleHeight": 10,
+        "waveFillColor": "black",
+        "waveHeight": 80,
+        "waveOutlineColor": "green",
+        "waveProgressColor": "orange",
+      },
+      Object {
+        "controlWidth": 0,
+        "name": "Base",
+        "timeColor": "grey",
+        "timeScaleHeight": 10,
+        "waveFillColor": "green",
+        "waveHeight": 80,
+        "waveOutlineColor": "black",
+        "waveProgressColor": "orange",
+      },
+    ]
+  }
+>
+  <withState(withHandlers(lifecycle(branch(BaseComponent))))
+    Provider={[Function]}
+    themes={
+      Immutable.List [
+        Object {
+          "controlWidth": 0,
+          "name": "Reverse",
+          "timeColor": "grey",
+          "timeScaleHeight": 10,
+          "waveFillColor": "black",
+          "waveHeight": 80,
+          "waveOutlineColor": "green",
+          "waveProgressColor": "orange",
+        },
+        Object {
+          "controlWidth": 0,
+          "name": "Base",
+          "timeColor": "grey",
+          "timeScaleHeight": 10,
+          "waveFillColor": "green",
+          "waveHeight": 80,
+          "waveOutlineColor": "black",
+          "waveProgressColor": "orange",
+        },
+      ]
+    }
+  >
+    <withHandlers(lifecycle(branch(BaseComponent)))
+      Provider={[Function]}
+      setTheme={[Function]}
+      theme={null}
+      themes={
+        Immutable.List [
+          Object {
+            "controlWidth": 0,
+            "name": "Reverse",
+            "timeColor": "grey",
+            "timeScaleHeight": 10,
+            "waveFillColor": "black",
+            "waveHeight": 80,
+            "waveOutlineColor": "green",
+            "waveProgressColor": "orange",
+          },
+          Object {
+            "controlWidth": 0,
+            "name": "Base",
+            "timeColor": "grey",
+            "timeScaleHeight": 10,
+            "waveFillColor": "green",
+            "waveHeight": 80,
+            "waveOutlineColor": "black",
+            "waveProgressColor": "orange",
+          },
+        ]
+      }
+    >
+      <lifecycle(branch(BaseComponent))
+        Provider={[Function]}
+        onSelectTheme={[Function]}
+        setTheme={[Function]}
+        theme={null}
+        themes={
+          Immutable.List [
+            Object {
+              "controlWidth": 0,
+              "name": "Reverse",
+              "timeColor": "grey",
+              "timeScaleHeight": 10,
+              "waveFillColor": "black",
+              "waveHeight": 80,
+              "waveOutlineColor": "green",
+              "waveProgressColor": "orange",
+            },
+            Object {
+              "controlWidth": 0,
+              "name": "Base",
+              "timeColor": "grey",
+              "timeScaleHeight": 10,
+              "waveFillColor": "green",
+              "waveHeight": 80,
+              "waveOutlineColor": "black",
+              "waveProgressColor": "orange",
+            },
+          ]
+        }
+      >
+        <branch(BaseComponent)
+          Provider={[Function]}
+          onSelectTheme={[Function]}
+          setTheme={[Function]}
+          theme={null}
+          themes={
+            Immutable.List [
+              Object {
+                "controlWidth": 0,
+                "name": "Reverse",
+                "timeColor": "grey",
+                "timeScaleHeight": 10,
+                "waveFillColor": "black",
+                "waveHeight": 80,
+                "waveOutlineColor": "green",
+                "waveProgressColor": "orange",
+              },
+              Object {
+                "controlWidth": 0,
+                "name": "Base",
+                "timeColor": "grey",
+                "timeScaleHeight": 10,
+                "waveFillColor": "green",
+                "waveHeight": 80,
+                "waveOutlineColor": "black",
+                "waveProgressColor": "orange",
+              },
+            ]
+          }
+        >
+          <Nothing
+            Provider={[Function]}
+            onSelectTheme={[Function]}
+            setTheme={[Function]}
+            theme={null}
+            themes={
+              Immutable.List [
+                Object {
+                  "controlWidth": 0,
+                  "name": "Reverse",
+                  "timeColor": "grey",
+                  "timeScaleHeight": 10,
+                  "waveFillColor": "black",
+                  "waveHeight": 80,
+                  "waveOutlineColor": "green",
+                  "waveProgressColor": "orange",
+                },
+                Object {
+                  "controlWidth": 0,
+                  "name": "Base",
+                  "timeColor": "grey",
+                  "timeScaleHeight": 10,
+                  "waveFillColor": "green",
+                  "waveHeight": 80,
+                  "waveOutlineColor": "black",
+                  "waveProgressColor": "orange",
+                },
+              ]
+            }
+          />
+        </branch(BaseComponent)>
+      </lifecycle(branch(BaseComponent))>
+    </withHandlers(lifecycle(branch(BaseComponent)))>
+  </withState(withHandlers(lifecycle(branch(BaseComponent))))>
+</mapProps(withState(withHandlers(lifecycle(branch(BaseComponent)))))>
+`;

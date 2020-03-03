@@ -1,9 +1,12 @@
 {
   "testEnvironment": "jsdom",
   "roots": ["<rootDir>/tests"],
+  "setupFilesAfterEnv": ["<rootDir>/setupTests.js"],
   "collectCoverageFrom": ["**/*.js"],
   "transform": {
-    "^.+\\.tsx?$": "ts-jest"
+    "^.+\\.stories\\.jsx?$": "@storybook/addon-storyshots/injectFileName",
+    "^.+\\.tsx?$": "ts-jest",
+    "^.+\\.mdx?$": "@storybook/addon-docs/jest-transform-mdx"
   },
   "testMatch": [
     "<rootDir>/tests/**/__tests__/**/*.[jt]s?(x)",
