@@ -18,6 +18,7 @@ module.exports = {
     '@storybook/addon-links',
     '@storybook/addon-docs',
     '@storybook/addon-contexts/register',
+    '@storybook/addon-knobs/register',
     'storybook-addon-styled-component-theme/dist/register',
   ],
 };

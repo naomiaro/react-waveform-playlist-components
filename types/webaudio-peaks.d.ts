@@ -1,4 +1,5 @@
 declare type Peaks = Int8Array | Int16Array | Int32Array;
+declare type Bits = 8 | 16 | 32;
 
 declare module 'webaudio-peaks' {
   function extractPeaks(
@@ -7,11 +8,11 @@ declare module 'webaudio-peaks' {
     isMono: boolean,
     cueIn: number,
     cueOut: number,
-    bits: number
+    bits: Bits
   ): {
     length: number;
     data: Peaks[];
-    bits: 8 | 16 | 32;
+    bits: Bits;
   };
   export = extractPeaks;
 }

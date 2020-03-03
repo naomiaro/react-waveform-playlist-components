@@ -39,6 +39,7 @@
     "@storybook/addon-contexts": "^5.3.14",
     "@storybook/addon-docs": "^5.3.14",
     "@storybook/addon-info": "^5.3.14",
+    "@storybook/addon-knobs": "^5.3.14",
     "@storybook/addon-links": "^5.3.14",
     "@storybook/addons": "^5.3.14",
     "@storybook/preset-typescript": "^1.2.0",

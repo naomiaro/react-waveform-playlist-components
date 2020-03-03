@@ -2,9 +2,9 @@ import React, { Fragment } from 'react';
 import extractPeaks from 'webaudio-peaks';
 
 type Props = {
-  children: (peaks: Peaks[], bits: number, length: number) => JSX.Element[];
+  children: (peaks: Peaks[], bits: Bits, length: number) => JSX.Element[];
   samplesPerPixel: number;
-  bits: number;
+  bits: Bits;
   source: AudioBuffer;
   showMultiChannel: boolean;
 };
