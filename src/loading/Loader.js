@@ -6,7 +6,7 @@ export const STATE_DECODING = 2;
 export const STATE_FINISHED = 3;
 
 export default class extends EventEmitter {
-  constructor(src, audioContext = null) {
+  constructor(src, audioContext = new AudioContext()) {
     super();
     this.src = src;
     this.ac = audioContext;

@@ -1,7 +1,7 @@
 import BlobLoader from './BlobLoader';
 import XHRLoader from './XHRLoader';
 
-export default (src, audioContext) => {
+export const load = (src, audioContext = new AudioContext()) => {
   if (src instanceof Blob) {
     return new BlobLoader(src, audioContext).load();
   } else if (typeof src === 'string') {

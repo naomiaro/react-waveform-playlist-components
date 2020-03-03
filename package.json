@@ -12,7 +12,7 @@
     "test": "tsdx test --passWithNoTests",
     "lint": "tsdx lint",
     "prepare": "tsdx build",
-    "storybook": "start-storybook -p 6006",
+    "storybook": "start-storybook -s ./media -p 6006",
     "build-storybook": "build-storybook"
   },
   "peerDependencies": {
@@ -72,6 +72,7 @@
     "@fortawesome/free-solid-svg-icons": "^5.12.1",
     "@fortawesome/react-fontawesome": "^0.1.8",
     "fade-maker": "^1.0.3",
+    "react-async-hook": "^3.6.1",
     "webaudio-peaks": "0.0.6"
   }
 }
