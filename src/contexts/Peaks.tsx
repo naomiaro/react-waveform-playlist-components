@@ -20,6 +20,7 @@ type Props = {
 };
 export const PeaksProvider = ({ children, ...props }: Partial<Props>) => {
   const [settings] = useState(Object.assign({}, defaultSettings, props));
+  console.log(props);
 
   return (
     <PeaksContext.Provider value={settings}>{children}</PeaksContext.Provider>

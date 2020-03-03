@@ -1,4 +1,4 @@
-import React, { ReactNode, useEffect, useRef } from 'react';
+import React, { ReactNode } from 'react';
 import extractPeaks from 'webaudio-peaks';
 import { PeaksProvider } from './Peaks';
 
@@ -15,27 +15,22 @@ export const ExtractPeacksProvider = ({
   bits,
   samplesPerPixel,
 }: Props) => {
-  const peaksRef = useRef({ length: 0, data: [], bits });
-  useEffect(() => {
-    const peaks = extractPeaks(
-      source,
-      samplesPerPixel,
-      true,
-      0,
-      source.length,
-      bits
-    );
-    peaksRef.current = peaks;
-  }, [source, samplesPerPixel, bits]);
+  const peaks = extractPeaks(
+    source,
+    samplesPerPixel,
+    true,
+    0,
+    source.length,
+    bits
+  );
 
-  console.log(source);
   return (
     <PeaksProvider
-      data={peaksRef.current.data[0]}
+      data={peaks.data[0]} //TODO work with multiple channels
       bits={bits}
       sampleRate={source.sampleRate}
       samplesPerPixel={samplesPerPixel}
-      length={peaksRef.current.length}
+      length={peaks.length}
     >
       {children}
     </PeaksProvider>
