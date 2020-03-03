@@ -1,0 +1,14 @@
+{
+  "testEnvironment": "jsdom",
+  "roots": ["<rootDir>/tests"],
+  "collectCoverageFrom": ["**/*.js"],
+  "transform": {
+    "^.+\\.tsx?$": "ts-jest"
+  },
+  "testMatch": [
+    "<rootDir>/tests/**/__tests__/**/*.[jt]s?(x)",
+    "<rootDir>/tests/**/*(*.)@(spec|test).[tj]s?(x)"
+  ],
+  "moduleFileExtensions": ["js", "json", "jsx", "ts", "tsx", "node"],
+  "snapshotSerializers": ["enzyme-to-json/serializer"]
+}

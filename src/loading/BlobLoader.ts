@@ -1,10 +1,15 @@
-import Loader from './Loader';
+import { Loader } from './Loader';
 
-export default class extends Loader {
+class BlobLoader extends Loader {
+  src: Blob;
+  constructor(src: Blob, audioContext = new AudioContext()) {
+    super(src, audioContext);
+    this.src = src;
+  }
   /*
    * Loads an audio file via a FileReader
    */
-  load() {
+  load(): Promise<AudioBuffer> {
     return new Promise((resolve, reject) => {
       if (
         this.src.type.match(/audio.*/) ||
@@ -15,12 +20,12 @@ export default class extends Loader {
 
         fr.readAsArrayBuffer(this.src);
 
-        fr.addEventListener('progress', e => {
-          super.fileProgress(e);
+        fr.addEventListener('progress', ev => {
+          super.fileProgress(ev);
         });
 
-        fr.addEventListener('load', e => {
-          const decoderPromise = super.fileLoad(e);
+        fr.addEventListener('load', () => {
+          const decoderPromise = super.fileLoad(fr.result as ArrayBuffer);
 
           decoderPromise
             .then(audioBuffer => {
@@ -40,3 +45,5 @@ export default class extends Loader {
     });
   }
 }
+
+export { BlobLoader };

@@ -4,8 +4,6 @@ import React, {
   useContext,
   useEffect,
   ReactNode,
-  Dispatch,
-  SetStateAction,
 } from 'react';
 
 const defaultProgress = 0;
@@ -22,8 +20,8 @@ type Props = {
   children: ReactNode;
 };
 export const PlayoutProvider = ({ children }: Props) => {
-  const [isPlaying, setIsPlaying] = useState(defaultIsPlaying);
-  const [progress, setProgress] = useState(defaultProgress);
+  const [isPlaying] = useState(defaultIsPlaying);
+  const [progress] = useState(defaultProgress);
 
   useEffect(() => {}, [isPlaying]);
 

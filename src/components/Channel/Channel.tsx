@@ -26,7 +26,7 @@ export const Channel: FunctionComponent<ChannelProps> = props => {
   const scale = useDevicePixelRatio();
   const { waveHeight, waveOutlineColor } = useContext(ThemeContext);
   const { data, bits, length, index, className } = props;
-  const { progress, isPlaying } = usePlayoutStatus();
+  const { progress } = usePlayoutStatus();
   const canvases: HTMLCanvasElement[] = [];
 
   const canvasRef = useCallback(
