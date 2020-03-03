@@ -4,7 +4,6 @@
   "setupFilesAfterEnv": ["<rootDir>/setupTests.ts"],
   "collectCoverageFrom": ["**/*.js"],
   "transform": {
-    "^.+\\.stories\\.tsx$": "@storybook/addon-storyshots/injectFileName",
     "^.+\\.tsx?$": "ts-jest",
     "^.+\\.mdx?$": "@storybook/addon-docs/jest-transform-mdx"
   },
