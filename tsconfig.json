@@ -2,6 +2,7 @@
   "include": ["src", "types", "test", "stories"],
   "exclude": ["node_modules"],
   "compilerOptions": {
+    "allowJs": true,
     "target": "es5",
     "module": "esnext",
     "lib": ["dom", "esnext"],
