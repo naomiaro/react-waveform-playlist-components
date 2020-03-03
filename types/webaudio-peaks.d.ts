@@ -1,3 +1,5 @@
+declare type Peaks = Int8Array | Int16Array | Int32Array;
+
 declare module 'webaudio-peaks' {
   function extractPeaks(
     source: AudioBuffer,
@@ -6,6 +8,10 @@ declare module 'webaudio-peaks' {
     cueIn: number,
     cueOut: number,
     bits: number
-  ): Int8Array | Int16Array | Int32Array;
+  ): {
+    length: number;
+    data: Peaks[];
+    bits: 8 | 16 | 32;
+  };
   export = extractPeaks;
 }

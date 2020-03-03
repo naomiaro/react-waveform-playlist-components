@@ -17,7 +17,7 @@ export interface ChannelProps {
   className?: string;
   index: number;
   theme?: DefaultTheme;
-  data: number[];
+  data: Peaks;
   bits: number;
   length: number;
 }
