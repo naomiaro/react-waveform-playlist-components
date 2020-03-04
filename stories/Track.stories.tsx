@@ -3,40 +3,13 @@ import { StyledChannel } from '../src/components/Channel/Channel';
 import { StyledTrack } from '../src/components/Track';
 import BBCWaveformData from '../media/json/vocals.json';
 
-import {
-  Button,
-  ButtonGroup,
-  Controls,
-  Header,
-  VolumeDownIcon,
-  VolumeUpIcon,
-  VolumeSlider,
-  VolumeSliderWrapper,
-} from '../src/components/TrackControls';
-
 export default {
   title: 'Styled Track',
   component: StyledTrack,
 };
 
 export const Default = () => (
-  <StyledTrack
-    numChannels={1}
-    controls={
-      <Controls>
-        <Header>Track 1</Header>
-        <ButtonGroup>
-          <Button>Mute</Button>
-          <Button>Solo</Button>
-        </ButtonGroup>
-        <VolumeSliderWrapper>
-          <VolumeDownIcon />
-          <VolumeSlider />
-          <VolumeUpIcon />
-        </VolumeSliderWrapper>
-      </Controls>
-    }
-  >
+  <StyledTrack numChannels={1}>
     <StyledChannel
       data={new Int16Array(BBCWaveformData.data)}
       bits={BBCWaveformData.bits as Bits}
@@ -47,23 +20,7 @@ export const Default = () => (
 );
 
 export const MultipleChannels = () => (
-  <StyledTrack
-    numChannels={2}
-    controls={
-      <Controls>
-        <Header>Track 1</Header>
-        <ButtonGroup>
-          <Button>Mute</Button>
-          <Button>Solo</Button>
-        </ButtonGroup>
-        <VolumeSliderWrapper>
-          <VolumeDownIcon />
-          <VolumeSlider />
-          <VolumeUpIcon />
-        </VolumeSliderWrapper>
-      </Controls>
-    }
-  >
+  <StyledTrack numChannels={2}>
     <StyledChannel
       data={new Int16Array(BBCWaveformData.data)}
       bits={BBCWaveformData.bits as Bits}
