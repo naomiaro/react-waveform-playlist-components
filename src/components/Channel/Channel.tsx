@@ -8,7 +8,6 @@ import { withTheme, ThemeContext, DefaultTheme } from 'styled-components';
 import { Progress } from './Progress';
 import { Wrapper } from './Wrapper';
 import { Waveform } from './Waveform';
-import { useDevicePixelRatio } from '../../contexts/DevicePixelRatio';
 
 const MAX_CANVAS_WIDTH = 1000;
 
@@ -20,12 +19,20 @@ export interface ChannelProps {
   bits: Bits;
   length: number;
   progress?: number;
+  devicePixelRatio?: number;
 }
 
 export const Channel: FunctionComponent<ChannelProps> = props => {
-  const scale = useDevicePixelRatio();
   const { waveHeight, waveOutlineColor } = useContext(ThemeContext);
-  const { data, bits, length, index, className, progress = 0 } = props;
+  const {
+    data,
+    bits,
+    length,
+    index,
+    className,
+    progress = 0,
+    devicePixelRatio = 1,
+  } = props;
   const canvases: HTMLCanvasElement[] = [];
 
   const canvasRef = useCallback(
@@ -35,7 +42,7 @@ export const Channel: FunctionComponent<ChannelProps> = props => {
         canvases[index] = canvas;
       }
     },
-    [data, bits, waveHeight, waveOutlineColor, scale, length]
+    [data, bits, waveHeight, waveOutlineColor, devicePixelRatio, length]
   );
 
   useEffect(() => {
@@ -49,9 +56,9 @@ export const Channel: FunctionComponent<ChannelProps> = props => {
       if (cc) {
         cc.clearRect(0, 0, canvas.width, canvas.height);
         cc.fillStyle = waveOutlineColor;
-        cc.scale(scale, scale);
+        cc.scale(devicePixelRatio, devicePixelRatio);
 
-        const peakSegmentLength = canvas.width / scale;
+        const peakSegmentLength = canvas.width / devicePixelRatio;
         for (let i = 0; i < peakSegmentLength; i += 1) {
           const minPeak = data[(i + offset) * 2] / maxValue;
           const maxPeak = data[(i + offset) * 2 + 1] / maxValue;
@@ -68,7 +75,7 @@ export const Channel: FunctionComponent<ChannelProps> = props => {
 
       offset += MAX_CANVAS_WIDTH;
     }
-  }, [data, bits, waveHeight, waveOutlineColor, scale, length]);
+  }, [data, bits, waveHeight, waveOutlineColor, devicePixelRatio, length]);
 
   let totalWidth = length;
   let waveformCount = 0;
@@ -79,8 +86,8 @@ export const Channel: FunctionComponent<ChannelProps> = props => {
       <Waveform
         key={`${length}-${waveformCount}`}
         cssWidth={currentWidth}
-        width={currentWidth * scale}
-        height={waveHeight * scale}
+        width={currentWidth * devicePixelRatio}
+        height={waveHeight * devicePixelRatio}
         waveHeight={waveHeight}
         data-index={waveformCount}
         ref={canvasRef}
