@@ -5,7 +5,7 @@ const base = {
   waveOutlineColor: 'black',
   waveFillColor: 'green',
   waveProgressColor: 'orange',
-  waveHeight: 80,
+  waveHeight: 100,
   timeColor: 'grey',
   timeScaleHeight: 15,
   controlWidth: 200,

@@ -5,7 +5,7 @@ import { SampleInfoContext } from '../../contexts/SampleInfo';
 import { secondsToPixels } from '../../utils/conversions';
 
 function formatTime(milliseconds: number) {
-  const seconds = milliseconds / 1000;
+  const seconds = Math.floor(milliseconds / 1000);
   const s = seconds % 60;
   const m = (seconds - s) / 60;
 

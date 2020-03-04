@@ -7,5 +7,5 @@ export const Controls = styled.div`
   background: white;
   text-align: center;
   width: ${props => props.theme.controlWidth}px;
-  height: ${props => props.theme.waveHeight}px;
+  height: 100%;
 `;

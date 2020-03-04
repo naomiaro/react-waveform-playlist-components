@@ -48,7 +48,7 @@ export const Default = () => (
 
 export const MultipleChannels = () => (
   <StyledTrack
-    numChannels={1}
+    numChannels={2}
     controls={
       <Controls>
         <Header>Track 1</Header>

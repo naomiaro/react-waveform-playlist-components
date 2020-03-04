@@ -7,7 +7,7 @@ export interface TrackProps {
   className?: string;
   theme?: DefaultTheme;
   children: ReactNode;
-  controls: ReactNode | null;
+  controls?: ReactNode;
   numChannels: number;
 }
 
