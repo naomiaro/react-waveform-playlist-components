@@ -43,26 +43,28 @@ export const Channel: FunctionComponent<ChannelProps> = props => {
     let offset = 0;
     for (let i = 0; i < canvases.length; i++) {
       const canvas = canvases[i];
-      const cc: CanvasRenderingContext2D = canvas.getContext('2d')!;
+      const cc = canvas.getContext('2d');
       const h2 = waveHeight / 2;
       const maxValue = 2 ** (bits - 1);
 
-      cc.clearRect(0, 0, canvas.width, canvas.height);
-      cc.fillStyle = waveOutlineColor;
-      cc.scale(scale, scale);
+      if (cc) {
+        cc.clearRect(0, 0, canvas.width, canvas.height);
+        cc.fillStyle = waveOutlineColor;
+        cc.scale(scale, scale);
 
-      const peakSegmentLength = canvas.width / scale;
-      for (let i = 0; i < peakSegmentLength; i += 1) {
-        const minPeak = data[(i + offset) * 2] / maxValue;
-        const maxPeak = data[(i + offset) * 2 + 1] / maxValue;
+        const peakSegmentLength = canvas.width / scale;
+        for (let i = 0; i < peakSegmentLength; i += 1) {
+          const minPeak = data[(i + offset) * 2] / maxValue;
+          const maxPeak = data[(i + offset) * 2 + 1] / maxValue;
 
-        const min = Math.abs(minPeak * h2);
-        const max = Math.abs(maxPeak * h2);
+          const min = Math.abs(minPeak * h2);
+          const max = Math.abs(maxPeak * h2);
 
-        // draw max
-        cc.fillRect(i, 0, 1, h2 - max);
-        // draw min
-        cc.fillRect(i, h2 + min, 1, h2 - min);
+          // draw max
+          cc.fillRect(i, 0, 1, h2 - max);
+          // draw min
+          cc.fillRect(i, h2 + min, 1, h2 - min);
+        }
       }
 
       offset += MAX_CANVAS_WIDTH;

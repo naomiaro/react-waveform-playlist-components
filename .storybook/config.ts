@@ -7,7 +7,7 @@ const base = {
   waveProgressColor: 'orange',
   waveHeight: 80,
   timeColor: 'grey',
-  timeScaleHeight: 10,
+  timeScaleHeight: 30,
   controlWidth: 200,
 };
 
@@ -17,7 +17,7 @@ const reverse = {
   waveProgressColor: 'orange',
   waveHeight: 80,
   timeColor: 'grey',
-  timeScaleHeight: 10,
+  timeScaleHeight: 30,
   controlWidth: 0,
 };
 
