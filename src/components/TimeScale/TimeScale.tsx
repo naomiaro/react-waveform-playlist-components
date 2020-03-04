@@ -1,6 +1,5 @@
 import React, { FunctionComponent, useRef, useEffect, useContext } from 'react';
 import styled, { withTheme, DefaultTheme } from 'styled-components';
-import { useDevicePixelRatio } from '../../contexts/DevicePixelRatio';
 import { SampleInfoContext } from '../../contexts/SampleInfo';
 import { secondsToPixels } from '../../utils/conversions';
 
@@ -49,6 +48,7 @@ export interface TimeScaleProps {
   readonly bigStep: number;
   readonly smallStep: number;
   readonly secondStep: number;
+  readonly devicePixelRatio?: number;
 }
 export const TimeScale: FunctionComponent<TimeScaleProps> = props => {
   const {
@@ -58,11 +58,11 @@ export const TimeScale: FunctionComponent<TimeScaleProps> = props => {
     bigStep,
     smallStep,
     secondStep,
+    devicePixelRatio = 1,
   } = props;
   const canvasInfo = new Map();
   const timeMarkers = [];
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const scale = useDevicePixelRatio();
   const { sampleRate, samplesPerPixel } = useContext(SampleInfoContext);
   useEffect(() => {
     if (canvasRef.current !== null) {
@@ -72,7 +72,7 @@ export const TimeScale: FunctionComponent<TimeScaleProps> = props => {
       if (ctx) {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
         ctx.fillStyle = timeColor;
-        ctx.scale(scale, scale);
+        ctx.scale(devicePixelRatio, devicePixelRatio);
 
         for (const [pixLeft, scaleHeight] of canvasInfo.entries()) {
           const scaleY = timeScaleHeight - scaleHeight;
@@ -82,7 +82,7 @@ export const TimeScale: FunctionComponent<TimeScaleProps> = props => {
     }
   }, [
     duration,
-    scale,
+    devicePixelRatio,
     timeColor,
     timeScaleHeight,
     bigStep,
@@ -121,8 +121,8 @@ export const TimeScale: FunctionComponent<TimeScaleProps> = props => {
       {timeMarkers}
       <TimeTicks
         cssWidth={widthX}
-        width={widthX * scale}
-        height={timeScaleHeight * scale}
+        width={widthX * devicePixelRatio}
+        height={timeScaleHeight * devicePixelRatio}
         ref={canvasRef}
       />
     </PlaylistTimeScaleScroll>
