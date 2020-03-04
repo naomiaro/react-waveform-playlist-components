@@ -3,7 +3,6 @@ import styled from 'styled-components';
 export interface ProgressProps {
   readonly progress: number;
 }
-
 export const Progress = styled.div<ProgressProps>`
   position: absolute;
   background: ${props => props.theme.waveProgressColor};

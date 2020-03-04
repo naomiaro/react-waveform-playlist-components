@@ -34,7 +34,7 @@ export const Default = () => (
   </StyledPlaylist>
 );
 
-export const MultipleTracks = () => (
+export const MultipleChannels = () => (
   <StyledPlaylist>
     <StyledTrack numChannels={2}>
       <StyledChannel
@@ -211,7 +211,7 @@ export const WithTimeScaleAndControlsMultipleTracks = () => (
   </StyledPlaylist>
 );
 
-export const WithTimeScaleAndControlsMultipleTracksMultipleChannels = () => (
+export const WithTimeScaleAndControlsMultipleTracksWithMultipleChannels = () => (
   <StyledPlaylist>
     <StyledTimeScale
       marker={2000}

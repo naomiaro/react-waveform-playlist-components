@@ -15,3 +15,13 @@ export const Default = () => (
     index={0}
   />
 );
+
+export const WithProgress = () => (
+  <StyledChannel
+    data={new Int16Array(BBCWaveformData.data)}
+    bits={BBCWaveformData.bits as Bits}
+    length={BBCWaveformData.length}
+    index={0}
+    progress={100}
+  />
+);

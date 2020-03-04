@@ -9,7 +9,6 @@ import { Progress } from './Progress';
 import { Wrapper } from './Wrapper';
 import { Waveform } from './Waveform';
 import { useDevicePixelRatio } from '../../contexts/DevicePixelRatio';
-import { usePlayoutStatus } from '../../contexts/Playout';
 
 const MAX_CANVAS_WIDTH = 1000;
 
@@ -20,13 +19,13 @@ export interface ChannelProps {
   data: Peaks;
   bits: Bits;
   length: number;
+  progress?: number;
 }
 
 export const Channel: FunctionComponent<ChannelProps> = props => {
   const scale = useDevicePixelRatio();
   const { waveHeight, waveOutlineColor } = useContext(ThemeContext);
-  const { data, bits, length, index, className } = props;
-  const { progress } = usePlayoutStatus();
+  const { data, bits, length, index, className, progress = 0 } = props;
   const canvases: HTMLCanvasElement[] = [];
 
   const canvasRef = useCallback(
