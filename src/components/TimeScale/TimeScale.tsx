@@ -4,21 +4,6 @@ import { useDevicePixelRatio } from '../../contexts/DevicePixelRatio';
 import { SampleInfoContext } from '../../contexts/SampleInfo';
 import { secondsToPixels } from '../../utils/conversions';
 
-interface ScaleInfo {
-  readonly marker: number;
-  readonly bigStep: number;
-  readonly smallStep: number;
-  readonly secondStep: number;
-}
-
-// TODO configure per zoomLevel based on samplesPerPixel
-const stepInfo: ScaleInfo = {
-  marker: 2000,
-  bigStep: 1000,
-  smallStep: 500,
-  secondStep: 1 / 2,
-};
-
 function formatTime(milliseconds: number) {
   const seconds = milliseconds / 1000;
   const s = seconds % 60;
@@ -60,11 +45,19 @@ const TimeStamp = styled.div<TimeStamp>`
 export interface TimeScaleProps {
   readonly theme: DefaultTheme;
   readonly duration: number;
+  readonly marker: number;
+  readonly bigStep: number;
+  readonly smallStep: number;
+  readonly secondStep: number;
 }
 export const TimeScale: FunctionComponent<TimeScaleProps> = props => {
   const {
     theme: { timeScaleHeight, timeColor },
     duration,
+    marker,
+    bigStep,
+    smallStep,
+    secondStep,
   } = props;
   const canvasInfo = new Map();
   const timeMarkers = [];
@@ -87,18 +80,26 @@ export const TimeScale: FunctionComponent<TimeScaleProps> = props => {
         }
       }
     }
-  }, [duration, scale, timeColor, timeScaleHeight]);
+  }, [
+    duration,
+    scale,
+    timeColor,
+    timeScaleHeight,
+    bigStep,
+    smallStep,
+    secondStep,
+    marker,
+  ]);
 
-  const widthX = secondsToPixels(duration, samplesPerPixel, sampleRate);
+  const widthX = secondsToPixels(duration / 1000, samplesPerPixel, sampleRate);
   const pixPerSec = sampleRate / samplesPerPixel;
-  const scaleInfo = stepInfo;
   let counter = 0;
 
-  for (let i = 0; i < widthX; i += pixPerSec * scaleInfo.secondStep) {
+  for (let i = 0; i < widthX; i += (pixPerSec * secondStep) / 1000) {
     const pix = Math.floor(i);
 
-    // put a timestamp every 30 seconds.
-    if (counter % scaleInfo.marker === 0) {
+    // create three levels of time markers - at marker point also place a timestamp.
+    if (counter % marker === 0) {
       const timestamp = formatTime(counter);
       timeMarkers.push(
         <TimeStamp key={timestamp} left={pix}>
@@ -106,13 +107,13 @@ export const TimeScale: FunctionComponent<TimeScaleProps> = props => {
         </TimeStamp>
       );
       canvasInfo.set(pix, timeScaleHeight);
-    } else if (scaleInfo.bigStep && counter % scaleInfo.bigStep === 0) {
+    } else if (counter % bigStep === 0) {
       canvasInfo.set(pix, Math.floor(timeScaleHeight / 2));
-    } else if (scaleInfo.smallStep && counter % scaleInfo.smallStep === 0) {
+    } else if (counter % smallStep === 0) {
       canvasInfo.set(pix, Math.floor(timeScaleHeight / 5));
     }
 
-    counter += 1000 * scaleInfo.secondStep;
+    counter += secondStep;
   }
 
   return (
