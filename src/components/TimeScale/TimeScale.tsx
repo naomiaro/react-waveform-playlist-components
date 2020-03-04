@@ -34,7 +34,7 @@ const PlaylistTimeScaleScroll = styled.div<PlaylistTimeScaleScroll>`
   position: relative;
   width: ${props => props.cssWidth}px;
   margin-left: ${props => props.theme.controlWidth}px;
-  height: ${props => props.theme.timeScaleHeight}px;
+  height: ${props => props.theme.timeScaleHeight * 2}px;
 `;
 
 interface TimeTicks {
@@ -43,7 +43,7 @@ interface TimeTicks {
 const TimeTicks = styled.canvas<TimeTicks>`
   position: absolute;
   width: ${props => props.cssWidth}px;
-  height: ${props => props.theme.timeScaleHeight / 2}px;
+  height: ${props => props.theme.timeScaleHeight}px;
   left: 0;
   right: 0;
   bottom: 0;
