@@ -24,10 +24,14 @@ class Playout {
     );
   }
 
-  play(when = 0, start = 0, duration = 0) {
+  play(when: number = 0, start: number = 0, duration?: number) {
     this.playBackPromise = this.sources.map(source => source.setUpSource());
     this.sources.forEach(source =>
-      source.play(when, start, source.getDuration())
+      source.play(
+        when,
+        start,
+        duration !== undefined ? duration : source.getDuration()
+      )
     );
 
     return this.playBackPromise;

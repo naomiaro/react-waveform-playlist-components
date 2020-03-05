@@ -4,27 +4,33 @@ import * as ReactDOM from 'react-dom';
 
 import { Playout } from '../src/playout';
 
-async function test1() {
-  const playout = new Playout([
-    '/media/audio/Vocals30.mp3',
-    '/media/audio/Guitar30.mp3',
-    '/media/audio/PianoSynth30.mp3',
-    '/media/audio/BassDrums30.mp3',
-  ]);
-  try {
-    await playout.load();
-    playout.play();
+const playout = new Playout([
+  '/media/audio/Vocals30.mp3',
+  '/media/audio/Guitar30.mp3',
+  '/media/audio/PianoSynth30.mp3',
+  '/media/audio/BassDrums30.mp3',
+]);
+const loading = playout.load();
+let playBack;
 
-    setTimeout(playout.stop.bind(playout), 5000);
+async function play() {
+  try {
+    await loading;
+    playBack = playout.play();
   } catch (e) {
     console.log(e);
   }
 }
 
+function stop() {
+  playout.stop();
+}
+
 const App = () => {
   return (
     <div>
-      <button onClick={test1}>Play</button>
+      <button onClick={play}>Play</button>
+      <button onClick={stop}>Stop</button>
     </div>
   );
 };
