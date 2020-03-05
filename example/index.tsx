@@ -3,10 +3,24 @@ import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import { Thing } from '../.';
 
+import { Playout } from '../src/playout';
+
+async function test1() {
+  const playout = new Playout(['/media/audio/Vocals30.mp3']);
+  try {
+    await playout.load();
+    playout.play();
+
+    setTimeout(playout.stop.bind(playout), 1000);
+  } catch (e) {
+    console.log(e);
+  }
+}
+
 const App = () => {
   return (
     <div>
-      <Thing />
+      <button onClick={test1}>Play</button>
     </div>
   );
 };
