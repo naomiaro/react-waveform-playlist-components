@@ -5,13 +5,13 @@ import * as ReactDOM from 'react-dom';
 import { Playout } from '../src/playout';
 
 const playout = new Playout([
-  '/media/audio/Vocals30.mp3',
-  '/media/audio/Guitar30.mp3',
-  '/media/audio/PianoSynth30.mp3',
-  '/media/audio/BassDrums30.mp3',
+  { src: '/media/audio/Vocals30.mp3', cuein: 6, cueout: 15 },
+  { src: '/media/audio/Guitar30.mp3', cuein: 6, cueout: 15 },
+  { src: '/media/audio/PianoSynth30.mp3', cuein: 6, cueout: 15 },
+  { src: '/media/audio/BassDrums30.mp3', cuein: 6, cueout: 15 },
 ]);
 const loading = playout.load();
-let playBack;
+let playBack: Promise<unknown>[];
 
 async function play() {
   try {
