@@ -9,8 +9,6 @@ class WebAudioPlayoutSource {
   fadeGain: GainNode | undefined;
   // used for track volume slider
   volumeGain: GainNode | undefined;
-  // used for solo/mute
-  shouldPlayGain: GainNode | undefined;
   masterGain: GainNode | undefined;
   constructor(ac: AudioContext, buffer: AudioBuffer) {
     this.ac = ac;
@@ -64,20 +62,17 @@ class WebAudioPlayoutSource {
 
     const fadeGain = this.ac.createGain();
     const volumeGain = this.ac.createGain();
-    const shouldPlayGain = this.ac.createGain();
     const masterGain = this.ac.createGain();
 
     this.source = source;
     this.fadeGain = fadeGain;
     this.volumeGain = volumeGain;
-    this.shouldPlayGain = shouldPlayGain;
     this.masterGain = masterGain;
 
     // TODO expose this to allow for custom node graphs
     this.source.connect(this.fadeGain);
     this.fadeGain.connect(this.volumeGain);
-    this.volumeGain.connect(this.shouldPlayGain);
-    this.shouldPlayGain.connect(this.masterGain);
+    this.volumeGain.connect(this.masterGain);
     this.masterGain.connect(this.destination);
 
     const sourcePromise = new Promise(resolve => {
@@ -86,13 +81,11 @@ class WebAudioPlayoutSource {
         source.disconnect();
         fadeGain.disconnect();
         volumeGain.disconnect();
-        shouldPlayGain.disconnect();
         masterGain.disconnect();
 
         this.source = undefined;
         this.fadeGain = undefined;
         this.volumeGain = undefined;
-        this.shouldPlayGain = undefined;
         this.masterGain = undefined;
 
         resolve();
@@ -105,12 +98,6 @@ class WebAudioPlayoutSource {
   setVolumeGainLevel(level: number) {
     if (this.volumeGain) {
       this.volumeGain.gain.value = level;
-    }
-  }
-
-  setShouldPlay(bool: boolean) {
-    if (this.shouldPlayGain) {
-      this.shouldPlayGain.gain.value = bool ? 1 : 0;
     }
   }
 
