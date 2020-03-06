@@ -61,8 +61,15 @@ class Playout {
   }
 
   play(when: number = 0, start: number = 0, duration?: number) {
-    this.playBackPromises = this.sources.map(source => {
+    this.playBackPromises = this.sources.map((source, i) => {
       const playBackPromise = source.setUpSource();
+      const gain =
+        typeof this.tracks[i].gain === 'number'
+          ? (this.tracks[i].gain as number)
+          : 1;
+
+      source.setVolumeGainLevel(gain);
+
       return playBackPromise;
     });
     this.sources.forEach((source, i) => {

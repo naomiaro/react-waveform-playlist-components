@@ -5,10 +5,10 @@ import * as ReactDOM from 'react-dom';
 import { Playout } from '../src/playout';
 
 const playout = new Playout([
-  { src: '/media/audio/Vocals30.mp3', cuein: 6, cueout: 15 },
-  { src: '/media/audio/Guitar30.mp3', cuein: 6, cueout: 15 },
-  { src: '/media/audio/PianoSynth30.mp3', cuein: 6, cueout: 15 },
-  { src: '/media/audio/BassDrums30.mp3', cuein: 6, cueout: 15 },
+  { src: '/media/audio/Vocals30.mp3', cuein: 6, cueout: 15, gain: 0.2 },
+  { src: '/media/audio/Guitar30.mp3', cuein: 6, cueout: 15, gain: 1 },
+  { src: '/media/audio/PianoSynth30.mp3', cuein: 6, cueout: 15, gain: 1 },
+  { src: '/media/audio/BassDrums30.mp3', cuein: 6, cueout: 15, gain: 1 },
 ]);
 const loading = playout.load();
 let playBack: Promise<unknown>[];
