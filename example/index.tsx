@@ -19,6 +19,8 @@ const playout = new Playout(
   ]
 );
 const loading = playout.load();
+playout.setMasterGain(0.1);
+
 let playBack: Promise<unknown>[];
 
 async function play() {

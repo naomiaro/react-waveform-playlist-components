@@ -44,11 +44,13 @@ class Playout {
   buffers: AudioBuffer[];
   sources: WebAudioPlayoutSource[];
   playBackPromises: Promise<unknown>[] | undefined;
-  constructor(tracks: AudioSource[], trackConfigs: TrackConfig[]) {
+  masterGain: number;
+  constructor(tracks: AudioSource[], trackConfigs?: TrackConfig[]) {
     this.tracks = tracks;
-    this.trackConfigs = trackConfigs;
+    this.trackConfigs = trackConfigs || Array(tracks.length).fill({});
     this.buffers = [];
     this.sources = [];
+    this.masterGain = 1;
   }
   async load() {
     this.buffers = await Promise.all(
@@ -63,6 +65,16 @@ class Playout {
     this.trackConfigs = configs;
   }
 
+  setMasterGain(gain: number) {
+    let masterGain = gain;
+    if (gain > 1) {
+      masterGain = 1;
+    } else if (gain < 0) {
+      masterGain = 0;
+    }
+    this.masterGain = masterGain;
+  }
+
   play(when: number = 0, start: number = 0, duration?: number) {
     this.playBackPromises = this.sources.map((source, i) => {
       const playBackPromise = source.setUpSource();
@@ -72,6 +84,7 @@ class Playout {
           : 1;
 
       source.setVolumeGainLevel(gain);
+      source.setMasterGainLevel(this.masterGain);
 
       return playBackPromise;
     });
