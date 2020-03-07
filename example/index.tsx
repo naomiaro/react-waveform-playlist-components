@@ -12,10 +12,10 @@ const playout = new Playout(
     '/media/audio/BassDrums30.mp3',
   ],
   [
-    { cuein: 6, cueout: 15, gain: 1 },
-    { cuein: 6, cueout: 15, gain: 1 },
-    { cuein: 6, cueout: 15, gain: 1 },
-    { cuein: 6, cueout: 15, gain: 1 },
+    { cuein: 0, cueout: 15, gain: 1 },
+    { cuein: 0, cueout: 15, gain: 1 },
+    { cuein: 0, cueout: 15, gain: 1 },
+    { cuein: 0, cueout: 15, gain: 1 },
   ]
 );
 const loading = playout.load();
@@ -26,7 +26,7 @@ let playBack: Promise<unknown>[];
 async function play() {
   try {
     await loading;
-    playBack = playout.play();
+    playBack = playout.play(6);
   } catch (e) {
     console.log(e);
   }
