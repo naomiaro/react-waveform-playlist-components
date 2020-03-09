@@ -135,7 +135,7 @@ class Playout {
       if (clipped >= trackLength) {
         source.play(0, 0, 0);
       } else {
-        const when = Math.min(0, clipped);
+        const when = AUDIO_CONTEXT.currentTime + Math.abs(Math.min(0, clipped));
         const trackStart = clipped < 0 ? cuein : cuein + clipped;
         const trackEnd = Math.min(
           playLength - trackStart,
