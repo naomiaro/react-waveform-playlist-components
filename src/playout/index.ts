@@ -5,7 +5,7 @@ const AUDIO_CONTEXT = new AudioContext();
 
 type FadeCurve = 'logarithmic' | 'linear' | 'sCurve' | 'exponential';
 type FadeDefinition = {
-  shape: FadeCurve;
+  shape?: FadeCurve;
   // length of fade from beginning or end of the track, in seconds.
   duration: number;
 };
@@ -121,34 +121,51 @@ class Playout {
       const clipped = start - offset;
       console.log(`CLIPPED ${clipped}`);
       const trackLength = cueOut - cueIn;
-      const playLength =
-        typeof duration === 'number' && duration < trackLength
-          ? duration
-          : trackLength;
+      let playLength;
 
-      if (clipped >= playLength) {
+      if (typeof duration === 'number' && duration < trackLength) {
+        if (clipped < 0) {
+          playLength = duration;
+        } else {
+          playLength = duration - clipped;
+        }
+      } else {
+        if (clipped < 0) {
+          playLength = trackLength;
+        } else {
+          playLength = trackLength - clipped;
+        }
+      }
+
+      if (playLength <= 0) {
         // nothing to play, but need to resolve the source setup
         source.play(0, 0, 0);
       } else {
         const when = now + Math.abs(Math.min(0, clipped));
         const trackStart = clipped < 0 ? cueIn : cueIn + clipped;
-        const trackDuration = Math.min(playLength, playLength + clipped);
 
         console.log(this.duration);
-        console.log(`${when} ${trackStart} ${trackDuration}`);
+        console.log(`${when} ${trackStart} ${playLength}`);
 
         if (fadeIn) {
-          source.applyFadeIn(when, fadeIn.duration, fadeIn.shape);
-          console.log(`FADEIN ${when} ${fadeIn.duration} ${fadeIn.shape}`);
+          const start = now - clipped;
+          if (start > 0) {
+            source.applyFadeIn(start, fadeIn.duration, fadeIn.shape);
+            console.log(`FADEIN ${start} ${fadeIn.duration} ${fadeIn.shape}`);
+          }
         }
 
         if (fadeOut) {
-          const start = when + trackLength - fadeOut.duration;
-          source.applyFadeOut(start, fadeOut.duration, fadeOut.shape);
-          console.log(`FADEOUT ${start} ${fadeOut.duration} ${fadeOut.shape}`);
+          const start = now - clipped + trackLength - fadeOut.duration;
+          if (start > 0) {
+            source.applyFadeOut(start, fadeOut.duration, fadeOut.shape);
+            console.log(
+              `FADEOUT ${start} ${fadeOut.duration} ${fadeOut.shape}`
+            );
+          }
         }
 
-        source.play(when, trackStart, trackDuration);
+        source.play(when, trackStart, playLength);
       }
     });
 

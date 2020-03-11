@@ -14,47 +14,47 @@ const playout = new Playout(
   [
     {
       start: 0,
-      cueIn: 6,
+      cueIn: 7,
       cueOut: 15,
       gain: 1,
-      fadeIn: { duration: 1, shape: 'sCurve' },
-      fadeOut: { duration: 1, shape: 'sCurve' },
+      fadeIn: { duration: 2, shape: 'linear' },
+      fadeOut: { duration: 1, shape: 'linear' },
     },
     {
       start: 0,
-      cueIn: 6,
+      cueIn: 7,
       cueOut: 15,
       gain: 1,
-      fadeIn: { duration: 1, shape: 'sCurve' },
-      fadeOut: { duration: 1, shape: 'sCurve' },
+      fadeIn: { duration: 2, shape: 'linear' },
+      fadeOut: { duration: 1, shape: 'linear' },
     },
     {
       start: 0,
-      cueIn: 6,
+      cueIn: 7,
       cueOut: 15,
       gain: 1,
-      fadeIn: { duration: 1, shape: 'sCurve' },
-      fadeOut: { duration: 1, shape: 'sCurve' },
+      fadeIn: { duration: 2, shape: 'linear' },
+      fadeOut: { duration: 1, shape: 'linear' },
     },
     {
       start: 0,
-      cueIn: 6,
+      cueIn: 7,
       cueOut: 15,
       gain: 1,
-      fadeIn: { duration: 1, shape: 'sCurve' },
-      fadeOut: { duration: 1, shape: 'sCurve' },
+      fadeIn: { duration: 2, shape: 'linear' },
+      fadeOut: { duration: 1, shape: 'linear' },
     },
   ]
 );
 const loading = playout.load();
-playout.setMasterGain(1.1);
+playout.setMasterGain(1);
 
 let playBack: Promise<void>[];
 
 async function play() {
   try {
     await loading;
-    playBack = await playout.play(0);
+    playBack = await playout.play(7);
   } catch (e) {
     console.log(e);
   }
