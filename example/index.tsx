@@ -13,6 +13,7 @@ const playout = new Playout(
   ],
   [
     {
+      start: 1,
       cueIn: 6,
       cueOut: 15,
       gain: 1,
@@ -20,6 +21,7 @@ const playout = new Playout(
       fadeOut: { duration: 1, shape: 'sCurve' },
     },
     {
+      start: 1,
       cueIn: 6,
       cueOut: 15,
       gain: 1,
@@ -27,6 +29,7 @@ const playout = new Playout(
       fadeOut: { duration: 1, shape: 'sCurve' },
     },
     {
+      start: 1,
       cueIn: 6,
       cueOut: 15,
       gain: 1,
@@ -34,6 +37,7 @@ const playout = new Playout(
       fadeOut: { duration: 1, shape: 'sCurve' },
     },
     {
+      start: 1,
       cueIn: 6,
       cueOut: 15,
       gain: 1,
@@ -43,14 +47,14 @@ const playout = new Playout(
   ]
 );
 const loading = playout.load();
-playout.setMasterGain(0.1);
+playout.setMasterGain(1.1);
 
-let playBack: Promise<unknown>[];
+let playBack: Promise<void>[];
 
 async function play() {
   try {
     await loading;
-    playBack = await playout.play(2);
+    playBack = await playout.play(0, 3);
   } catch (e) {
     console.log(e);
   }

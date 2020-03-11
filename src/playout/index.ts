@@ -109,6 +109,7 @@ class Playout {
     });
 
     const now = AUDIO_CONTEXT.currentTime;
+    console.log(`NOW ${now}`);
     this.sources.forEach((source, i) => {
       const cueIn = source.cueIn;
       const cueOut = source.cueOut;
@@ -118,16 +119,20 @@ class Playout {
       const fadeOut = this.trackConfigs[i].fadeOut;
 
       const clipped = start - offset;
+      console.log(`CLIPPED ${clipped}`);
       const trackLength = cueOut - cueIn;
-      const playLength = typeof duration === 'number' ? duration : trackLength;
+      const playLength =
+        typeof duration === 'number' && duration < trackLength
+          ? duration
+          : trackLength;
 
-      if (clipped >= trackLength) {
+      if (clipped >= playLength) {
         // nothing to play, but need to resolve the source setup
         source.play(0, 0, 0);
       } else {
         const when = now + Math.abs(Math.min(0, clipped));
         const trackStart = clipped < 0 ? cueIn : cueIn + clipped;
-        const trackDuration = Math.min(playLength, playLength - clipped);
+        const trackDuration = Math.min(playLength, playLength + clipped);
 
         console.log(this.duration);
         console.log(`${when} ${trackStart} ${trackDuration}`);
