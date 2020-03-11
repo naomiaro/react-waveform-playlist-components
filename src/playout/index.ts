@@ -107,6 +107,8 @@ class Playout {
 
       return playBackPromise;
     });
+
+    const now = AUDIO_CONTEXT.currentTime;
     this.sources.forEach((source, i) => {
       const cueIn = source.cueIn;
       const cueOut = source.cueOut;
@@ -118,7 +120,6 @@ class Playout {
       const clipped = start - offset;
       const trackLength = cueOut - cueIn;
       const playLength = typeof duration === 'number' ? duration : trackLength;
-      const now = AUDIO_CONTEXT.currentTime;
 
       if (clipped >= trackLength) {
         // nothing to play, but need to resolve the source setup

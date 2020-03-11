@@ -136,16 +136,6 @@ class WebAudioPlayoutSource {
   stop(when = 0) {
     if (this.source) {
       this.source.stop(when);
-
-      // this.source && this.source.disconnect();
-      // this.fadeGain && this.fadeGain.disconnect();
-      // this.volumeGain && this.volumeGain.disconnect();
-      // this.masterGain && this.masterGain.disconnect();
-
-      // this.source = undefined;
-      // this.fadeGain = undefined;
-      // this.volumeGain = undefined;
-      // this.masterGain = undefined;
     }
   }
 }
