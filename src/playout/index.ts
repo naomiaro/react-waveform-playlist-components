@@ -26,11 +26,11 @@ interface TrackConfig {
   // where the waveform for this track should begin from
   // ex (Waveform will begin 15 seconds into this track)
   // DEFAULT start at the beginning - 0 seconds
-  cuein?: number;
+  cueIn?: number;
   // where the waveform for this track should end
   // ex (Waveform will end at 30 second into this track)
   // DEFAULT duration of the track
-  cueout?: number;
+  cueOut?: number;
 }
 
 // reference api https://developer.mozilla.org/en-US/docs/Web/API/HTMLMediaElement
@@ -50,7 +50,7 @@ class Playout {
   trackConfigs: TrackConfig[];
   buffers: AudioBuffer[];
   sources: WebAudioPlayoutSource[];
-  playBackPromises: Promise<unknown>[] | undefined;
+  playBackPromises: Promise<void>[] | undefined;
   masterGain: number;
   constructor(tracks: AudioSource[], trackConfigs?: TrackConfig[]) {
     this.tracks = tracks;
@@ -66,28 +66,23 @@ class Playout {
     this.sources = this.buffers.map(
       buffer => new WebAudioPlayoutSource(AUDIO_CONTEXT, buffer)
     );
+    this.configure(this.trackConfigs);
   }
 
   get duration() {
     let duration = 0;
     for (let i = 0; i < this.sources.length; i++) {
-      const cuein =
-        typeof this.trackConfigs[i].cuein === 'number'
-          ? (this.trackConfigs[i].cuein as number)
-          : 0;
-
-      const cueout =
-        typeof this.trackConfigs[i].cueout === 'number'
-          ? (this.trackConfigs[i].cueout as number)
-          : this.sources[i].getDuration();
-      const start = this.trackConfigs[i].start || 0;
-      duration = Math.max(duration, cueout - cuein + start);
+      duration = Math.max(duration, this.sources[i].duration);
     }
 
     return duration;
   }
 
   configure(configs: TrackConfig[]) {
+    configs.forEach((config, i) => {
+      const track = this.sources[i];
+      track.setCues(config.cueIn, config.cueOut, config.start);
+    });
     this.trackConfigs = configs;
   }
 
@@ -99,7 +94,7 @@ class Playout {
    * @param start - time in seconds relative to playlist to start playing.
    * @param duration - time in seconds to continue playout.
    */
-  play(start: number = 0, duration?: number) {
+  async play(start: number = 0, duration?: number) {
     this.playBackPromises = this.sources.map((source, i) => {
       const playBackPromise = source.setUpSource();
       const gain =
@@ -113,46 +108,51 @@ class Playout {
       return playBackPromise;
     });
     this.sources.forEach((source, i) => {
-      const cuein =
-        typeof this.trackConfigs[i].cuein === 'number'
-          ? (this.trackConfigs[i].cuein as number)
-          : 0;
+      const cueIn = source.cueIn;
+      const cueOut = source.cueOut;
+      const offset = source.offset;
 
-      const cueout =
-        typeof this.trackConfigs[i].cueout === 'number'
-          ? (this.trackConfigs[i].cueout as number)
-          : source.getDuration();
-
-      const offset =
-        typeof this.trackConfigs[i].start === 'number'
-          ? (this.trackConfigs[i].start as number)
-          : 0;
+      const fadeIn = this.trackConfigs[i].fadeIn;
+      const fadeOut = this.trackConfigs[i].fadeOut;
 
       const clipped = start - offset;
-      const trackLength = cueout - cuein;
+      const trackLength = cueOut - cueIn;
       const playLength = typeof duration === 'number' ? duration : trackLength;
+      const now = AUDIO_CONTEXT.currentTime;
 
       if (clipped >= trackLength) {
+        // nothing to play, but need to resolve the source setup
         source.play(0, 0, 0);
       } else {
-        const when = AUDIO_CONTEXT.currentTime + Math.abs(Math.min(0, clipped));
-        const trackStart = clipped < 0 ? cuein : cuein + clipped;
-        const trackEnd = Math.min(
+        const when = now + Math.abs(Math.min(0, clipped));
+        const trackStart = clipped < 0 ? cueIn : cueIn + clipped;
+        const trackDuration = Math.min(
           playLength - trackStart,
           trackLength - clipped
         );
 
         console.log(this.duration);
-        console.log(`${when} ${trackStart} ${trackEnd}`);
+        console.log(`${when} ${trackStart} ${trackDuration}`);
 
-        source.play(when, trackStart, trackEnd);
+        if (fadeIn) {
+          source.applyFadeIn(when, fadeIn.duration, fadeIn.shape);
+          console.log(`FADEIN ${when} ${fadeIn.duration} ${fadeIn.shape}`);
+        }
+
+        if (fadeOut) {
+          const start = when + trackDuration - fadeOut.duration;
+          source.applyFadeOut(start, fadeOut.duration, fadeOut.shape);
+          console.log(`FADEOUT ${start} ${fadeOut.duration} ${fadeOut.shape}`);
+        }
+
+        source.play(when, trackStart, trackDuration);
       }
     });
 
     return this.playBackPromises;
   }
 
-  stop() {
+  async stop() {
     this.sources.forEach(source => source.stop());
   }
 }

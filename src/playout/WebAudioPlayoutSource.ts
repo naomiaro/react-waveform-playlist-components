@@ -2,6 +2,9 @@ import { FADEIN, FADEOUT, createFadeIn, createFadeOut } from 'fade-maker';
 
 class WebAudioPlayoutSource {
   ac: AudioContext;
+  cueIn: number;
+  cueOut: number;
+  offset: number;
   gain: number;
   buffer: AudioBuffer;
   destination: AudioDestinationNode;
@@ -15,6 +18,13 @@ class WebAudioPlayoutSource {
     this.gain = 1;
     this.buffer = buffer;
     this.destination = this.ac.destination;
+    this.cueIn = 0;
+    this.cueOut = buffer.duration;
+    this.offset = 0;
+  }
+
+  get duration() {
+    return this.cueOut - this.cueIn + this.offset;
   }
 
   applyFade(
@@ -47,16 +57,12 @@ class WebAudioPlayoutSource {
     return this.source !== undefined;
   }
 
-  getDuration() {
-    return this.buffer.duration;
-  }
-
   setAudioContext(audioContext: AudioContext) {
     this.ac = audioContext;
     this.destination = this.ac.destination;
   }
 
-  setUpSource() {
+  setUpSource(): Promise<void> {
     const source = this.ac.createBufferSource();
     source.buffer = this.buffer;
 
@@ -75,13 +81,15 @@ class WebAudioPlayoutSource {
     this.volumeGain.connect(this.masterGain);
     this.masterGain.connect(this.destination);
 
-    const sourcePromise = new Promise(resolve => {
+    const sourcePromise = new Promise<void>(resolve => {
       // keep track of the AudioBufferSourceNode state.
       source.onended = () => {
-        source.disconnect();
-        fadeGain.disconnect();
-        volumeGain.disconnect();
-        masterGain.disconnect();
+        // gainNode.gain.cancelScheduledValues(audioCtx.currentTime);
+        console.log('ended');
+        this.source && source.disconnect();
+        this.fadeGain && fadeGain.disconnect();
+        this.volumeGain && volumeGain.disconnect();
+        this.masterGain && masterGain.disconnect();
 
         this.source = undefined;
         this.fadeGain = undefined;
@@ -93,6 +101,12 @@ class WebAudioPlayoutSource {
     });
 
     return sourcePromise;
+  }
+
+  setCues(cueIn?: number, cueOut?: number, offset = 0) {
+    this.cueIn = cueIn || 0;
+    this.cueOut = cueOut || this.buffer.duration;
+    this.offset = offset;
   }
 
   setVolumeGainLevel(level: number) {
@@ -122,6 +136,16 @@ class WebAudioPlayoutSource {
   stop(when = 0) {
     if (this.source) {
       this.source.stop(when);
+
+      // this.source && this.source.disconnect();
+      // this.fadeGain && this.fadeGain.disconnect();
+      // this.volumeGain && this.volumeGain.disconnect();
+      // this.masterGain && this.masterGain.disconnect();
+
+      // this.source = undefined;
+      // this.fadeGain = undefined;
+      // this.volumeGain = undefined;
+      // this.masterGain = undefined;
     }
   }
 }

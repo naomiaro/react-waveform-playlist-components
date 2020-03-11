@@ -12,10 +12,34 @@ const playout = new Playout(
     '/media/audio/BassDrums30.mp3',
   ],
   [
-    { cuein: 0, cueout: 15, gain: 1, start: -6 },
-    { cuein: 0, cueout: 15, gain: 1, start: -6 },
-    { cuein: 0, cueout: 15, gain: 1, start: -6 },
-    { cuein: 0, cueout: 15, gain: 1, start: -6 },
+    {
+      cueIn: 0,
+      cueOut: 5,
+      gain: 1,
+      fadeIn: { duration: 1, shape: 'sCurve' },
+      fadeOut: { duration: 1, shape: 'sCurve' },
+    },
+    {
+      cueIn: 0,
+      cueOut: 5,
+      gain: 1,
+      fadeIn: { duration: 1, shape: 'sCurve' },
+      fadeOut: { duration: 1, shape: 'sCurve' },
+    },
+    {
+      cueIn: 0,
+      cueOut: 5,
+      gain: 1,
+      fadeIn: { duration: 1, shape: 'sCurve' },
+      fadeOut: { duration: 1, shape: 'sCurve' },
+    },
+    {
+      cueIn: 0,
+      cueOut: 5,
+      gain: 1,
+      fadeIn: { duration: 1, shape: 'sCurve' },
+      fadeOut: { duration: 1, shape: 'sCurve' },
+    },
   ]
 );
 const loading = playout.load();
@@ -26,14 +50,18 @@ let playBack: Promise<unknown>[];
 async function play() {
   try {
     await loading;
-    playBack = playout.play(0);
+    if (playBack) {
+      await playBack;
+      console.log('waited');
+    }
+    playBack = await playout.play(0);
   } catch (e) {
     console.log(e);
   }
 }
 
-function stop() {
-  playout.stop();
+async function stop() {
+  await playout.stop();
 }
 
 const App = () => {
