@@ -94,7 +94,7 @@ class Playout {
    * @param start - time in seconds relative to playlist to start playing.
    * @param duration - time in seconds to continue playout.
    */
-  async play(start: number = 0, duration?: number) {
+  play(start: number = 0, duration?: number) {
     this.playBackPromises = this.sources.map((source, i) => {
       const playBackPromise = source.setUpSource();
       const gain =
@@ -127,10 +127,7 @@ class Playout {
       } else {
         const when = now + Math.abs(Math.min(0, clipped));
         const trackStart = clipped < 0 ? cueIn : cueIn + clipped;
-        const trackDuration = Math.min(
-          playLength - trackStart,
-          trackLength - clipped
-        );
+        const trackDuration = Math.min(playLength, playLength - clipped);
 
         console.log(this.duration);
         console.log(`${when} ${trackStart} ${trackDuration}`);
@@ -153,7 +150,7 @@ class Playout {
     return this.playBackPromises;
   }
 
-  async stop() {
+  stop() {
     this.sources.forEach(source => source.stop());
   }
 }

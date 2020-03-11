@@ -13,29 +13,29 @@ const playout = new Playout(
   ],
   [
     {
-      cueIn: 0,
-      cueOut: 5,
+      cueIn: 6,
+      cueOut: 15,
       gain: 1,
       fadeIn: { duration: 1, shape: 'sCurve' },
       fadeOut: { duration: 1, shape: 'sCurve' },
     },
     {
-      cueIn: 0,
-      cueOut: 5,
+      cueIn: 6,
+      cueOut: 15,
       gain: 1,
       fadeIn: { duration: 1, shape: 'sCurve' },
       fadeOut: { duration: 1, shape: 'sCurve' },
     },
     {
-      cueIn: 0,
-      cueOut: 5,
+      cueIn: 6,
+      cueOut: 15,
       gain: 1,
       fadeIn: { duration: 1, shape: 'sCurve' },
       fadeOut: { duration: 1, shape: 'sCurve' },
     },
     {
-      cueIn: 0,
-      cueOut: 5,
+      cueIn: 6,
+      cueOut: 15,
       gain: 1,
       fadeIn: { duration: 1, shape: 'sCurve' },
       fadeOut: { duration: 1, shape: 'sCurve' },
@@ -50,18 +50,14 @@ let playBack: Promise<unknown>[];
 async function play() {
   try {
     await loading;
-    if (playBack) {
-      await playBack;
-      console.log('waited');
-    }
-    playBack = await playout.play(0);
+    playBack = await playout.play(2);
   } catch (e) {
     console.log(e);
   }
 }
 
-async function stop() {
-  await playout.stop();
+function stop() {
+  playout.stop();
 }
 
 const App = () => {
