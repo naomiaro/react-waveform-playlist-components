@@ -143,7 +143,7 @@ class Playout {
         }
 
         if (fadeOut) {
-          const start = when + trackDuration - fadeOut.duration;
+          const start = when + trackLength - fadeOut.duration;
           source.applyFadeOut(start, fadeOut.duration, fadeOut.shape);
           console.log(`FADEOUT ${start} ${fadeOut.duration} ${fadeOut.shape}`);
         }
