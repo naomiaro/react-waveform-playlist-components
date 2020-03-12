@@ -1,6 +1,14 @@
 import { scheduleSourcePlayout, ITrackConfig } from './';
 
 describe('Playout from the beginning', () => {
+  test('No playout', () => {
+    expect(scheduleSourcePlayout(0, 0, 0, {}, 0, 0)).toStrictEqual({
+      when: 0,
+      start: 0,
+      duration: 0,
+    });
+  });
+
   test('Basic config', () => {
     expect(scheduleSourcePlayout(0, 15, 0, {}, 0, 0)).toStrictEqual({
       when: 0,
@@ -63,6 +71,14 @@ describe('Playout from the beginning', () => {
 });
 
 describe('Playout from set point', () => {
+  test('No playout', () => {
+    expect(scheduleSourcePlayout(0, 15, 0, {}, 0, 15)).toStrictEqual({
+      when: 0,
+      start: 0,
+      duration: 0,
+    });
+  });
+
   test('Basic config', () => {
     expect(scheduleSourcePlayout(0, 15, 0, {}, 0, 1)).toStrictEqual({
       when: 0,
@@ -138,6 +154,13 @@ describe('Playout from set point', () => {
 });
 
 describe('Playout with duration', () => {
+  test('No playout', () => {
+    expect(scheduleSourcePlayout(8, 15, 7, {}, 0, 0, 3)).toStrictEqual({
+      when: 0,
+      start: 0,
+      duration: 0,
+    });
+  });
   test('Basic config', () => {
     expect(scheduleSourcePlayout(0, 15, 0, {}, 0, 0, 3)).toStrictEqual({
       when: 0,
