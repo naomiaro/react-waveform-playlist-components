@@ -136,3 +136,79 @@ describe('Playout from set point', () => {
     });
   });
 });
+
+describe('Playout with duration', () => {
+  test('Basic config', () => {
+    expect(scheduleSourcePlayout(0, 15, 0, {}, 0, 0, 3)).toStrictEqual({
+      when: 0,
+      start: 0,
+      duration: 3,
+    });
+  });
+
+  test('Fade config', () => {
+    const config: ITrackConfig = {
+      fadeIn: { duration: 1.5, shape: 'logarithmic' },
+      fadeOut: { duration: 1, shape: 'linear' },
+    };
+    expect(scheduleSourcePlayout(0, 15, 0, config, 0, 0, 3)).toStrictEqual({
+      when: 0,
+      start: 0,
+      duration: 3,
+      fadeIn: { start: 0, duration: 1.5, shape: 'logarithmic' },
+      fadeOut: { start: 14, duration: 1, shape: 'linear' },
+    });
+  });
+
+  test('Fade config - when allows for retro scheduling fade.', () => {
+    const config: ITrackConfig = {
+      fadeIn: { duration: 1.5, shape: 'logarithmic' },
+      fadeOut: { duration: 1, shape: 'linear' },
+    };
+    expect(scheduleSourcePlayout(0, 15, 0, config, 2, 1, 3)).toStrictEqual({
+      when: 2,
+      start: 1,
+      duration: 3,
+      fadeIn: { start: 1, duration: 1.5, shape: 'logarithmic' },
+      fadeOut: { start: 15, duration: 1, shape: 'linear' },
+    });
+  });
+
+  test('Offset track', () => {
+    expect(scheduleSourcePlayout(0, 15, 1, {}, 0, 1, 3)).toStrictEqual({
+      when: 0,
+      start: 0,
+      duration: 3,
+    });
+  });
+
+  test('CueIn not 0', () => {
+    expect(scheduleSourcePlayout(7, 15, 0, {}, 0, 1, 3)).toStrictEqual({
+      when: 0,
+      start: 8,
+      duration: 3,
+    });
+  });
+
+  test('CueIn not 0 and offset track', () => {
+    expect(scheduleSourcePlayout(7, 15, 2, {}, 0, 1, 3)).toStrictEqual({
+      when: 1,
+      start: 7,
+      duration: 2,
+    });
+  });
+
+  test('CueIn not 0 and offset track with fades', () => {
+    const config: ITrackConfig = {
+      fadeIn: { duration: 1.5, shape: 'logarithmic' },
+      fadeOut: { duration: 1, shape: 'linear' },
+    };
+    expect(scheduleSourcePlayout(7, 15, 2, config, 0, 1, 3)).toStrictEqual({
+      when: 1,
+      start: 7,
+      duration: 2,
+      fadeIn: { start: 1, duration: 1.5, shape: 'logarithmic' },
+      fadeOut: { start: 8, duration: 1, shape: 'linear' },
+    });
+  });
+});

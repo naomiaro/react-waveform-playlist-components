@@ -72,7 +72,6 @@ export function scheduleSourcePlayout(
   const fadeOut = config.fadeOut;
 
   const clipped = start - offset;
-  console.log(`CLIPPED ${clipped}`);
   const trackLength = cueOut - cueIn;
   let playLength;
   let schedule: ISourceSchedule = {
@@ -82,10 +81,10 @@ export function scheduleSourcePlayout(
   };
 
   if (typeof duration === 'number' && duration < trackLength) {
-    if (clipped < 0) {
+    if (clipped > 0) {
       playLength = duration;
     } else {
-      playLength = duration - clipped;
+      playLength = duration + clipped;
     }
   } else {
     if (clipped < 0) {
@@ -101,8 +100,6 @@ export function scheduleSourcePlayout(
   const when = now + Math.abs(Math.min(0, clipped));
   const trackStart = clipped < 0 ? cueIn : cueIn + clipped;
 
-  console.log(`${when} ${trackStart} ${playLength}`);
-
   schedule = Object.assign(schedule, {
     when,
     start: trackStart,
@@ -112,7 +109,6 @@ export function scheduleSourcePlayout(
   if (fadeIn) {
     const start = now - clipped;
     if (start >= 0) {
-      console.log(`FADEIN ${start} ${fadeIn.duration} ${fadeIn.shape}`);
       schedule = Object.assign(schedule, {
         fadeIn: {
           start,
@@ -126,7 +122,6 @@ export function scheduleSourcePlayout(
   if (fadeOut) {
     const start = now - clipped + trackLength - fadeOut.duration;
     if (start >= 0) {
-      console.log(`FADEOUT ${start} ${fadeOut.duration} ${fadeOut.shape}`);
       schedule = Object.assign(schedule, {
         fadeOut: {
           start,
@@ -212,7 +207,6 @@ class Playout {
   play(start: number = 0, duration?: number) {
     const playBackPromises = this.createSources();
     const now = this.ac.currentTime;
-    console.log(`NOW ${now}`);
 
     this.sources.forEach((source, i) => {
       const cueIn = source.cueIn;
