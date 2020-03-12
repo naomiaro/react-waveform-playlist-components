@@ -54,7 +54,7 @@ let playBack: Promise<void>[];
 async function play() {
   try {
     await loading;
-    playBack = await playout.play(7);
+    playBack = await playout.play(0);
   } catch (e) {
     console.log(e);
   }

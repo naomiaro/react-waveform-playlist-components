@@ -1,8 +1,6 @@
 import { load } from '../loading';
 import { WebAudioPlayoutSource } from './WebAudioPlayoutSource';
 
-const AUDIO_CONTEXT = new AudioContext();
-
 type FadeCurve = 'logarithmic' | 'linear' | 'sCurve' | 'exponential';
 type FadeDefinition = {
   shape?: FadeCurve;
@@ -11,7 +9,23 @@ type FadeDefinition = {
 };
 type AudioSource = string | File;
 
-interface TrackConfig {
+export interface ISourceSchedule {
+  when: number;
+  start: number;
+  duration: number;
+  fadeIn?: {
+    start: number;
+    duration: number;
+    shape?: FadeCurve;
+  };
+  fadeOut?: {
+    start: number;
+    duration: number;
+    shape?: FadeCurve;
+  };
+}
+
+export interface ITrackConfig {
   // volume level of the track between [0-1]
   gain?: number;
   // time in seconds relative to the playlist
@@ -35,7 +49,7 @@ interface TrackConfig {
 
 // reference api https://developer.mozilla.org/en-US/docs/Web/API/HTMLMediaElement
 
-function clampGain(gain: number) {
+export function clampGain(gain: number) {
   if (gain > 1) {
     return 1;
   } else if (gain < 0) {
@@ -45,14 +59,100 @@ function clampGain(gain: number) {
   return gain;
 }
 
+export function scheduleSourcePlayout(
+  cueIn: number,
+  cueOut: number,
+  offset: number,
+  config: ITrackConfig,
+  now: number,
+  start: number = 0,
+  duration?: number
+): ISourceSchedule {
+  const fadeIn = config.fadeIn;
+  const fadeOut = config.fadeOut;
+
+  const clipped = start - offset;
+  console.log(`CLIPPED ${clipped}`);
+  const trackLength = cueOut - cueIn;
+  let playLength;
+  let schedule: ISourceSchedule = {
+    when: 0,
+    start: 0,
+    duration: 0,
+  };
+
+  if (typeof duration === 'number' && duration < trackLength) {
+    if (clipped < 0) {
+      playLength = duration;
+    } else {
+      playLength = duration - clipped;
+    }
+  } else {
+    if (clipped < 0) {
+      playLength = trackLength;
+    } else {
+      playLength = trackLength - clipped;
+    }
+  }
+  if (playLength <= 0) {
+    return schedule;
+  }
+
+  const when = now + Math.abs(Math.min(0, clipped));
+  const trackStart = clipped < 0 ? cueIn : cueIn + clipped;
+
+  console.log(`${when} ${trackStart} ${playLength}`);
+
+  schedule = Object.assign(schedule, {
+    when,
+    start: trackStart,
+    duration: playLength,
+  });
+
+  if (fadeIn) {
+    const start = now - clipped;
+    if (start > 0) {
+      console.log(`FADEIN ${start} ${fadeIn.duration} ${fadeIn.shape}`);
+      schedule = Object.assign(schedule, {
+        fadeIn: {
+          start,
+          duration: fadeIn.duration,
+          shape: fadeIn.shape,
+        },
+      });
+    }
+  }
+
+  if (fadeOut) {
+    const start = now - clipped + trackLength - fadeOut.duration;
+    if (start > 0) {
+      console.log(`FADEOUT ${start} ${fadeOut.duration} ${fadeOut.shape}`);
+      schedule = Object.assign(schedule, {
+        fadeOut: {
+          start,
+          duration: fadeOut.duration,
+          shape: fadeOut.shape,
+        },
+      });
+    }
+  }
+
+  return schedule;
+}
+
 class Playout {
+  ac: AudioContext;
   tracks: AudioSource[];
-  trackConfigs: TrackConfig[];
+  trackConfigs: ITrackConfig[];
   buffers: AudioBuffer[];
   sources: WebAudioPlayoutSource[];
-  playBackPromises: Promise<void>[] | undefined;
   masterGain: number;
-  constructor(tracks: AudioSource[], trackConfigs?: TrackConfig[]) {
+  constructor(
+    tracks: AudioSource[],
+    trackConfigs?: ITrackConfig[],
+    ac?: AudioContext
+  ) {
+    this.ac = ac || new AudioContext();
     this.tracks = tracks;
     this.trackConfigs = trackConfigs || Array(tracks.length).fill({});
     this.buffers = [];
@@ -61,10 +161,10 @@ class Playout {
   }
   async load() {
     this.buffers = await Promise.all(
-      this.tracks.map(track => load(track, AUDIO_CONTEXT))
+      this.tracks.map(track => load(track, this.ac))
     );
     this.sources = this.buffers.map(
-      buffer => new WebAudioPlayoutSource(AUDIO_CONTEXT, buffer)
+      buffer => new WebAudioPlayoutSource(this.ac, buffer)
     );
     this.configure(this.trackConfigs);
   }
@@ -78,7 +178,7 @@ class Playout {
     return duration;
   }
 
-  configure(configs: TrackConfig[]) {
+  configure(configs: ITrackConfig[]) {
     configs.forEach((config, i) => {
       const track = this.sources[i];
       track.setCues(config.cueIn, config.cueOut, config.start);
@@ -90,12 +190,8 @@ class Playout {
     this.masterGain = clampGain(gain);
   }
 
-  /*
-   * @param start - time in seconds relative to playlist to start playing.
-   * @param duration - time in seconds to continue playout.
-   */
-  play(start: number = 0, duration?: number) {
-    this.playBackPromises = this.sources.map((source, i) => {
+  createSources() {
+    return this.sources.map((source, i) => {
       const playBackPromise = source.setUpSource();
       const gain =
         typeof this.trackConfigs[i].gain === 'number'
@@ -107,69 +203,45 @@ class Playout {
 
       return playBackPromise;
     });
+  }
 
-    const now = AUDIO_CONTEXT.currentTime;
+  /*
+   * @param start - time in seconds relative to playlist to start playing.
+   * @param duration - time in seconds to continue playout.
+   */
+  play(start: number = 0, duration?: number) {
+    const playBackPromises = this.createSources();
+    const now = this.ac.currentTime;
     console.log(`NOW ${now}`);
+
     this.sources.forEach((source, i) => {
       const cueIn = source.cueIn;
       const cueOut = source.cueOut;
       const offset = source.offset;
+      const schedule = scheduleSourcePlayout(
+        cueIn,
+        cueOut,
+        offset,
+        this.trackConfigs[i],
+        now,
+        start,
+        duration
+      );
 
-      const fadeIn = this.trackConfigs[i].fadeIn;
-      const fadeOut = this.trackConfigs[i].fadeOut;
-
-      const clipped = start - offset;
-      console.log(`CLIPPED ${clipped}`);
-      const trackLength = cueOut - cueIn;
-      let playLength;
-
-      if (typeof duration === 'number' && duration < trackLength) {
-        if (clipped < 0) {
-          playLength = duration;
-        } else {
-          playLength = duration - clipped;
-        }
-      } else {
-        if (clipped < 0) {
-          playLength = trackLength;
-        } else {
-          playLength = trackLength - clipped;
-        }
+      if (schedule.fadeIn) {
+        const fadeIn = schedule.fadeIn;
+        source.applyFadeIn(fadeIn.start, fadeIn.duration, fadeIn.shape);
       }
 
-      if (playLength <= 0) {
-        // nothing to play, but need to resolve the source setup
-        source.play(0, 0, 0);
-      } else {
-        const when = now + Math.abs(Math.min(0, clipped));
-        const trackStart = clipped < 0 ? cueIn : cueIn + clipped;
-
-        console.log(this.duration);
-        console.log(`${when} ${trackStart} ${playLength}`);
-
-        if (fadeIn) {
-          const start = now - clipped;
-          if (start > 0) {
-            source.applyFadeIn(start, fadeIn.duration, fadeIn.shape);
-            console.log(`FADEIN ${start} ${fadeIn.duration} ${fadeIn.shape}`);
-          }
-        }
-
-        if (fadeOut) {
-          const start = now - clipped + trackLength - fadeOut.duration;
-          if (start > 0) {
-            source.applyFadeOut(start, fadeOut.duration, fadeOut.shape);
-            console.log(
-              `FADEOUT ${start} ${fadeOut.duration} ${fadeOut.shape}`
-            );
-          }
-        }
-
-        source.play(when, trackStart, playLength);
+      if (schedule.fadeOut) {
+        const fadeOut = schedule.fadeOut;
+        source.applyFadeOut(fadeOut.start, fadeOut.duration, fadeOut.shape);
       }
+
+      source.play(schedule.when, schedule.start, schedule.duration);
     });
 
-    return this.playBackPromises;
+    return playBackPromises;
   }
 
   stop() {

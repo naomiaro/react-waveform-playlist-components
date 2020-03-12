@@ -84,7 +84,6 @@ class WebAudioPlayoutSource {
     const sourcePromise = new Promise<void>(resolve => {
       // keep track of the AudioBufferSourceNode state.
       source.onended = () => {
-        // gainNode.gain.cancelScheduledValues(audioCtx.currentTime);
         console.log('ended');
         this.source && source.disconnect();
         this.fadeGain && fadeGain.disconnect();

@@ -1,6 +1,6 @@
 {
   "testEnvironment": "jsdom",
-  "roots": ["<rootDir>/tests"],
+  "roots": ["<rootDir>/src"],
   "setupFilesAfterEnv": ["<rootDir>/setupTests.ts"],
   "collectCoverageFrom": ["**/*.js"],
   "transform": {
@@ -8,8 +8,8 @@
     "^.+\\.mdx?$": "@storybook/addon-docs/jest-transform-mdx"
   },
   "testMatch": [
-    "<rootDir>/tests/**/__tests__/**/*.[jt]s?(x)",
-    "<rootDir>/tests/**/*(*.)@(spec|test).[tj]s?(x)"
+    "<rootDir>/src/**/__tests__/**/*.[jt]s?(x)",
+    "<rootDir>/src/**/*(*.)@(spec|test).[tj]s?(x)"
   ],
   "moduleFileExtensions": ["js", "json", "jsx", "ts", "tsx", "node"],
   "snapshotSerializers": ["enzyme-to-json/serializer"]
