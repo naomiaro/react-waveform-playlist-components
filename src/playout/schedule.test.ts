@@ -169,6 +169,14 @@ describe('Playout with duration', () => {
     });
   });
 
+  test('Basic config long duration', () => {
+    expect(scheduleSourcePlayout(0, 15, 0, {}, 0, 0, 16)).toStrictEqual({
+      when: 0,
+      start: 0,
+      duration: 15,
+    });
+  });
+
   test('Fade config', () => {
     const config: ITrackConfig = {
       fadeIn: { duration: 1.5, shape: 'logarithmic' },
@@ -218,6 +226,22 @@ describe('Playout with duration', () => {
       when: 1,
       start: 7,
       duration: 2,
+    });
+  });
+
+  test('CueIn not 0 and offset negative track long duration', () => {
+    expect(scheduleSourcePlayout(7, 15, 2, {}, 0, 4, 15)).toStrictEqual({
+      when: 0,
+      start: 9,
+      duration: 6,
+    });
+  });
+
+  test('CueIn not 0 and offset positive track long duration', () => {
+    expect(scheduleSourcePlayout(7, 15, 2, {}, 0, 1, 15)).toStrictEqual({
+      when: 1,
+      start: 7,
+      duration: 8,
     });
   });
 

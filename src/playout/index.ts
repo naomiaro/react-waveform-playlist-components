@@ -80,11 +80,13 @@ export function scheduleSourcePlayout(
     duration: 0,
   };
 
-  if (typeof duration === 'number' && duration < trackLength) {
+  if (typeof duration === 'number') {
+    //starting at or after the cuein
     if (clipped > 0) {
-      playLength = duration;
+      playLength = Math.min(duration, trackLength - clipped);
     } else {
-      playLength = duration + clipped;
+      // some duration is eaten by the silence of the offset.
+      playLength = Math.min(duration + clipped, trackLength);
     }
   } else {
     if (clipped < 0) {
