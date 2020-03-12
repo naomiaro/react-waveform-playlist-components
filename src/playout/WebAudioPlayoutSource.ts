@@ -9,10 +9,10 @@ class WebAudioPlayoutSource {
   buffer: AudioBuffer;
   destination: AudioDestinationNode;
   source: AudioBufferSourceNode | undefined;
-  fadeGain: GainNode | undefined;
+  fadeGain: GainNode;
   // used for track volume slider
-  volumeGain: GainNode | undefined;
-  masterGain: GainNode | undefined;
+  volumeGain: GainNode;
+  masterGain: GainNode;
   constructor(ac: AudioContext, buffer: AudioBuffer) {
     this.ac = ac;
     this.gain = 1;
@@ -21,6 +21,12 @@ class WebAudioPlayoutSource {
     this.cueIn = 0;
     this.cueOut = buffer.duration;
     this.offset = 0;
+    this.fadeGain = this.ac.createGain();
+    this.volumeGain = this.ac.createGain();
+    this.masterGain = this.ac.createGain();
+    this.fadeGain.connect(this.volumeGain);
+    this.volumeGain.connect(this.masterGain);
+    this.masterGain.connect(this.destination);
   }
 
   get duration() {
@@ -33,9 +39,6 @@ class WebAudioPlayoutSource {
     duration: number,
     shape = 'logarithmic'
   ) {
-    if (!this.fadeGain) {
-      throw new Error('Source not setup');
-    }
     if (type === FADEIN) {
       createFadeIn(this.fadeGain.gain, shape, start, duration);
     } else if (type === FADEOUT) {
@@ -57,44 +60,17 @@ class WebAudioPlayoutSource {
     return this.source !== undefined;
   }
 
-  setAudioContext(audioContext: AudioContext) {
-    this.ac = audioContext;
-    this.destination = this.ac.destination;
-  }
-
   setUpSource(): Promise<void> {
     const source = this.ac.createBufferSource();
-    source.buffer = this.buffer;
-
-    const fadeGain = this.ac.createGain();
-    const volumeGain = this.ac.createGain();
-    const masterGain = this.ac.createGain();
-
     this.source = source;
-    this.fadeGain = fadeGain;
-    this.volumeGain = volumeGain;
-    this.masterGain = masterGain;
+    this.source.buffer = this.buffer;
 
     // TODO expose this to allow for custom node graphs
-    this.source.connect(this.fadeGain);
-    this.fadeGain.connect(this.volumeGain);
-    this.volumeGain.connect(this.masterGain);
-    this.masterGain.connect(this.destination);
+    source.connect(this.fadeGain);
 
     const sourcePromise = new Promise<void>(resolve => {
-      // keep track of the AudioBufferSourceNode state.
       source.onended = () => {
-        console.log('ended');
-        this.source && source.disconnect();
-        this.fadeGain && fadeGain.disconnect();
-        this.volumeGain && volumeGain.disconnect();
-        this.masterGain && masterGain.disconnect();
-
-        this.source = undefined;
-        this.fadeGain = undefined;
-        this.volumeGain = undefined;
-        this.masterGain = undefined;
-
+        source.disconnect();
         resolve();
       };
     });
@@ -109,15 +85,11 @@ class WebAudioPlayoutSource {
   }
 
   setVolumeGainLevel(level: number) {
-    if (this.volumeGain) {
-      this.volumeGain.gain.value = level;
-    }
+    this.volumeGain.gain.value = level;
   }
 
   setMasterGainLevel(level: number) {
-    if (this.masterGain) {
-      this.masterGain.gain.value = level;
-    }
+    this.masterGain.gain.value = level;
   }
 
   /*
@@ -136,6 +108,7 @@ class WebAudioPlayoutSource {
     if (this.source) {
       this.source.stop(when);
     }
+    this.fadeGain.gain.cancelScheduledValues(when);
   }
 }
 
