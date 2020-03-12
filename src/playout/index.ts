@@ -111,7 +111,7 @@ export function scheduleSourcePlayout(
 
   if (fadeIn) {
     const start = now - clipped;
-    if (start > 0) {
+    if (start >= 0) {
       console.log(`FADEIN ${start} ${fadeIn.duration} ${fadeIn.shape}`);
       schedule = Object.assign(schedule, {
         fadeIn: {
@@ -125,7 +125,7 @@ export function scheduleSourcePlayout(
 
   if (fadeOut) {
     const start = now - clipped + trackLength - fadeOut.duration;
-    if (start > 0) {
+    if (start >= 0) {
       console.log(`FADEOUT ${start} ${fadeOut.duration} ${fadeOut.shape}`);
       schedule = Object.assign(schedule, {
         fadeOut: {
