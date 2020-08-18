@@ -46,7 +46,6 @@ export interface TimeScaleProps {
   readonly duration: number;
   readonly marker: number;
   readonly bigStep: number;
-  readonly smallStep: number;
   readonly secondStep: number;
   readonly devicePixelRatio?: number;
 }
@@ -56,7 +55,6 @@ export const TimeScale: FunctionComponent<TimeScaleProps> = props => {
     duration,
     marker,
     bigStep,
-    smallStep,
     secondStep,
     devicePixelRatio = 1,
   } = props;
@@ -71,6 +69,7 @@ export const TimeScale: FunctionComponent<TimeScaleProps> = props => {
 
       if (ctx) {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
+        ctx.setTransform(1, 0, 0, 1, 0, 0);
         ctx.fillStyle = timeColor;
         ctx.scale(devicePixelRatio, devicePixelRatio);
 
@@ -86,7 +85,6 @@ export const TimeScale: FunctionComponent<TimeScaleProps> = props => {
     timeColor,
     timeScaleHeight,
     bigStep,
-    smallStep,
     secondStep,
     marker,
   ]);
@@ -109,7 +107,7 @@ export const TimeScale: FunctionComponent<TimeScaleProps> = props => {
       canvasInfo.set(pix, timeScaleHeight);
     } else if (counter % bigStep === 0) {
       canvasInfo.set(pix, Math.floor(timeScaleHeight / 2));
-    } else if (counter % smallStep === 0) {
+    } else if (counter % secondStep === 0) {
       canvasInfo.set(pix, Math.floor(timeScaleHeight / 5));
     }
 
