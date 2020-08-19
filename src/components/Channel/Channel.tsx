@@ -28,12 +28,15 @@ export const Channel: FunctionComponent<ChannelProps> = props => {
   const { data, bits, length, index, className, progress = 0 } = props;
   const canvases: HTMLCanvasElement[] = [];
 
-  const canvasRef = useCallback((canvas: HTMLCanvasElement | null) => {
-    if (canvas !== null) {
-      const index: number = parseInt(canvas.dataset.index!, 10);
-      canvases[index] = canvas;
-    }
-  }, []);
+  const canvasRef = useCallback(
+    (canvas: HTMLCanvasElement | null) => {
+      if (canvas !== null) {
+        const index: number = parseInt(canvas.dataset.index!, 10);
+        canvases[index] = canvas;
+      }
+    },
+    [canvases]
+  );
 
   useEffect(() => {
     let offset = 0;
