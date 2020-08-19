@@ -1,6 +1,7 @@
 import React, { FunctionComponent, useRef, useEffect, useContext } from 'react';
 import styled, { withTheme, DefaultTheme } from 'styled-components';
 import { SampleInfoContext } from '../../contexts/SampleInfo';
+import { useDevicePixelRatio } from '../../contexts/DevicePixelRatio';
 import { secondsToPixels } from '../../utils/conversions';
 
 function formatTime(milliseconds: number) {
@@ -47,7 +48,6 @@ export interface TimeScaleProps {
   readonly marker: number;
   readonly bigStep: number;
   readonly secondStep: number;
-  readonly devicePixelRatio?: number;
 }
 export const TimeScale: FunctionComponent<TimeScaleProps> = props => {
   const {
@@ -56,12 +56,13 @@ export const TimeScale: FunctionComponent<TimeScaleProps> = props => {
     marker,
     bigStep,
     secondStep,
-    devicePixelRatio = 1,
   } = props;
   const canvasInfo = new Map();
   const timeMarkers = [];
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const { sampleRate, samplesPerPixel } = useContext(SampleInfoContext);
+  const devicePixelRatio = useDevicePixelRatio();
+
   useEffect(() => {
     if (canvasRef.current !== null) {
       const canvas = canvasRef.current;
@@ -70,6 +71,7 @@ export const TimeScale: FunctionComponent<TimeScaleProps> = props => {
       if (ctx) {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
         ctx.setTransform(1, 0, 0, 1, 0, 0);
+        // ctx.resetTransform();
         ctx.fillStyle = timeColor;
         ctx.scale(devicePixelRatio, devicePixelRatio);
 

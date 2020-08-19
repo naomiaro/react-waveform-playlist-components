@@ -14,6 +14,5 @@ export const Default = () => (
     bigStep={number('bigStep', 1000)}
     secondStep={number('secondStep', 500)}
     duration={number('duration', 30000)}
-    devicePixelRatio={number('devicePixelRatio', 1)}
   />
 );

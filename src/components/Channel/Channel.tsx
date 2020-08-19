@@ -5,6 +5,7 @@ import React, {
   useCallback,
 } from 'react';
 import { withTheme, ThemeContext, DefaultTheme } from 'styled-components';
+import { useDevicePixelRatio } from '../../contexts/DevicePixelRatio';
 import { Progress } from './Progress';
 import { Wrapper } from './Wrapper';
 import { Waveform } from './Waveform';
@@ -19,20 +20,12 @@ export interface ChannelProps {
   bits: Bits;
   length: number;
   progress?: number;
-  devicePixelRatio?: number;
 }
 
 export const Channel: FunctionComponent<ChannelProps> = props => {
   const { waveHeight, waveOutlineColor } = useContext(ThemeContext);
-  const {
-    data,
-    bits,
-    length,
-    index,
-    className,
-    progress = 0,
-    devicePixelRatio = 1,
-  } = props;
+  const devicePixelRatio = useDevicePixelRatio();
+  const { data, bits, length, index, className, progress = 0 } = props;
   const canvases: HTMLCanvasElement[] = [];
 
   const canvasRef = useCallback(

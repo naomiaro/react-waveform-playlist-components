@@ -58,7 +58,6 @@ export const WithTimeScale = () => (
     <StyledTimeScale
       marker={2000}
       bigStep={1000}
-      smallStep={500}
       secondStep={500}
       duration={30000}
     />
@@ -78,7 +77,6 @@ export const WithTimeScaleAndControls = () => (
     <StyledTimeScale
       marker={2000}
       bigStep={1000}
-      smallStep={500}
       secondStep={500}
       duration={30000}
     />
@@ -114,7 +112,6 @@ export const WithTimeScaleAndControlsMultipleChannels = () => (
     <StyledTimeScale
       marker={2000}
       bigStep={1000}
-      smallStep={500}
       secondStep={500}
       duration={30000}
     />
@@ -156,7 +153,6 @@ export const WithTimeScaleAndControlsMultipleTracks = () => (
     <StyledTimeScale
       marker={2000}
       bigStep={1000}
-      smallStep={500}
       secondStep={500}
       duration={30000}
     />
@@ -216,7 +212,6 @@ export const WithTimeScaleAndControlsMultipleTracksWithMultipleChannels = () => 
     <StyledTimeScale
       marker={2000}
       bigStep={1000}
-      smallStep={500}
       secondStep={500}
       duration={30000}
     />

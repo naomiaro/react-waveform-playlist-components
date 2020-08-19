@@ -1,4 +1,6 @@
 const path = require('path');
+const SRC_PATH = path.join(__dirname, '../src');
+const STORIES_PATH = path.join(__dirname, '../stories');
 
 module.exports = {
   stories: ['../stories/**/*.stories.(tsx|mdx)'], // notice mdx support added here
@@ -6,10 +8,8 @@ module.exports = {
     {
       name: '@storybook/preset-typescript',
       options: {
-        include: [
-          path.resolve(__dirname, '../src'),
-          path.resolve(__dirname, '../stories'),
-        ],
+        include: [SRC_PATH, STORIES_PATH, __dirname],
+        transpileManager: true,
       },
     },
   ],
@@ -20,5 +20,6 @@ module.exports = {
     '@storybook/addon-contexts/register',
     '@storybook/addon-knobs/register',
     'storybook-addon-styled-component-theme/dist/register',
+    '@storybook/addon-a11y',
   ],
 };

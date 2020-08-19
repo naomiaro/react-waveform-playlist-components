@@ -16,16 +16,6 @@ export const Default = () => (
   />
 );
 
-export const Retina = () => (
-  <StyledChannel
-    data={new Int16Array(BBCWaveformData.data)}
-    bits={BBCWaveformData.bits as Bits}
-    length={BBCWaveformData.length}
-    index={0}
-    devicePixelRatio={2}
-  />
-);
-
 export const WithProgress = () => (
   <StyledChannel
     data={new Int16Array(BBCWaveformData.data)}
