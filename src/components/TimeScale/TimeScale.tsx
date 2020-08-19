@@ -70,8 +70,7 @@ export const TimeScale: FunctionComponent<TimeScaleProps> = props => {
 
       if (ctx) {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
-        ctx.setTransform(1, 0, 0, 1, 0, 0);
-        // ctx.resetTransform();
+        ctx.resetTransform();
         ctx.fillStyle = timeColor;
         ctx.scale(devicePixelRatio, devicePixelRatio);
 
@@ -89,6 +88,7 @@ export const TimeScale: FunctionComponent<TimeScaleProps> = props => {
     bigStep,
     secondStep,
     marker,
+    canvasInfo,
   ]);
 
   const widthX = secondsToPixels(duration / 1000, samplesPerPixel, sampleRate);

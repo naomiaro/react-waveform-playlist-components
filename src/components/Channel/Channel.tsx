@@ -35,21 +35,30 @@ export const Channel: FunctionComponent<ChannelProps> = props => {
         canvases[index] = canvas;
       }
     },
-    [data, bits, waveHeight, waveOutlineColor, devicePixelRatio, length]
+    [
+      data,
+      bits,
+      waveHeight,
+      waveOutlineColor,
+      devicePixelRatio,
+      length,
+      canvases,
+    ]
   );
 
   useEffect(() => {
     let offset = 0;
     for (let i = 0; i < canvases.length; i++) {
       const canvas = canvases[i];
-      const cc = canvas.getContext('2d');
+      const ctx = canvas.getContext('2d');
       const h2 = waveHeight / 2;
       const maxValue = 2 ** (bits - 1);
 
-      if (cc) {
-        cc.clearRect(0, 0, canvas.width, canvas.height);
-        cc.fillStyle = waveOutlineColor;
-        cc.scale(devicePixelRatio, devicePixelRatio);
+      if (ctx) {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        ctx.resetTransform();
+        ctx.fillStyle = waveOutlineColor;
+        ctx.scale(devicePixelRatio, devicePixelRatio);
 
         const peakSegmentLength = canvas.width / devicePixelRatio;
         for (let i = 0; i < peakSegmentLength; i += 1) {
@@ -60,15 +69,23 @@ export const Channel: FunctionComponent<ChannelProps> = props => {
           const max = Math.abs(maxPeak * h2);
 
           // draw max
-          cc.fillRect(i, 0, 1, h2 - max);
+          ctx.fillRect(i, 0, 1, h2 - max);
           // draw min
-          cc.fillRect(i, h2 + min, 1, h2 - min);
+          ctx.fillRect(i, h2 + min, 1, h2 - min);
         }
       }
 
       offset += MAX_CANVAS_WIDTH;
     }
-  }, [data, bits, waveHeight, waveOutlineColor, devicePixelRatio, length]);
+  }, [
+    data,
+    bits,
+    waveHeight,
+    waveOutlineColor,
+    devicePixelRatio,
+    length,
+    canvases,
+  ]);
 
   let totalWidth = length;
   let waveformCount = 0;
