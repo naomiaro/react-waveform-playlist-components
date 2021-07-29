@@ -1,4 +1,5 @@
 import { scheduleSourcePlayout, ITrackConfig } from './';
+import 'jest';
 
 describe('Playout from the beginning', () => {
   test('No playout', () => {
