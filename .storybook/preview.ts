@@ -1,4 +1,5 @@
 import { addDecorator } from '@storybook/react';
+import { ThemeProvider } from 'styled-components';
 import { withThemesProvider } from 'storybook-addon-styled-component-theme';
 import { DevicePixelRatioDecorator } from './decorators/devicePixelRatioDecorator';
 
@@ -26,5 +27,5 @@ const themes = [
   Object.assign({}, reverse, { name: 'Reverse' }),
   Object.assign({}, base, { name: 'Base' }),
 ];
-addDecorator(withThemesProvider(themes));
+addDecorator(withThemesProvider(themes, ThemeProvider));
 addDecorator(DevicePixelRatioDecorator);

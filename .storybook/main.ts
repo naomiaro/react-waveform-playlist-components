@@ -8,9 +8,8 @@ module.exports = {
     '@storybook/addon-actions',
     '@storybook/addon-links',
     '@storybook/addon-docs',
-    '@storybook/addon-contexts/register',
-    '@storybook/addon-knobs',
-    'storybook-addon-styled-component-theme/dist/register',
+    '@storybook/addon-controls',
+    'storybook-addon-styled-component-theme/dist/preset',
     '@storybook/addon-a11y',
   ],
 };
