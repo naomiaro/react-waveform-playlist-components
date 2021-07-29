@@ -1,11 +1,24 @@
 {
-  "include": ["src", "types", "test", "stories"],
-  "exclude": ["node_modules"],
+  "include": [
+    "src",
+    "types",
+    "stories"
+  ],
+  "exclude": [
+    "node_modules"
+  ],
   "compilerOptions": {
     "allowJs": true,
     "target": "es5",
     "module": "esnext",
-    "lib": ["dom", "esnext"],
+    "lib": [
+      "dom",
+      "esnext"
+    ],
+    "typeRoots": [
+      "/node_modules/@types",
+      "/types/"
+    ],
     "importHelpers": true,
     "declaration": true,
     "sourceMap": true,
@@ -21,7 +34,9 @@
     "noImplicitReturns": true,
     "noFallthroughCasesInSwitch": true,
     "moduleResolution": "node",
-    "rootDirs": ["src"],
+    "rootDirs": [
+      "src"
+    ],
     "baseUrl": "src",
     "jsx": "react",
     "esModuleInterop": true,

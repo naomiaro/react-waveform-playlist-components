@@ -4,7 +4,8 @@ import { ExtractPeacksProvider } from './ExtractPeaks';
 import { load } from '../loading';
 
 type AudioDataSource = string | Blob;
-type Props = {
+
+export type WebAudioProviderProps = {
   children: (peaks: Peaks[], bits: Bits, length: number) => JSX.Element;
   samplesPerPixel?: number;
   bits?: Bits;
@@ -20,7 +21,7 @@ export const WebAudioProvider = ({
   bits = 16,
   samplesPerPixel = 1000,
   showMultiChannel = false,
-}: Props) => {
+}: WebAudioProviderProps) => {
   const asyncAudioData = useAsync(loadAudioData, [source]);
   return (
     <div>

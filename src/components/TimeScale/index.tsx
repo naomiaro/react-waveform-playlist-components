@@ -1,3 +1,3 @@
-import { StyledTimeScale, TimeScale } from './TimeScale';
+import { StyledTimeScale, TimeScale, TimeScaleProps } from './TimeScale';
 
-export { TimeScale, StyledTimeScale };
+export { TimeScale, StyledTimeScale, TimeScaleProps };

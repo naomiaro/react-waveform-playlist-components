@@ -1,18 +1,21 @@
 import React from 'react';
-import { withKnobs, number } from '@storybook/addon-knobs';
-import { StyledTimeScale } from '../src/components/TimeScale';
+import { StyledTimeScale, TimeScaleProps } from '../src/components/TimeScale';
 
 export default {
   title: 'Styled Timescale',
   component: StyledTimeScale,
-  decorators: [withKnobs],
+
 };
 
-export const Default = () => (
-  <StyledTimeScale
-    marker={number('marker', 2000)}
-    bigStep={number('bigStep', 1000)}
-    secondStep={number('secondStep', 500)}
-    duration={number('duration', 30000)}
-  />
+export const Default = (args: TimeScaleProps) => (
+  <StyledTimeScale {...args} />
 );
+
+Default.args = {
+  marker: 2000,
+  bigStep: 1000,
+  secondStep: 500,
+  duration: 30000
+}
+
+
