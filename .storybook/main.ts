@@ -1,9 +1,5 @@
-const path = require('path');
-const SRC_PATH = path.join(__dirname, '../src');
-const STORIES_PATH = path.join(__dirname, '../stories');
-
 module.exports = {
-  stories: ['../stories/**/*.stories.@(tsx|mdx)'], // notice mdx support added here
+  stories: ['../stories/**/*.stories.@(ts|tsx|js|jsx)'],
   addons: [
     '@storybook/addon-actions',
     '@storybook/addon-links',
@@ -12,4 +8,7 @@ module.exports = {
     'storybook-addon-styled-component-theme/dist/preset',
     '@storybook/addon-a11y',
   ],
+  typescript: {
+    check: true, // type-check stories during Storybook build
+  },
 };

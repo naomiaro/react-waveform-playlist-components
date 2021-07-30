@@ -110,7 +110,7 @@ export const Channel: FunctionComponent<ChannelProps> = props => {
       className={className}
       waveHeight={waveHeight}
     >
-      <Progress progress={progress} />
+      <Progress progress={progress} waveHeight={waveHeight} />
       {waveforms}
     </Wrapper>
   );
