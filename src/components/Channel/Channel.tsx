@@ -6,6 +6,7 @@ import React, {
 } from 'react';
 import { withTheme, ThemeContext, DefaultTheme } from 'styled-components';
 import { useDevicePixelRatio } from '../../contexts/DevicePixelRatio';
+import { PlaylistInfoContext } from '../../contexts/PlaylistInfo';
 import { Progress } from './Progress';
 import { Wrapper } from './Wrapper';
 import { Waveform } from './Waveform';
@@ -23,7 +24,8 @@ export interface ChannelProps {
 }
 
 export const Channel: FunctionComponent<ChannelProps> = props => {
-  const { waveHeight, waveOutlineColor } = useContext(ThemeContext);
+  const { waveOutlineColor } = useContext(ThemeContext);
+  const { waveHeight } = useContext(PlaylistInfoContext);
   const devicePixelRatio = useDevicePixelRatio();
   const { data, bits, length, index, className, progress = 0 } = props;
   const canvases: HTMLCanvasElement[] = [];
@@ -102,7 +104,12 @@ export const Channel: FunctionComponent<ChannelProps> = props => {
   }
 
   return (
-    <Wrapper index={index} cssWidth={length} className={className}>
+    <Wrapper
+      index={index}
+      cssWidth={length}
+      className={className}
+      waveHeight={waveHeight}
+    >
       <Progress progress={progress} />
       {waveforms}
     </Wrapper>

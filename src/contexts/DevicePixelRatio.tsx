@@ -11,7 +11,7 @@ type Props = {
 export const DevicePixelRatioProvider = ({ children }: Props) => {
   const [scale, setScale] = useState(defaultScale);
   const updatePixelRatio = () => {
-    setScale(window.devicePixelRatio);
+    setScale(Math.ceil(window.devicePixelRatio));
   };
   matchMedia(mqString).addListener(updatePixelRatio);
 

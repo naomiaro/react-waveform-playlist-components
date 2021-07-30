@@ -1,6 +1,6 @@
 import React, { FunctionComponent, useRef, useEffect, useContext } from 'react';
 import styled, { withTheme, DefaultTheme } from 'styled-components';
-import { SampleInfoContext } from '../../contexts/SampleInfo';
+import { PlaylistInfoContext } from '../../contexts/PlaylistInfo';
 import { useDevicePixelRatio } from '../../contexts/DevicePixelRatio';
 import { secondsToPixels } from '../../utils/conversions';
 
@@ -14,21 +14,25 @@ function formatTime(milliseconds: number) {
 
 interface PlaylistTimeScaleScroll {
   readonly cssWidth: number;
+  readonly controls: boolean;
+  readonly controlWidth: number;
+  readonly timeScaleHeight: number;
 }
 const PlaylistTimeScaleScroll = styled.div<PlaylistTimeScaleScroll>`
   position: relative;
   width: ${props => props.cssWidth}px;
-  margin-left: ${props => props.theme.controlWidth}px;
-  height: ${props => props.theme.timeScaleHeight * 2}px;
+  margin-left: ${props => (props.controls ? props.controlWidth : 0)}px;
+  height: ${props => props.timeScaleHeight * 2}px;
 `;
 
 interface TimeTicks {
   readonly cssWidth: number;
+  readonly timeScaleHeight: number;
 }
 const TimeTicks = styled.canvas<TimeTicks>`
   position: absolute;
   width: ${props => props.cssWidth}px;
-  height: ${props => props.theme.timeScaleHeight}px;
+  height: ${props => props.timeScaleHeight}px;
   left: 0;
   right: 0;
   bottom: 0;
@@ -44,14 +48,16 @@ const TimeStamp = styled.div<TimeStamp>`
 
 export interface TimeScaleProps {
   readonly theme: DefaultTheme;
+  readonly timeScaleHeight: number;
   readonly duration: number;
   readonly marker: number;
   readonly bigStep: number;
   readonly secondStep: number;
 }
+
 export const TimeScale: FunctionComponent<TimeScaleProps> = props => {
   const {
-    theme: { timeScaleHeight, timeColor },
+    theme: { timeColor },
     duration,
     marker,
     bigStep,
@@ -60,7 +66,12 @@ export const TimeScale: FunctionComponent<TimeScaleProps> = props => {
   const canvasInfo = new Map();
   const timeMarkers = [];
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const { sampleRate, samplesPerPixel } = useContext(SampleInfoContext);
+  const {
+    sampleRate,
+    samplesPerPixel,
+    timeScaleHeight,
+    controls: { show: controls, width: controlWidth },
+  } = useContext(PlaylistInfoContext);
   const devicePixelRatio = useDevicePixelRatio();
 
   useEffect(() => {
@@ -117,10 +128,16 @@ export const TimeScale: FunctionComponent<TimeScaleProps> = props => {
   }
 
   return (
-    <PlaylistTimeScaleScroll cssWidth={widthX}>
+    <PlaylistTimeScaleScroll
+      cssWidth={widthX}
+      controls={controls}
+      controlWidth={controlWidth}
+      timeScaleHeight={timeScaleHeight}
+    >
       {timeMarkers}
       <TimeTicks
         cssWidth={widthX}
+        timeScaleHeight={timeScaleHeight}
         width={widthX * devicePixelRatio}
         height={timeScaleHeight * devicePixelRatio}
         ref={canvasRef}
