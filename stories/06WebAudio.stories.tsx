@@ -29,7 +29,7 @@ export const Default = (args: WebAudioProviderProps) => (
 );
 
 Default.args = {
-  source: '/audio/Vocals30.mp3',
+  source: 'audio/Vocals30.mp3',
   showMultiChannel: false,
   samplesPerPixel: 1000,
   bits: 16,
@@ -41,10 +41,10 @@ Default.argTypes = {
     control: {
       type: 'select',
       options: {
-        '/audio/Vocals30.mp3': '/audio/Vocals30.mp3',
-        '/audio/Guitar30.mp3': '/audio/Guitar30.mp3',
-        '/audio/PianoSynth30.mp3': '/audio/PianoSynth30.mp3',
-        '/audio/BassDrums30.mp3': '/audio/BassDrums30.mp3',
+        'audio/Vocals30.mp3': 'audio/Vocals30.mp3',
+        'audio/Guitar30.mp3': 'audio/Guitar30.mp3',
+        'audio/PianoSynth30.mp3': 'audio/PianoSynth30.mp3',
+        'audio/BassDrums30.mp3': 'audio/BassDrums30.mp3',
       },
     },
   },
