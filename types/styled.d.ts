@@ -5,9 +5,6 @@ declare module 'styled-components' {
     waveOutlineColor: string;
     waveFillColor: string;
     waveProgressColor: string;
-    waveHeight: number;
     timeColor: string;
-    timeScaleHeight: number;
-    controlWidth: number;
   }
 }

@@ -7,20 +7,14 @@ const base = {
   waveOutlineColor: 'black',
   waveFillColor: 'green',
   waveProgressColor: 'orange',
-  waveHeight: 100,
   timeColor: 'grey',
-  timeScaleHeight: 15,
-  controlWidth: 200,
 };
 
 const reverse = {
-  waveOutlineColor: 'green',
-  waveFillColor: 'black',
+  waveOutlineColor: '#E0EFF1',
+  waveFillColor: 'grey',
   waveProgressColor: 'orange',
-  waveHeight: 80,
   timeColor: 'grey',
-  timeScaleHeight: 15,
-  controlWidth: 0,
 };
 
 const themes = [

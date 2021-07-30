@@ -4,6 +4,7 @@ import { StyledChannel } from '../src/components/Channel/Channel';
 import { StyledTrack } from '../src/components/Track';
 import { StyledTimeScale } from '../src/components/TimeScale';
 import BBCWaveformData from '../media/json/vocals.json';
+import { PlaylistInfoContext } from '../src/contexts/PlaylistInfo';
 
 import {
   Button,
@@ -57,6 +58,7 @@ export const WithTimeScale = () => (
   <StyledPlaylist>
     <StyledTimeScale
       marker={2000}
+      timeScaleHeight={10}
       bigStep={1000}
       secondStep={500}
       duration={30000}
@@ -76,6 +78,7 @@ export const WithTimeScaleAndControls = () => (
   <StyledPlaylist>
     <StyledTimeScale
       marker={2000}
+      timeScaleHeight={10}
       bigStep={1000}
       secondStep={500}
       duration={30000}
@@ -111,6 +114,7 @@ export const WithTimeScaleAndControlsMultipleChannels = () => (
   <StyledPlaylist>
     <StyledTimeScale
       marker={2000}
+      timeScaleHeight={10}
       bigStep={1000}
       secondStep={500}
       duration={30000}
@@ -152,6 +156,7 @@ export const WithTimeScaleAndControlsMultipleTracks = () => (
   <StyledPlaylist>
     <StyledTimeScale
       marker={2000}
+      timeScaleHeight={10}
       bigStep={1000}
       secondStep={500}
       duration={30000}
@@ -208,72 +213,86 @@ export const WithTimeScaleAndControlsMultipleTracks = () => (
 );
 
 export const WithTimeScaleAndControlsMultipleTracksWithMultipleChannels = () => (
-  <StyledPlaylist>
-    <StyledTimeScale
-      marker={2000}
-      bigStep={1000}
-      secondStep={500}
-      duration={30000}
-    />
-    <StyledTrack
-      numChannels={2}
-      controls={
-        <Controls>
-          <Header>Track 1</Header>
-          <ButtonGroup>
-            <Button>Mute</Button>
-            <Button>Solo</Button>
-          </ButtonGroup>
-          <VolumeSliderWrapper>
-            <VolumeDownIcon />
-            <VolumeSlider />
-            <VolumeUpIcon />
-          </VolumeSliderWrapper>
-        </Controls>
-      }
-    >
-      <StyledChannel
-        data={new Int16Array(BBCWaveformData.data)}
-        bits={BBCWaveformData.bits as Bits}
-        length={BBCWaveformData.length}
-        index={0}
+  <PlaylistInfoContext.Provider
+    value={{
+      sampleRate: 48000,
+      samplesPerPixel: 1000,
+      waveHeight: 80,
+      timeScaleHeight: 10,
+      controls: {
+        show: true,
+        width: 200,
+      },
+    }}
+  >
+    <StyledPlaylist>
+      <StyledTimeScale
+        marker={2000}
+        timeScaleHeight={10}
+        bigStep={1000}
+        secondStep={500}
+        duration={30000}
       />
-      <StyledChannel
-        data={new Int16Array(BBCWaveformData.data)}
-        bits={BBCWaveformData.bits as Bits}
-        length={BBCWaveformData.length}
-        index={1}
-      />
-    </StyledTrack>
-    <StyledTrack
-      numChannels={2}
-      controls={
-        <Controls>
-          <Header>Track 2</Header>
-          <ButtonGroup>
-            <Button>Mute</Button>
-            <Button>Solo</Button>
-          </ButtonGroup>
-          <VolumeSliderWrapper>
-            <VolumeDownIcon />
-            <VolumeSlider />
-            <VolumeUpIcon />
-          </VolumeSliderWrapper>
-        </Controls>
-      }
-    >
-      <StyledChannel
-        data={new Int16Array(BBCWaveformData.data)}
-        bits={BBCWaveformData.bits as Bits}
-        length={BBCWaveformData.length}
-        index={0}
-      />
-      <StyledChannel
-        data={new Int16Array(BBCWaveformData.data)}
-        bits={BBCWaveformData.bits as Bits}
-        length={BBCWaveformData.length}
-        index={1}
-      />
-    </StyledTrack>
-  </StyledPlaylist>
+      <StyledTrack
+        numChannels={2}
+        controls={
+          <Controls controlWidth={200}>
+            <Header>Track 1</Header>
+            <ButtonGroup>
+              <Button>Mute</Button>
+              <Button>Solo</Button>
+            </ButtonGroup>
+            <VolumeSliderWrapper>
+              <VolumeDownIcon />
+              <VolumeSlider />
+              <VolumeUpIcon />
+            </VolumeSliderWrapper>
+          </Controls>
+        }
+      >
+        <StyledChannel
+          data={new Int16Array(BBCWaveformData.data)}
+          bits={BBCWaveformData.bits as Bits}
+          length={BBCWaveformData.length}
+          index={0}
+        />
+        <StyledChannel
+          data={new Int16Array(BBCWaveformData.data)}
+          bits={BBCWaveformData.bits as Bits}
+          length={BBCWaveformData.length}
+          index={1}
+        />
+      </StyledTrack>
+      <StyledTrack
+        numChannels={2}
+        controls={
+          <Controls controlWidth={200}>
+            <Header>Track 2</Header>
+            <ButtonGroup>
+              <Button>Mute</Button>
+              <Button>Solo</Button>
+            </ButtonGroup>
+            <VolumeSliderWrapper>
+              <VolumeDownIcon />
+              <VolumeSlider />
+              <VolumeUpIcon />
+            </VolumeSliderWrapper>
+          </Controls>
+        }
+      >
+        <StyledChannel
+          data={new Int16Array(BBCWaveformData.data)}
+          bits={BBCWaveformData.bits as Bits}
+          length={BBCWaveformData.length}
+          index={0}
+        />
+        <StyledChannel
+          data={new Int16Array(BBCWaveformData.data)}
+          bits={BBCWaveformData.bits as Bits}
+          length={BBCWaveformData.length}
+          index={1}
+        />
+      </StyledTrack>
+    </StyledPlaylist>
+  </PlaylistInfoContext.Provider>
 );
