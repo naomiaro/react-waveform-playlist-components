@@ -16,11 +16,29 @@ import {
   VolumeSlider,
   VolumeSliderWrapper,
 } from '../src/components/TrackControls';
+import { Bits } from 'webaudio-peaks';
 
 export default {
-  title: 'Styled Playlist',
+  title: 'Playlist',
   component: StyledPlaylist,
 };
+
+function makeControls(trackName) {
+  return (
+    <Controls>
+      <Header>{trackName}</Header>
+      <ButtonGroup>
+        <Button>Mute</Button>
+        <Button>Solo</Button>
+      </ButtonGroup>
+      <VolumeSliderWrapper>
+        <VolumeDownIcon />
+        <VolumeSlider />
+        <VolumeUpIcon />
+      </VolumeSliderWrapper>
+    </Controls>
+  );
+}
 
 export const Default = () => (
   <StyledPlaylist>
@@ -54,7 +72,7 @@ export const MultipleChannels = () => (
   </StyledPlaylist>
 );
 
-export const WithTimeScale = () => (
+export const TimeScale = () => (
   <StyledPlaylist>
     <StyledTimeScale
       marker={2000}
@@ -74,7 +92,7 @@ export const WithTimeScale = () => (
   </StyledPlaylist>
 );
 
-export const WithTimeScaleAndControls = () => (
+export const TimeScaleAndControls = () => (
   <PlaylistInfoContext.Provider
     value={{
       sampleRate: 48000,
@@ -95,23 +113,7 @@ export const WithTimeScaleAndControls = () => (
         secondStep={500}
         duration={30000}
       />
-      <StyledTrack
-        numChannels={1}
-        controls={
-          <Controls>
-            <Header>Track 1</Header>
-            <ButtonGroup>
-              <Button>Mute</Button>
-              <Button>Solo</Button>
-            </ButtonGroup>
-            <VolumeSliderWrapper>
-              <VolumeDownIcon />
-              <VolumeSlider />
-              <VolumeUpIcon />
-            </VolumeSliderWrapper>
-          </Controls>
-        }
-      >
+      <StyledTrack numChannels={1} controls={makeControls('Track 1')}>
         <StyledChannel
           data={new Int16Array(BBCWaveformData.data)}
           bits={BBCWaveformData.bits as Bits}
@@ -123,7 +125,7 @@ export const WithTimeScaleAndControls = () => (
   </PlaylistInfoContext.Provider>
 );
 
-export const WithTimeScaleAndControlsMultipleChannels = () => (
+export const TimeScaleAndControlsMultipleChannels = () => (
   <PlaylistInfoContext.Provider
     value={{
       sampleRate: 48000,
@@ -144,23 +146,7 @@ export const WithTimeScaleAndControlsMultipleChannels = () => (
         secondStep={500}
         duration={30000}
       />
-      <StyledTrack
-        numChannels={2}
-        controls={
-          <Controls>
-            <Header>Track 1</Header>
-            <ButtonGroup>
-              <Button>Mute</Button>
-              <Button>Solo</Button>
-            </ButtonGroup>
-            <VolumeSliderWrapper>
-              <VolumeDownIcon />
-              <VolumeSlider />
-              <VolumeUpIcon />
-            </VolumeSliderWrapper>
-          </Controls>
-        }
-      >
+      <StyledTrack numChannels={2} controls={makeControls('Track 1')}>
         <StyledChannel
           data={new Int16Array(BBCWaveformData.data)}
           bits={BBCWaveformData.bits as Bits}
@@ -178,7 +164,7 @@ export const WithTimeScaleAndControlsMultipleChannels = () => (
   </PlaylistInfoContext.Provider>
 );
 
-export const WithTimeScaleAndControlsMultipleTracks = () => (
+export const TimeScaleAndControlsMultipleTracks = () => (
   <PlaylistInfoContext.Provider
     value={{
       sampleRate: 48000,
@@ -199,23 +185,7 @@ export const WithTimeScaleAndControlsMultipleTracks = () => (
         secondStep={500}
         duration={30000}
       />
-      <StyledTrack
-        numChannels={1}
-        controls={
-          <Controls>
-            <Header>Track 1</Header>
-            <ButtonGroup>
-              <Button>Mute</Button>
-              <Button>Solo</Button>
-            </ButtonGroup>
-            <VolumeSliderWrapper>
-              <VolumeDownIcon />
-              <VolumeSlider />
-              <VolumeUpIcon />
-            </VolumeSliderWrapper>
-          </Controls>
-        }
-      >
+      <StyledTrack numChannels={1} controls={makeControls('Track 1')}>
         <StyledChannel
           data={new Int16Array(BBCWaveformData.data)}
           bits={BBCWaveformData.bits as Bits}
@@ -223,23 +193,7 @@ export const WithTimeScaleAndControlsMultipleTracks = () => (
           index={0}
         />
       </StyledTrack>
-      <StyledTrack
-        numChannels={1}
-        controls={
-          <Controls>
-            <Header>Track 2</Header>
-            <ButtonGroup>
-              <Button>Mute</Button>
-              <Button>Solo</Button>
-            </ButtonGroup>
-            <VolumeSliderWrapper>
-              <VolumeDownIcon />
-              <VolumeSlider />
-              <VolumeUpIcon />
-            </VolumeSliderWrapper>
-          </Controls>
-        }
-      >
+      <StyledTrack numChannels={1} controls={makeControls('Track 2')}>
         <StyledChannel
           data={new Int16Array(BBCWaveformData.data)}
           bits={BBCWaveformData.bits as Bits}
@@ -251,7 +205,7 @@ export const WithTimeScaleAndControlsMultipleTracks = () => (
   </PlaylistInfoContext.Provider>
 );
 
-export const WithTimeScaleAndControlsMultipleTracksWithMultipleChannels = () => (
+export const TimeScaleAndControlsMultipleTracksWithMultipleChannels = () => (
   <PlaylistInfoContext.Provider
     value={{
       sampleRate: 48000,
@@ -272,23 +226,7 @@ export const WithTimeScaleAndControlsMultipleTracksWithMultipleChannels = () => 
         secondStep={500}
         duration={30000}
       />
-      <StyledTrack
-        numChannels={2}
-        controls={
-          <Controls>
-            <Header>Track 1</Header>
-            <ButtonGroup>
-              <Button>Mute</Button>
-              <Button>Solo</Button>
-            </ButtonGroup>
-            <VolumeSliderWrapper>
-              <VolumeDownIcon />
-              <VolumeSlider />
-              <VolumeUpIcon />
-            </VolumeSliderWrapper>
-          </Controls>
-        }
-      >
+      <StyledTrack numChannels={2} controls={makeControls('Track 1')}>
         <StyledChannel
           data={new Int16Array(BBCWaveformData.data)}
           bits={BBCWaveformData.bits as Bits}
@@ -302,23 +240,7 @@ export const WithTimeScaleAndControlsMultipleTracksWithMultipleChannels = () => 
           index={1}
         />
       </StyledTrack>
-      <StyledTrack
-        numChannels={2}
-        controls={
-          <Controls>
-            <Header>Track 2</Header>
-            <ButtonGroup>
-              <Button>Mute</Button>
-              <Button>Solo</Button>
-            </ButtonGroup>
-            <VolumeSliderWrapper>
-              <VolumeDownIcon />
-              <VolumeSlider />
-              <VolumeUpIcon />
-            </VolumeSliderWrapper>
-          </Controls>
-        }
-      >
+      <StyledTrack numChannels={2} controls={makeControls('Track 2')}>
         <StyledChannel
           data={new Int16Array(BBCWaveformData.data)}
           bits={BBCWaveformData.bits as Bits}

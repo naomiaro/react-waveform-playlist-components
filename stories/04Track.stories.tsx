@@ -2,9 +2,10 @@ import React from 'react';
 import { StyledChannel } from '../src/components/Channel/Channel';
 import { StyledTrack } from '../src/components/Track';
 import BBCWaveformData from '../media/json/vocals.json';
+import { Bits } from 'webaudio-peaks';
 
 export default {
-  title: 'Styled Track',
+  title: 'Track',
   component: StyledTrack,
 };
 

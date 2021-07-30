@@ -7,7 +7,7 @@ import { StyledChannel } from '../src/components/Channel/Channel';
 import { StyledTrack } from '../src/components/Track';
 
 export default {
-  title: 'WebAudio',
+  title: 'WebAudioContext',
 };
 
 export const Default = (args: WebAudioProviderProps) => (
