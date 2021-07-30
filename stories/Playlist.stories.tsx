@@ -58,7 +58,7 @@ export const WithTimeScale = () => (
   <StyledPlaylist>
     <StyledTimeScale
       marker={2000}
-      timeScaleHeight={10}
+      timeScaleHeight={15}
       bigStep={1000}
       secondStep={500}
       duration={30000}
@@ -80,7 +80,7 @@ export const WithTimeScaleAndControls = () => (
       sampleRate: 48000,
       samplesPerPixel: 1000,
       waveHeight: 100,
-      timeScaleHeight: 10,
+      timeScaleHeight: 15,
       controls: {
         show: true,
         width: 200,
@@ -90,7 +90,7 @@ export const WithTimeScaleAndControls = () => (
     <StyledPlaylist>
       <StyledTimeScale
         marker={2000}
-        timeScaleHeight={10}
+        timeScaleHeight={15}
         bigStep={1000}
         secondStep={500}
         duration={30000}
@@ -129,7 +129,7 @@ export const WithTimeScaleAndControlsMultipleChannels = () => (
       sampleRate: 48000,
       samplesPerPixel: 1000,
       waveHeight: 80,
-      timeScaleHeight: 10,
+      timeScaleHeight: 15,
       controls: {
         show: true,
         width: 200,
@@ -139,7 +139,7 @@ export const WithTimeScaleAndControlsMultipleChannels = () => (
     <StyledPlaylist>
       <StyledTimeScale
         marker={2000}
-        timeScaleHeight={10}
+        timeScaleHeight={15}
         bigStep={1000}
         secondStep={500}
         duration={30000}
@@ -184,7 +184,7 @@ export const WithTimeScaleAndControlsMultipleTracks = () => (
       sampleRate: 48000,
       samplesPerPixel: 1000,
       waveHeight: 100,
-      timeScaleHeight: 10,
+      timeScaleHeight: 15,
       controls: {
         show: true,
         width: 200,
@@ -194,7 +194,7 @@ export const WithTimeScaleAndControlsMultipleTracks = () => (
     <StyledPlaylist>
       <StyledTimeScale
         marker={2000}
-        timeScaleHeight={10}
+        timeScaleHeight={15}
         bigStep={1000}
         secondStep={500}
         duration={30000}
@@ -257,7 +257,7 @@ export const WithTimeScaleAndControlsMultipleTracksWithMultipleChannels = () => 
       sampleRate: 48000,
       samplesPerPixel: 1000,
       waveHeight: 80,
-      timeScaleHeight: 10,
+      timeScaleHeight: 15,
       controls: {
         show: true,
         width: 200,
@@ -267,7 +267,7 @@ export const WithTimeScaleAndControlsMultipleTracksWithMultipleChannels = () => 
     <StyledPlaylist>
       <StyledTimeScale
         marker={2000}
-        timeScaleHeight={10}
+        timeScaleHeight={15}
         bigStep={1000}
         secondStep={500}
         duration={30000}
