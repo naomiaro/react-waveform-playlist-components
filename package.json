@@ -1,6 +1,7 @@
 {
   "version": "0.1.0",
   "license": "MIT",
+  "website": "https://naomiaro.github.io/react-waveform-playlist-components",
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",
   "files": [
@@ -32,9 +33,9 @@
     "singleQuote": true,
     "trailingComma": "es5"
   },
-  "name": "react-waveformplaylist-tsdx",
+  "name": "react-waveform-playlist",
   "author": "Naomi Aro",
-  "module": "dist/react-waveformplaylist-tsdx.esm.js",
+  "module": "dist/react-waveform-playlist.esm.js",
   "devDependencies": {
     "@babel/core": "^7.8.6",
     "@storybook/addon-a11y": "^6.3.6",
