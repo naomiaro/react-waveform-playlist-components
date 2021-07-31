@@ -4,15 +4,53 @@ import React, {
   useContext,
   useCallback,
 } from 'react';
-import { withTheme, ThemeContext, DefaultTheme } from 'styled-components';
+import styled, {
+  withTheme,
+  ThemeContext,
+  DefaultTheme,
+} from 'styled-components';
 import { useDevicePixelRatio } from '../../contexts/DevicePixelRatio';
 import { PlaylistInfoContext } from '../../contexts/PlaylistInfo';
-import { Progress } from './Progress';
-import { Wrapper } from './Wrapper';
-import { Waveform } from './Waveform';
 import { Peaks, Bits } from 'webaudio-peaks';
 
 const MAX_CANVAS_WIDTH = 1000;
+
+interface ProgressProps {
+  readonly progress: number;
+  readonly waveHeight: number;
+}
+const Progress = styled.div<ProgressProps>`
+  position: absolute;
+  background: ${props => props.theme.waveProgressColor};
+  width: ${props => props.progress}px;
+  height: ${props => props.waveHeight}px;
+`;
+
+interface WaveformProps {
+  readonly cssWidth: number;
+  readonly waveHeight: number;
+}
+
+const Waveform = styled.canvas<WaveformProps>`
+  float: left;
+  position: relative;
+  width: ${props => props.cssWidth}px;
+  height: ${props => props.waveHeight}px;
+`;
+
+interface WrapperProps {
+  readonly index: number;
+  readonly cssWidth: number;
+  readonly waveHeight: number;
+}
+
+const Wrapper = styled.div<WrapperProps>`
+  position: absolute;
+  top: ${props => props.waveHeight * props.index}px;
+  background: ${props => props.theme.waveFillColor};
+  width: ${props => props.cssWidth}px;
+  height: ${props => props.waveHeight}px;
+`;
 
 export interface ChannelProps {
   className?: string;

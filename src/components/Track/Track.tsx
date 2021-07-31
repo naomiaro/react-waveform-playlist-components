@@ -2,7 +2,10 @@ import React, { FunctionComponent, ReactNode, useContext } from 'react';
 import styled, { withTheme, DefaultTheme } from 'styled-components';
 import { PlaylistInfoContext } from '../../contexts/PlaylistInfo';
 import { Container } from './Container';
-import { ChannelContainer } from './ChannelContainer';
+
+const ChannelContainer = styled.div`
+  position: relative;
+`;
 
 export interface ControlsWrapperProps {
   readonly controlWidth: number;

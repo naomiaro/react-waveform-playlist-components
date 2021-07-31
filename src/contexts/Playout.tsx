@@ -1,10 +1,4 @@
-import React, {
-  useState,
-  createContext,
-  useContext,
-  useEffect,
-  ReactNode,
-} from 'react';
+import React, { useState, createContext, useContext, ReactNode } from 'react';
 
 const defaultProgress = 0;
 const defaultIsPlaying = false;
@@ -22,8 +16,6 @@ type Props = {
 export const PlayoutProvider = ({ children }: Props) => {
   const [isPlaying] = useState(defaultIsPlaying);
   const [progress] = useState(defaultProgress);
-
-  useEffect(() => {}, [isPlaying]);
 
   return (
     <PlayoutContext.Provider value={{ isPlaying, progress }}>
