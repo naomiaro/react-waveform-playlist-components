@@ -97,7 +97,7 @@ export const TimeScaleAndControls = () => (
         show: true,
         width: 200,
       },
-      duration: 30,
+      duration: 30000,
     }}
   >
     <StyledPlaylist>
@@ -125,7 +125,7 @@ export const TimeScaleAndControlsMultipleChannels = () => (
         show: true,
         width: 200,
       },
-      duration: 30,
+      duration: 30000,
     }}
   >
     <StyledPlaylist>
@@ -159,7 +159,7 @@ export const TimeScaleAndControlsMultipleTracks = () => (
         show: true,
         width: 200,
       },
-      duration: 30,
+      duration: 30000,
     }}
   >
     <StyledPlaylist>
@@ -195,7 +195,7 @@ export const TimeScaleAndControlsMultipleTracksWithMultipleChannels = () => (
         show: true,
         width: 200,
       },
-      duration: 30,
+      duration: 30000,
     }}
   >
     <StyledPlaylist>
