@@ -1,5 +1,6 @@
 import React from 'react';
 import { StyledTimeScale, TimeScaleProps } from '../src/components/TimeScale';
+import { SmartScale } from '../src/components/TimeScale';
 
 export default {
   title: 'Timescale',

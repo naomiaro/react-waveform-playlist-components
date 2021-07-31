@@ -14,14 +14,13 @@ function formatTime(milliseconds: number) {
 
 interface PlaylistTimeScaleScroll {
   readonly cssWidth: number;
-  readonly controls: boolean;
   readonly controlWidth: number;
   readonly timeScaleHeight: number;
 }
 const PlaylistTimeScaleScroll = styled.div<PlaylistTimeScaleScroll>`
   position: relative;
   width: ${props => props.cssWidth}px;
-  margin-left: ${props => (props.controls ? props.controlWidth : 0)}px;
+  margin-left: ${props => props.controlWidth}px;
   height: ${props => props.timeScaleHeight * 2}px;
 `;
 
@@ -48,7 +47,6 @@ const TimeStamp = styled.div<TimeStamp>`
 
 export interface TimeScaleProps {
   readonly theme: DefaultTheme;
-  readonly timeScaleHeight: number;
   readonly duration: number;
   readonly marker: number;
   readonly bigStep: number;
@@ -70,7 +68,7 @@ export const TimeScale: FunctionComponent<TimeScaleProps> = props => {
     sampleRate,
     samplesPerPixel,
     timeScaleHeight,
-    controls: { show: controls, width: controlWidth },
+    controls: { show: showControls, width: controlWidth },
   } = useContext(PlaylistInfoContext);
   const devicePixelRatio = useDevicePixelRatio();
 
@@ -130,8 +128,7 @@ export const TimeScale: FunctionComponent<TimeScaleProps> = props => {
   return (
     <PlaylistTimeScaleScroll
       cssWidth={widthX}
-      controls={controls}
-      controlWidth={controlWidth}
+      controlWidth={showControls ? controlWidth : 0}
       timeScaleHeight={timeScaleHeight}
     >
       {timeMarkers}

@@ -9,4 +9,5 @@ export const PlaylistInfoContext = createContext({
     show: false,
     width: 150,
   },
+  duration: 30000,
 });

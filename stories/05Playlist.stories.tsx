@@ -2,7 +2,7 @@ import React from 'react';
 import { StyledPlaylist } from '../src/components/Playlist';
 import { StyledChannel } from '../src/components/Channel/Channel';
 import { StyledTrack } from '../src/components/Track';
-import { StyledTimeScale } from '../src/components/TimeScale';
+import { SmartScale } from '../src/components/TimeScale';
 import BBCWaveformData from '../media/json/vocals.json';
 import { PlaylistInfoContext } from '../src/contexts/PlaylistInfo';
 
@@ -74,13 +74,7 @@ export const MultipleChannels = () => (
 
 export const TimeScale = () => (
   <StyledPlaylist>
-    <StyledTimeScale
-      marker={2000}
-      timeScaleHeight={15}
-      bigStep={1000}
-      secondStep={500}
-      duration={30000}
-    />
+    <SmartScale />
     <StyledTrack numChannels={1}>
       <StyledChannel
         data={new Int16Array(BBCWaveformData.data)}
@@ -103,16 +97,11 @@ export const TimeScaleAndControls = () => (
         show: true,
         width: 200,
       },
+      duration: 30,
     }}
   >
     <StyledPlaylist>
-      <StyledTimeScale
-        marker={2000}
-        timeScaleHeight={15}
-        bigStep={1000}
-        secondStep={500}
-        duration={30000}
-      />
+      <SmartScale />
       <StyledTrack numChannels={1} controls={makeControls('Track 1')}>
         <StyledChannel
           data={new Int16Array(BBCWaveformData.data)}
@@ -136,16 +125,11 @@ export const TimeScaleAndControlsMultipleChannels = () => (
         show: true,
         width: 200,
       },
+      duration: 30,
     }}
   >
     <StyledPlaylist>
-      <StyledTimeScale
-        marker={2000}
-        timeScaleHeight={15}
-        bigStep={1000}
-        secondStep={500}
-        duration={30000}
-      />
+      <SmartScale />
       <StyledTrack numChannels={2} controls={makeControls('Track 1')}>
         <StyledChannel
           data={new Int16Array(BBCWaveformData.data)}
@@ -175,16 +159,11 @@ export const TimeScaleAndControlsMultipleTracks = () => (
         show: true,
         width: 200,
       },
+      duration: 30,
     }}
   >
     <StyledPlaylist>
-      <StyledTimeScale
-        marker={2000}
-        timeScaleHeight={15}
-        bigStep={1000}
-        secondStep={500}
-        duration={30000}
-      />
+      <SmartScale />
       <StyledTrack numChannels={1} controls={makeControls('Track 1')}>
         <StyledChannel
           data={new Int16Array(BBCWaveformData.data)}
@@ -216,16 +195,11 @@ export const TimeScaleAndControlsMultipleTracksWithMultipleChannels = () => (
         show: true,
         width: 200,
       },
+      duration: 30,
     }}
   >
     <StyledPlaylist>
-      <StyledTimeScale
-        marker={2000}
-        timeScaleHeight={15}
-        bigStep={1000}
-        secondStep={500}
-        duration={30000}
-      />
+      <SmartScale />
       <StyledTrack numChannels={2} controls={makeControls('Track 1')}>
         <StyledChannel
           data={new Int16Array(BBCWaveformData.data)}
