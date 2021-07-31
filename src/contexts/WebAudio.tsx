@@ -2,6 +2,7 @@ import React from 'react';
 import { useAsync } from 'react-async-hook';
 import { ExtractPeacksProvider } from './ExtractPeaks';
 import { load } from '../loading';
+import { Peaks, Bits } from 'webaudio-peaks';
 
 type AudioDataSource = string | Blob;
 

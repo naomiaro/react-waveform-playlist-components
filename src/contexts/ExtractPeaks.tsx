@@ -1,5 +1,5 @@
 import React, { Fragment } from 'react';
-import extractPeaks from 'webaudio-peaks';
+import extractPeaks, { Bits, Peaks } from 'webaudio-peaks';
 
 type Props = {
   children: (peaks: Peaks[], bits: Bits, length: number) => JSX.Element;

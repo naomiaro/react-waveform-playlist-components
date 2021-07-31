@@ -10,6 +10,7 @@ import { PlaylistInfoContext } from '../../contexts/PlaylistInfo';
 import { Progress } from './Progress';
 import { Wrapper } from './Wrapper';
 import { Waveform } from './Waveform';
+import { Peaks, Bits } from 'webaudio-peaks';
 
 const MAX_CANVAS_WIDTH = 1000;
 
