@@ -4,33 +4,24 @@ function getScale() {
   return window.devicePixelRatio;
 }
 
-function defaultState() {
-  return Math.ceil(getScale());
-}
-
-const DevicePixelRatioContext = createContext(defaultState());
+const DevicePixelRatioContext = createContext(getScale());
 
 type Props = {
   children: ReactNode;
 };
 export const DevicePixelRatioProvider = ({ children }: Props) => {
-  const [scale, setScale] = useState(defaultState());
+  const [scale, setScale] = useState(getScale());
 
-  function updateDevicePixelRatio() {
-    matchMedia(`(resolution: ${scale}dppx)`).addEventListener(
-      'change',
-      () => {
-        setScale(defaultState());
-        updateDevicePixelRatio();
-      },
-      { once: true }
-    );
-  }
-
-  updateDevicePixelRatio();
+  matchMedia(`(resolution: ${getScale()}dppx)`).addEventListener(
+    'change',
+    () => {
+      setScale(getScale());
+    },
+    { once: true }
+  );
 
   return (
-    <DevicePixelRatioContext.Provider value={scale}>
+    <DevicePixelRatioContext.Provider value={Math.ceil(scale)}>
       {children}
     </DevicePixelRatioContext.Provider>
   );
