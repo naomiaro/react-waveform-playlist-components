@@ -93,6 +93,7 @@
     "@types/enzyme-adapter-react-16": "^1.0.6",
     "fade-maker": "^1.0.3",
     "react-async-hook": "^3.6.1",
+    "waveform-data": "^4.1.0",
     "webaudio-peaks": "1.0.0"
   }
 }
