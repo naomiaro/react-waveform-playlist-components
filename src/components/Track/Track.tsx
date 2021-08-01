@@ -1,7 +1,17 @@
 import React, { FunctionComponent, ReactNode, useContext } from 'react';
 import styled, { withTheme, DefaultTheme } from 'styled-components';
 import { PlaylistInfoContext } from '../../contexts/PlaylistInfo';
-import { Container } from './Container';
+
+interface ContainerProps {
+  readonly numChannels: number;
+  readonly waveHeight: number;
+  readonly controlWidth: number;
+}
+
+const Container = styled.div<ContainerProps>`
+  height: ${props => props.waveHeight * props.numChannels}px;
+  margin-left: ${props => props.controlWidth}px;
+`;
 
 const ChannelContainer = styled.div`
   position: relative;
