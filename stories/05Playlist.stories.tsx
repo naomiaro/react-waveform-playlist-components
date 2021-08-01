@@ -3,7 +3,7 @@ import { StyledPlaylist } from '../src/components/Playlist';
 import { SmartChannel } from '../src/components/Channel';
 import { StyledTrack } from '../src/components/Track';
 import { SmartScale } from '../src/components/TimeScale';
-import BBCWaveformData from '../media/json/vocals.json';
+import BBCWaveformData from '../media/json/vocals_mono_8bit.json';
 import { PlaylistInfoContext } from '../src/contexts/PlaylistInfo';
 
 import {
