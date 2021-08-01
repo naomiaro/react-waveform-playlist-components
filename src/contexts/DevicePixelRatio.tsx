@@ -1,19 +1,33 @@
 import React, { useState, createContext, useContext, ReactNode } from 'react';
 
-const defaultScale = window.devicePixelRatio;
-let mqString = `(resolution: ${defaultScale}dppx)`;
+function getScale() {
+  return window.devicePixelRatio;
+}
 
-export const DevicePixelRatioContext = createContext(defaultScale);
+function defaultState() {
+  return Math.ceil(getScale());
+}
+
+const DevicePixelRatioContext = createContext(defaultState());
 
 type Props = {
   children: ReactNode;
 };
 export const DevicePixelRatioProvider = ({ children }: Props) => {
-  const [scale, setScale] = useState(defaultScale);
-  const updatePixelRatio = () => {
-    setScale(Math.ceil(window.devicePixelRatio));
-  };
-  matchMedia(mqString).addListener(updatePixelRatio);
+  const [scale, setScale] = useState(defaultState());
+
+  function updateDevicePixelRatio() {
+    matchMedia(`(resolution: ${scale}dppx)`).addEventListener(
+      'change',
+      () => {
+        setScale(defaultState());
+        updateDevicePixelRatio();
+      },
+      { once: true }
+    );
+  }
+
+  updateDevicePixelRatio();
 
   return (
     <DevicePixelRatioContext.Provider value={scale}>
