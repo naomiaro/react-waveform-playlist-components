@@ -1,3 +1,4 @@
-import { Channel } from './Channel';
+import { Channel, ChannelProps } from './Channel';
+import { SmartChannel, SmartChannelProps } from './SmartChannel';
 
-export { Channel };
+export { Channel, ChannelProps, SmartChannel, SmartChannelProps };

@@ -1,16 +1,5 @@
-import React, {
-  FunctionComponent,
-  useEffect,
-  useContext,
-  useCallback,
-} from 'react';
-import styled, {
-  withTheme,
-  ThemeContext,
-  DefaultTheme,
-} from 'styled-components';
-import { useDevicePixelRatio } from '../../contexts/DevicePixelRatio';
-import { PlaylistInfoContext } from '../../contexts/PlaylistInfo';
+import React, { FunctionComponent, useEffect, useCallback } from 'react';
+import styled from 'styled-components';
 import { Peaks, Bits } from 'webaudio-peaks';
 
 const MAX_CANVAS_WIDTH = 1000;
@@ -18,10 +7,11 @@ const MAX_CANVAS_WIDTH = 1000;
 interface ProgressProps {
   readonly progress: number;
   readonly waveHeight: number;
+  readonly waveProgressColor: string;
 }
 const Progress = styled.div<ProgressProps>`
   position: absolute;
-  background: ${props => props.theme.waveProgressColor};
+  background: ${props => props.waveProgressColor};
   width: ${props => props.progress}px;
   height: ${props => props.waveHeight}px;
 `;
@@ -42,12 +32,13 @@ interface WrapperProps {
   readonly index: number;
   readonly cssWidth: number;
   readonly waveHeight: number;
+  readonly waveFillColor: string;
 }
 
 const Wrapper = styled.div<WrapperProps>`
   position: absolute;
   top: ${props => props.waveHeight * props.index}px;
-  background: ${props => props.theme.waveFillColor};
+  background: ${props => props.waveFillColor};
   width: ${props => props.cssWidth}px;
   height: ${props => props.waveHeight}px;
 `;
@@ -55,18 +46,31 @@ const Wrapper = styled.div<WrapperProps>`
 export interface ChannelProps {
   className?: string;
   index: number;
-  theme?: DefaultTheme;
   data: Peaks;
   bits: Bits;
   length: number;
   progress?: number;
+  devicePixelRatio?: number;
+  waveHeight?: number;
+  waveProgressColor?: string;
+  waveOutlineColor?: string;
+  waveFillColor?: string;
 }
 
 export const Channel: FunctionComponent<ChannelProps> = props => {
-  const { waveOutlineColor } = useContext(ThemeContext);
-  const { waveHeight } = useContext(PlaylistInfoContext);
-  const devicePixelRatio = useDevicePixelRatio();
-  const { data, bits, length, index, className, progress = 0 } = props;
+  const {
+    data,
+    bits,
+    length,
+    index,
+    className,
+    progress = 0,
+    devicePixelRatio = 1,
+    waveHeight = 80,
+    waveProgressColor = 'orange',
+    waveOutlineColor = '#E0EFF1',
+    waveFillColor = 'grey',
+  } = props;
   const canvases: HTMLCanvasElement[] = [];
 
   const canvasRef = useCallback(
@@ -148,11 +152,14 @@ export const Channel: FunctionComponent<ChannelProps> = props => {
       cssWidth={length}
       className={className}
       waveHeight={waveHeight}
+      waveFillColor={waveFillColor}
     >
-      <Progress progress={progress} waveHeight={waveHeight} />
+      <Progress
+        progress={progress}
+        waveHeight={waveHeight}
+        waveProgressColor={waveProgressColor}
+      />
       {waveforms}
     </Wrapper>
   );
 };
-
-export const StyledChannel = withTheme(Channel);

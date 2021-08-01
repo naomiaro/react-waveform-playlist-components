@@ -1,4 +1,4 @@
-import { createContext } from 'react';
+import { createContext, useContext } from 'react';
 
 export const PlaylistInfoContext = createContext({
   sampleRate: 48000,
@@ -11,3 +11,5 @@ export const PlaylistInfoContext = createContext({
   },
   duration: 30000,
 });
+
+export const usePlaylistInfo = () => useContext(PlaylistInfoContext);
