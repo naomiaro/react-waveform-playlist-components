@@ -1,6 +1,6 @@
 import React from 'react';
 import { StyledPlaylist } from '../src/components/Playlist';
-import { StyledChannel } from '../src/components/Channel/Channel';
+import { SmartChannel } from '../src/components/Channel';
 import { StyledTrack } from '../src/components/Track';
 import { SmartScale } from '../src/components/TimeScale';
 import BBCWaveformData from '../media/json/vocals.json';
@@ -43,7 +43,7 @@ function makeControls(trackName) {
 export const Default = () => (
   <StyledPlaylist>
     <StyledTrack numChannels={1}>
-      <StyledChannel
+      <SmartChannel
         data={new Int16Array(BBCWaveformData.data)}
         bits={BBCWaveformData.bits as Bits}
         length={BBCWaveformData.length}
@@ -56,13 +56,13 @@ export const Default = () => (
 export const MultipleChannels = () => (
   <StyledPlaylist>
     <StyledTrack numChannels={2}>
-      <StyledChannel
+      <SmartChannel
         data={new Int16Array(BBCWaveformData.data)}
         bits={BBCWaveformData.bits as Bits}
         length={BBCWaveformData.length}
         index={0}
       />
-      <StyledChannel
+      <SmartChannel
         data={new Int16Array(BBCWaveformData.data)}
         bits={BBCWaveformData.bits as Bits}
         length={BBCWaveformData.length}
@@ -76,7 +76,7 @@ export const TimeScale = () => (
   <StyledPlaylist>
     <SmartScale />
     <StyledTrack numChannels={1}>
-      <StyledChannel
+      <SmartChannel
         data={new Int16Array(BBCWaveformData.data)}
         bits={BBCWaveformData.bits as Bits}
         length={BBCWaveformData.length}
@@ -103,7 +103,7 @@ export const TimeScaleAndControls = () => (
     <StyledPlaylist>
       <SmartScale />
       <StyledTrack numChannels={1} controls={makeControls('Track 1')}>
-        <StyledChannel
+        <SmartChannel
           data={new Int16Array(BBCWaveformData.data)}
           bits={BBCWaveformData.bits as Bits}
           length={BBCWaveformData.length}
@@ -131,13 +131,13 @@ export const TimeScaleAndControlsMultipleChannels = () => (
     <StyledPlaylist>
       <SmartScale />
       <StyledTrack numChannels={2} controls={makeControls('Track 1')}>
-        <StyledChannel
+        <SmartChannel
           data={new Int16Array(BBCWaveformData.data)}
           bits={BBCWaveformData.bits as Bits}
           length={BBCWaveformData.length}
           index={0}
         />
-        <StyledChannel
+        <SmartChannel
           data={new Int16Array(BBCWaveformData.data)}
           bits={BBCWaveformData.bits as Bits}
           length={BBCWaveformData.length}
@@ -165,7 +165,7 @@ export const TimeScaleAndControlsMultipleTracks = () => (
     <StyledPlaylist>
       <SmartScale />
       <StyledTrack numChannels={1} controls={makeControls('Track 1')}>
-        <StyledChannel
+        <SmartChannel
           data={new Int16Array(BBCWaveformData.data)}
           bits={BBCWaveformData.bits as Bits}
           length={BBCWaveformData.length}
@@ -173,7 +173,7 @@ export const TimeScaleAndControlsMultipleTracks = () => (
         />
       </StyledTrack>
       <StyledTrack numChannels={1} controls={makeControls('Track 2')}>
-        <StyledChannel
+        <SmartChannel
           data={new Int16Array(BBCWaveformData.data)}
           bits={BBCWaveformData.bits as Bits}
           length={BBCWaveformData.length}
@@ -201,13 +201,13 @@ export const TimeScaleAndControlsMultipleTracksWithMultipleChannels = () => (
     <StyledPlaylist>
       <SmartScale />
       <StyledTrack numChannels={2} controls={makeControls('Track 1')}>
-        <StyledChannel
+        <SmartChannel
           data={new Int16Array(BBCWaveformData.data)}
           bits={BBCWaveformData.bits as Bits}
           length={BBCWaveformData.length}
           index={0}
         />
-        <StyledChannel
+        <SmartChannel
           data={new Int16Array(BBCWaveformData.data)}
           bits={BBCWaveformData.bits as Bits}
           length={BBCWaveformData.length}
@@ -215,13 +215,13 @@ export const TimeScaleAndControlsMultipleTracksWithMultipleChannels = () => (
         />
       </StyledTrack>
       <StyledTrack numChannels={2} controls={makeControls('Track 2')}>
-        <StyledChannel
+        <SmartChannel
           data={new Int16Array(BBCWaveformData.data)}
           bits={BBCWaveformData.bits as Bits}
           length={BBCWaveformData.length}
           index={0}
         />
-        <StyledChannel
+        <SmartChannel
           data={new Int16Array(BBCWaveformData.data)}
           bits={BBCWaveformData.bits as Bits}
           length={BBCWaveformData.length}

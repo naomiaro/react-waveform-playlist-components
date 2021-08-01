@@ -3,7 +3,7 @@ import {
   WebAudioProvider,
   WebAudioProviderProps,
 } from '../src/contexts/WebAudio';
-import { StyledChannel } from '../src/components/Channel/Channel';
+import { SmartChannel } from '../src/components/Channel';
 import { StyledTrack } from '../src/components/Track';
 
 export default {
@@ -15,7 +15,7 @@ export const Default = (args: WebAudioProviderProps) => (
     {(peaks, bits, length) => (
       <StyledTrack numChannels={peaks.length} controls={null}>
         {peaks.map((data, index) => (
-          <StyledChannel
+          <SmartChannel
             key={index}
             index={index}
             data={data}
