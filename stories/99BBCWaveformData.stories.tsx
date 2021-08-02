@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import { BBCWaveformData } from '../src/components/BBCExtractPeaks';
 
 export default {
@@ -8,11 +8,17 @@ export default {
 
 export const Default = args => (
   <BBCWaveformData {...args}>
-    {waveformData => {
+    {({ data, loading, error }) => {
       return (
-        <code>
-          <pre>{JSON.stringify(waveformData.toJSON(), null, 2)}</pre>
-        </code>
+        <Fragment>
+          {loading && 'Loading WaveformData'}
+          {error && error.message}
+          {data && (
+            <code>
+              <pre>{JSON.stringify(data.toJSON(), null, 2)}</pre>
+            </code>
+          )}
+        </Fragment>
       );
     }}
   </BBCWaveformData>

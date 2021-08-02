@@ -2,31 +2,22 @@ import React, { Fragment } from 'react';
 import { useAsync } from 'react-async-hook';
 import WaveformData from 'waveform-data';
 
-const EMPTY_PEAKS = {
-  version: 2,
-  channels: 1,
-  sample_rate: 48000,
-  samples_per_pixel: 256,
-  bits: 8,
-  length: 0,
-  data: [],
-};
-
 const fetchPeaks = async (dataUri: string, type: 'dat' | 'json') => {
   const parsePeaksMethod = type === 'dat' ? 'arrayBuffer' : 'json';
   const peaksResponse = await fetch(dataUri);
-  try {
-    const decodedPeaks = await peaksResponse[parsePeaksMethod]();
-    return decodedPeaks;
-  } catch (e) {
-    return EMPTY_PEAKS;
-  }
+  return await peaksResponse[parsePeaksMethod]();
+};
+
+type RenderProps = {
+  data?: WaveformData;
+  loading: boolean;
+  error?: Error;
 };
 
 type Props = {
   location: string;
   type: 'json' | 'dat';
-  children: (data: WaveformData) => JSX.Element;
+  children: (args: RenderProps) => JSX.Element;
 };
 
 /**
@@ -37,10 +28,10 @@ type Props = {
  * const location = dat/vocals_mono_8bit.dat
  * const type = 'dat'
  * <BBCWaveformData location={location} type={type}>
- *  {waveformData => {
+ *  {({data, loading, error}) => {
  *    return (
  *      <code>
- *        <pre>{JSON.stringify(waveformData.toJSON(), null, 2)}</pre>
+ *        <pre>{JSON.stringify(data.toJSON(), null, 2)}</pre>
  *      </code>
  *    );
  *  }}
@@ -51,9 +42,16 @@ export const BBCWaveformData = ({ location, type, children }: Props) => {
 
   return (
     <Fragment>
-      {asyncPeaks.loading && <div>Loading</div>}
-      {asyncPeaks.error && <div>Error loading peaks</div>}
-      {asyncPeaks.result && children(WaveformData.create(asyncPeaks.result))}
+      {asyncPeaks.loading &&
+        children({ loading: true, error: undefined, data: undefined })}
+      {asyncPeaks.error &&
+        children({ loading: false, error: asyncPeaks.error, data: undefined })}
+      {asyncPeaks.result &&
+        children({
+          loading: false,
+          error: undefined,
+          data: WaveformData.create(asyncPeaks.result),
+        })}
     </Fragment>
   );
 };
