@@ -30,7 +30,7 @@ const ControlsWrapper = styled.div<ControlsWrapperProps>`
 
 export interface TrackProps {
   className?: string;
-  children: ReactNode;
+  children?: ReactNode;
   controls?: ReactNode;
   numChannels: number;
 }

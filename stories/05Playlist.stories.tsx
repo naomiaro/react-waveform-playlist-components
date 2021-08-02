@@ -1,7 +1,6 @@
 import React from 'react';
 import { StyledPlaylist } from '../src/components/Playlist';
-import { SmartChannel } from '../src/components/Channel';
-import { SmartTrack, SmartTrackProps } from '../src/components/Track';
+import { SmartTrack } from '../src/components/Track';
 import { SmartScale } from '../src/components/TimeScale';
 import { PlaylistInfoContext } from '../src/contexts/PlaylistInfo';
 
@@ -15,7 +14,6 @@ import {
   VolumeSlider,
   VolumeSliderWrapper,
 } from '../src/components/TrackControls';
-import { Bits } from 'webaudio-peaks';
 
 export default {
   title: 'Playlist',

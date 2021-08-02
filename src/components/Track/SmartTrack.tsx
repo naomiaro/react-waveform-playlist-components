@@ -29,11 +29,11 @@ export const SmartTrack: FunctionComponent<SmartTrackProps> = ({
   type,
   controls,
 }) => {
-  const { loading, error, data: waveform } = useWaveformData(dataUri, type);
+  const { data: waveform } = useWaveformData(dataUri, type);
 
   return (
     <Fragment>
-      {!waveform && 'test'}
+      {!waveform && <Track numChannels={0} />}
       {waveform && (
         <Track numChannels={waveform.channels} controls={controls}>
           {Array(waveform.channels)
