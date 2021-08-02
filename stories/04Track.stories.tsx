@@ -1,7 +1,7 @@
 import React from 'react';
 import { SmartChannel } from '../src/components/Channel';
 import { StyledTrack } from '../src/components/Track';
-import BBCWaveformData from '../media/json/vocals.json';
+import BBCWaveformData from '../media/json/vocals_mono_8bit.json';
 import { Bits } from 'webaudio-peaks';
 
 export default {
