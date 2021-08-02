@@ -1,9 +1,8 @@
 import React from 'react';
 import { StyledPlaylist } from '../src/components/Playlist';
 import { SmartChannel } from '../src/components/Channel';
-import { StyledTrack } from '../src/components/Track';
+import { SmartTrack, SmartTrackProps } from '../src/components/Track';
 import { SmartScale } from '../src/components/TimeScale';
-import BBCWaveformData from '../media/json/vocals_mono_8bit.json';
 import { PlaylistInfoContext } from '../src/contexts/PlaylistInfo';
 
 import {
@@ -42,47 +41,20 @@ function makeControls(trackName) {
 
 export const Default = () => (
   <StyledPlaylist>
-    <StyledTrack numChannels={1}>
-      <SmartChannel
-        data={new Int16Array(BBCWaveformData.data)}
-        bits={BBCWaveformData.bits as Bits}
-        length={BBCWaveformData.length}
-        index={0}
-      />
-    </StyledTrack>
+    <SmartTrack dataUri="dat/vocals_mono_8bit.dat" type="dat" />
   </StyledPlaylist>
 );
 
 export const MultipleChannels = () => (
   <StyledPlaylist>
-    <StyledTrack numChannels={2}>
-      <SmartChannel
-        data={new Int16Array(BBCWaveformData.data)}
-        bits={BBCWaveformData.bits as Bits}
-        length={BBCWaveformData.length}
-        index={0}
-      />
-      <SmartChannel
-        data={new Int16Array(BBCWaveformData.data)}
-        bits={BBCWaveformData.bits as Bits}
-        length={BBCWaveformData.length}
-        index={1}
-      />
-    </StyledTrack>
+    <SmartTrack dataUri="dat/vocals_multi_8bit.dat" type="dat" />
   </StyledPlaylist>
 );
 
 export const TimeScale = () => (
   <StyledPlaylist>
     <SmartScale />
-    <StyledTrack numChannels={1}>
-      <SmartChannel
-        data={new Int16Array(BBCWaveformData.data)}
-        bits={BBCWaveformData.bits as Bits}
-        length={BBCWaveformData.length}
-        index={0}
-      />
-    </StyledTrack>
+    <SmartTrack dataUri="dat/vocals_mono_8bit.dat" type="dat" />
   </StyledPlaylist>
 );
 
@@ -102,14 +74,11 @@ export const TimeScaleAndControls = () => (
   >
     <StyledPlaylist>
       <SmartScale />
-      <StyledTrack numChannels={1} controls={makeControls('Track 1')}>
-        <SmartChannel
-          data={new Int16Array(BBCWaveformData.data)}
-          bits={BBCWaveformData.bits as Bits}
-          length={BBCWaveformData.length}
-          index={0}
-        />
-      </StyledTrack>
+      <SmartTrack
+        dataUri="dat/vocals_mono_8bit.dat"
+        type="dat"
+        controls={makeControls('Track 1')}
+      />
     </StyledPlaylist>
   </PlaylistInfoContext.Provider>
 );
@@ -130,20 +99,11 @@ export const TimeScaleAndControlsMultipleChannels = () => (
   >
     <StyledPlaylist>
       <SmartScale />
-      <StyledTrack numChannels={2} controls={makeControls('Track 1')}>
-        <SmartChannel
-          data={new Int16Array(BBCWaveformData.data)}
-          bits={BBCWaveformData.bits as Bits}
-          length={BBCWaveformData.length}
-          index={0}
-        />
-        <SmartChannel
-          data={new Int16Array(BBCWaveformData.data)}
-          bits={BBCWaveformData.bits as Bits}
-          length={BBCWaveformData.length}
-          index={1}
-        />
-      </StyledTrack>
+      <SmartTrack
+        dataUri="dat/vocals_multi_8bit.dat"
+        type="dat"
+        controls={makeControls('Track 1')}
+      />
     </StyledPlaylist>
   </PlaylistInfoContext.Provider>
 );
@@ -164,22 +124,16 @@ export const TimeScaleAndControlsMultipleTracks = () => (
   >
     <StyledPlaylist>
       <SmartScale />
-      <StyledTrack numChannels={1} controls={makeControls('Track 1')}>
-        <SmartChannel
-          data={new Int16Array(BBCWaveformData.data)}
-          bits={BBCWaveformData.bits as Bits}
-          length={BBCWaveformData.length}
-          index={0}
-        />
-      </StyledTrack>
-      <StyledTrack numChannels={1} controls={makeControls('Track 2')}>
-        <SmartChannel
-          data={new Int16Array(BBCWaveformData.data)}
-          bits={BBCWaveformData.bits as Bits}
-          length={BBCWaveformData.length}
-          index={0}
-        />
-      </StyledTrack>
+      <SmartTrack
+        dataUri="dat/vocals_mono_8bit.dat"
+        type="dat"
+        controls={makeControls('Vocals 1')}
+      />
+      <SmartTrack
+        dataUri="dat/vocals_mono_8bit.dat"
+        type="dat"
+        controls={makeControls('Vocals 2')}
+      />
     </StyledPlaylist>
   </PlaylistInfoContext.Provider>
 );
@@ -200,34 +154,16 @@ export const TimeScaleAndControlsMultipleTracksWithMultipleChannels = () => (
   >
     <StyledPlaylist>
       <SmartScale />
-      <StyledTrack numChannels={2} controls={makeControls('Track 1')}>
-        <SmartChannel
-          data={new Int16Array(BBCWaveformData.data)}
-          bits={BBCWaveformData.bits as Bits}
-          length={BBCWaveformData.length}
-          index={0}
-        />
-        <SmartChannel
-          data={new Int16Array(BBCWaveformData.data)}
-          bits={BBCWaveformData.bits as Bits}
-          length={BBCWaveformData.length}
-          index={1}
-        />
-      </StyledTrack>
-      <StyledTrack numChannels={2} controls={makeControls('Track 2')}>
-        <SmartChannel
-          data={new Int16Array(BBCWaveformData.data)}
-          bits={BBCWaveformData.bits as Bits}
-          length={BBCWaveformData.length}
-          index={0}
-        />
-        <SmartChannel
-          data={new Int16Array(BBCWaveformData.data)}
-          bits={BBCWaveformData.bits as Bits}
-          length={BBCWaveformData.length}
-          index={1}
-        />
-      </StyledTrack>
+      <SmartTrack
+        dataUri="dat/vocals_multi_8bit.dat"
+        type="dat"
+        controls={makeControls('Vocals 1')}
+      />
+      <SmartTrack
+        dataUri="dat/vocals_multi_8bit.dat"
+        type="dat"
+        controls={makeControls('Vocals 2')}
+      />
     </StyledPlaylist>
   </PlaylistInfoContext.Provider>
 );

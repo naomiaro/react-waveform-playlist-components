@@ -1,4 +1,4 @@
-import React, { Fragment, FunctionComponent } from 'react';
+import React, { Fragment, FunctionComponent, ReactNode } from 'react';
 import { SmartChannel } from '../Channel';
 import { Track } from './Track';
 import WaveformData from 'waveform-data';
@@ -7,6 +7,7 @@ import { useWaveformData } from '../BBCExtractPeaks';
 export interface SmartTrackProps {
   dataUri: string;
   type: 'dat' | 'json';
+  controls?: ReactNode;
 }
 
 function parseData(waveform: WaveformData, channel: number) {
@@ -26,6 +27,7 @@ function parseData(waveform: WaveformData, channel: number) {
 export const SmartTrack: FunctionComponent<SmartTrackProps> = ({
   dataUri,
   type,
+  controls,
 }) => {
   const { loading, error, data: waveform } = useWaveformData(dataUri, type);
 
@@ -33,7 +35,7 @@ export const SmartTrack: FunctionComponent<SmartTrackProps> = ({
     <Fragment>
       {!waveform && 'test'}
       {waveform && (
-        <Track numChannels={waveform.channels}>
+        <Track numChannels={waveform.channels} controls={controls}>
           {Array(waveform.channels)
             .fill(0)
             .map((_, i) => {
