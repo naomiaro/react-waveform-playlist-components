@@ -11,17 +11,20 @@ export interface SmartTrackProps {
 }
 
 function parseData(waveform: WaveformData, channel: number) {
-  const data = [];
-  for (let i = 0; i < waveform.length; i++) {
-    data.push(waveform.channel(channel).min_sample(i));
-    data.push(waveform.channel(channel).max_sample(i));
-  }
+  const peakLength = waveform.length;
+  let data;
 
   if (waveform.bits === 8) {
-    return new Int8Array(data);
+    data = new Int8Array(peakLength * 2);
   } else {
-    return new Int16Array(data);
+    data = new Int16Array(peakLength * 2);
   }
+  for (let i = 0; i < peakLength; i++) {
+    data[i * 2] = waveform.channel(channel).min_sample(i);
+    data[i * 2 + 1] = waveform.channel(channel).max_sample(i);
+  }
+
+  return data;
 }
 
 export const SmartTrack: FunctionComponent<SmartTrackProps> = ({
