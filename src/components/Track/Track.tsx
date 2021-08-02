@@ -1,5 +1,5 @@
 import React, { FunctionComponent, ReactNode, useContext } from 'react';
-import styled, { withTheme, DefaultTheme } from 'styled-components';
+import styled from 'styled-components';
 import { PlaylistInfoContext } from '../../contexts/PlaylistInfo';
 
 interface ContainerProps {
@@ -30,8 +30,7 @@ const ControlsWrapper = styled.div<ControlsWrapperProps>`
 
 export interface TrackProps {
   className?: string;
-  theme?: DefaultTheme;
-  children: ReactNode;
+  children?: ReactNode;
   controls?: ReactNode;
   numChannels: number;
 }
@@ -60,5 +59,3 @@ export const Track: FunctionComponent<TrackProps> = ({
     </Container>
   );
 };
-
-export const StyledTrack = withTheme(Track);

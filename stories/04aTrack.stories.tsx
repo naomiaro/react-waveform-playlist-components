@@ -1,38 +1,37 @@
 import React from 'react';
 import { SmartChannel } from '../src/components/Channel';
-import { StyledTrack } from '../src/components/Track';
+import { Track } from '../src/components/Track';
 import BBCWaveformData from '../media/json/vocals_mono_8bit.json';
-import { Bits } from 'webaudio-peaks';
 
 export default {
   title: 'Track',
-  component: StyledTrack,
+  component: Track,
 };
 
 export const Default = () => (
-  <StyledTrack numChannels={1}>
+  <Track numChannels={1}>
     <SmartChannel
       data={new Int16Array(BBCWaveformData.data)}
-      bits={BBCWaveformData.bits as Bits}
+      bits={BBCWaveformData.bits as 8 | 16}
       length={BBCWaveformData.length}
       index={0}
     />
-  </StyledTrack>
+  </Track>
 );
 
 export const MultipleChannels = () => (
-  <StyledTrack numChannels={2}>
+  <Track numChannels={2}>
     <SmartChannel
       data={new Int16Array(BBCWaveformData.data)}
-      bits={BBCWaveformData.bits as Bits}
+      bits={BBCWaveformData.bits as 8 | 16}
       length={BBCWaveformData.length}
       index={0}
     />
     <SmartChannel
       data={new Int16Array(BBCWaveformData.data)}
-      bits={BBCWaveformData.bits as Bits}
+      bits={BBCWaveformData.bits as 8 | 16}
       length={BBCWaveformData.length}
       index={1}
     />
-  </StyledTrack>
+  </Track>
 );

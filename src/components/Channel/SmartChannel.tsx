@@ -1,13 +1,12 @@
 import React, { FunctionComponent } from 'react';
-import { Peaks, Bits } from 'webaudio-peaks';
 import { useDevicePixelRatio, usePlaylistInfo, useTheme } from '../../contexts';
 import { Channel } from './Channel';
 
 export interface SmartChannelProps {
   className?: string;
   index: number;
-  data: Peaks;
-  bits: Bits;
+  data: Int8Array | Int16Array;
+  bits: 8 | 16;
   length: number;
 }
 
