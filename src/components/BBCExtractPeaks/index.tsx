@@ -5,7 +5,8 @@ import WaveformData from 'waveform-data';
 const fetchPeaks = async (dataUri: string, type: 'dat' | 'json') => {
   const parsePeaksMethod = type === 'dat' ? 'arrayBuffer' : 'json';
   const peaksResponse = await fetch(dataUri);
-  return await peaksResponse[parsePeaksMethod]();
+  const decodedPeaks = await peaksResponse[parsePeaksMethod]();
+  return WaveformData.create(decodedPeaks);
 };
 
 type RenderProps = {
@@ -50,7 +51,7 @@ export const BBCWaveformData = ({ location, type, children }: Props) => {
         children({
           loading: false,
           error: undefined,
-          data: WaveformData.create(asyncPeaks.result),
+          data: asyncPeaks.result,
         })}
     </Fragment>
   );
