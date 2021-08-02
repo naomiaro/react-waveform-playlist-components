@@ -23,7 +23,6 @@ Default.args = {
   type: 'dat',
 };
 
-// Files generated with https://github.com/bbc/audiowaveform
 Default.argTypes = {
   location: {
     control: {
