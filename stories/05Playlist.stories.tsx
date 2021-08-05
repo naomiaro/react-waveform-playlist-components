@@ -3,6 +3,7 @@ import { StyledPlaylist } from '../src/components/Playlist';
 import { SmartTrack } from '../src/components/Track';
 import { SmartScale } from '../src/components/TimeScale';
 import { PlaylistInfoContext } from '../src/contexts/PlaylistInfo';
+import { TrackControlsContext } from '../src/contexts/TrackControls';
 
 import {
   Button,
@@ -71,14 +72,12 @@ export const TimeScaleAndControls = () => (
       duration: 30000,
     }}
   >
-    <StyledPlaylist>
-      <SmartScale />
-      <SmartTrack
-        dataUri="dat/vocals_mono_8bit.dat"
-        type="dat"
-        controls={makeControls('Track 1')}
-      />
-    </StyledPlaylist>
+    <TrackControlsContext.Provider value={makeControls('Track 1')}>
+      <StyledPlaylist>
+        <SmartScale />
+        <SmartTrack dataUri="dat/vocals_mono_8bit.dat" type="dat" />
+      </StyledPlaylist>
+    </TrackControlsContext.Provider>
   </PlaylistInfoContext.Provider>
 );
 
@@ -97,14 +96,12 @@ export const TimeScaleAndControlsMultipleChannels = () => (
       duration: 30000,
     }}
   >
-    <StyledPlaylist>
-      <SmartScale />
-      <SmartTrack
-        dataUri="dat/vocals_multi_8bit.dat"
-        type="dat"
-        controls={makeControls('Track 1')}
-      />
-    </StyledPlaylist>
+    <TrackControlsContext.Provider value={makeControls('Track 1')}>
+      <StyledPlaylist>
+        <SmartScale />
+        <SmartTrack dataUri="dat/vocals_multi_8bit.dat" type="dat" />
+      </StyledPlaylist>
+    </TrackControlsContext.Provider>
   </PlaylistInfoContext.Provider>
 );
 
@@ -125,16 +122,12 @@ export const TimeScaleAndControlsMultipleTracks = () => (
   >
     <StyledPlaylist>
       <SmartScale />
-      <SmartTrack
-        dataUri="dat/vocals_mono_8bit.dat"
-        type="dat"
-        controls={makeControls('Vocals 1')}
-      />
-      <SmartTrack
-        dataUri="dat/vocals_mono_8bit.dat"
-        type="dat"
-        controls={makeControls('Vocals 2')}
-      />
+      <TrackControlsContext.Provider value={makeControls('Vocals 1')}>
+        <SmartTrack dataUri="dat/vocals_mono_8bit.dat" type="dat" />
+      </TrackControlsContext.Provider>
+      <TrackControlsContext.Provider value={makeControls('Vocals2')}>
+        <SmartTrack dataUri="dat/vocals_mono_8bit.dat" type="dat" />
+      </TrackControlsContext.Provider>
     </StyledPlaylist>
   </PlaylistInfoContext.Provider>
 );
@@ -156,16 +149,12 @@ export const TimeScaleAndControlsMultipleTracksWithMultipleChannels = () => (
   >
     <StyledPlaylist>
       <SmartScale />
-      <SmartTrack
-        dataUri="dat/vocals_multi_8bit.dat"
-        type="dat"
-        controls={makeControls('Vocals 1')}
-      />
-      <SmartTrack
-        dataUri="dat/vocals_multi_8bit.dat"
-        type="dat"
-        controls={makeControls('Vocals 2')}
-      />
+      <TrackControlsContext.Provider value={makeControls('Vocals 1')}>
+        <SmartTrack dataUri="dat/vocals_multi_8bit.dat" type="dat" />
+      </TrackControlsContext.Provider>
+      <TrackControlsContext.Provider value={makeControls('Vocals 2')}>
+        <SmartTrack dataUri="dat/vocals_multi_8bit.dat" type="dat" />
+      </TrackControlsContext.Provider>
     </StyledPlaylist>
   </PlaylistInfoContext.Provider>
 );

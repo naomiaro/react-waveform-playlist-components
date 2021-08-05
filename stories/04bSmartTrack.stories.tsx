@@ -61,25 +61,3 @@ export const WithZoom = (args: SmartTrackProps) => (
 
 WithZoom.args = args;
 WithZoom.argTypes = argTypes;
-
-export const WithZoomAndControls = (args: SmartTrackProps) => (
-  <PlaylistInfoContext.Provider
-    value={{
-      sampleRate: 48000,
-      samplesPerPixel: 2000,
-      zoomLevels: [1000, 1500, 2000, 2500],
-      waveHeight: 80,
-      timeScaleHeight: 15,
-      controls: {
-        show: true,
-        width: 200,
-      },
-      duration: 30000,
-    }}
-  >
-    <SmartTrack {...args}></SmartTrack>
-  </PlaylistInfoContext.Provider>
-);
-
-WithZoomAndControls.args = args;
-WithZoomAndControls.argTypes = argTypes;

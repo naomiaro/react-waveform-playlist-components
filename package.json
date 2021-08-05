@@ -14,7 +14,7 @@
     "lint": "tsdx lint",
     "prepare": "tsdx build",
     "storybook": "start-storybook -s ./media -p 6006",
-    "build-storybook": "build-storybook --docs && cp -R ./media/ ./storybook-static",
+    "build-storybook": "build-storybook && cp -R ./media/ ./storybook-static",
     "ghpages": "gh-pages --repo https://$GH_TOKEN@github.com/naomiaro/react-waveform-playlist-components.git -d storybook-static",
     "website": "npm run build-storybook && npm run ghpages"
   },
