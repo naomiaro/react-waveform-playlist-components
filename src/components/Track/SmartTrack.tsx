@@ -1,14 +1,9 @@
-import React, { Fragment, FunctionComponent, ReactNode } from 'react';
+import React, { Fragment, FunctionComponent } from 'react';
 import { SmartChannel } from '../Channel';
 import { Track } from './Track';
 import WaveformData from 'waveform-data';
 import { useWaveformData } from '../BBCExtractPeaks';
-
-export interface SmartTrackProps {
-  dataUri: string;
-  type: 'dat' | 'json';
-  controls?: ReactNode;
-}
+import { usePlaylistInfo } from '../../contexts/PlaylistInfo';
 
 function parseData(waveform: WaveformData, channel: number) {
   const peakLength = waveform.length;
@@ -27,33 +22,49 @@ function parseData(waveform: WaveformData, channel: number) {
   return data;
 }
 
+interface WaveformDataTrackProps {
+  waveformData: WaveformData;
+}
+
+const WaveformDataTrack: FunctionComponent<WaveformDataTrackProps> = ({
+  waveformData,
+}) => {
+  const { samplesPerPixel } = usePlaylistInfo();
+  const waveform = waveformData.resample({ scale: samplesPerPixel });
+
+  return (
+    <Track numChannels={waveform.channels}>
+      {Array(waveform.channels)
+        .fill(0)
+        .map((_, i) => {
+          return (
+            <SmartChannel
+              data={parseData(waveform, i)}
+              bits={waveform.bits as 8 | 16}
+              length={waveform.length}
+              index={i}
+              key={i}
+            />
+          );
+        })}
+    </Track>
+  );
+};
+
+export interface SmartTrackProps {
+  dataUri: string;
+  type: 'dat' | 'json';
+}
 export const SmartTrack: FunctionComponent<SmartTrackProps> = ({
   dataUri,
   type,
-  controls,
 }) => {
-  const { data: waveform } = useWaveformData(dataUri, type);
+  const { data: waveformData } = useWaveformData(dataUri, type);
 
   return (
     <Fragment>
-      {!waveform && <Track numChannels={0} />}
-      {waveform && (
-        <Track numChannels={waveform.channels} controls={controls}>
-          {Array(waveform.channels)
-            .fill(0)
-            .map((_, i) => {
-              return (
-                <SmartChannel
-                  data={parseData(waveform, i)}
-                  bits={waveform.bits as 8 | 16}
-                  length={waveform.length}
-                  index={i}
-                  key={i}
-                />
-              );
-            })}
-        </Track>
-      )}
+      {!waveformData && <Track numChannels={0} />}
+      {waveformData && <WaveformDataTrack waveformData={waveformData} />}
     </Fragment>
   );
 };
