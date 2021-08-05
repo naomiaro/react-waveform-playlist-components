@@ -1,4 +1,11 @@
-import React, { useState, createContext, useContext, ReactNode } from 'react';
+import React, {
+  useState,
+  createContext,
+  useContext,
+  ReactNode,
+  Dispatch,
+  SetStateAction,
+} from 'react';
 
 const defaultProgress = 0;
 const defaultIsPlaying = false;
@@ -8,20 +15,33 @@ const defaultPlayout = {
   isPlaying: defaultIsPlaying,
 };
 
-export const PlayoutContext = createContext(defaultPlayout);
+const PlayoutStatusContext = createContext(defaultPlayout);
+
+type PlayoutStatusUpdate = {
+  setIsPlaying: Dispatch<SetStateAction<boolean>>;
+  setProgress: Dispatch<SetStateAction<number>>;
+};
+const PlayoutStatusUpdateContext = createContext<PlayoutStatusUpdate>({
+  setIsPlaying: () => {},
+  setProgress: () => {},
+});
 
 type Props = {
   children: ReactNode;
 };
 export const PlayoutProvider = ({ children }: Props) => {
-  const [isPlaying] = useState(defaultIsPlaying);
-  const [progress] = useState(defaultProgress);
+  const [isPlaying, setIsPlaying] = useState(defaultIsPlaying);
+  const [progress, setProgress] = useState(defaultProgress);
 
   return (
-    <PlayoutContext.Provider value={{ isPlaying, progress }}>
-      {children}
-    </PlayoutContext.Provider>
+    <PlayoutStatusUpdateContext.Provider value={{ setIsPlaying, setProgress }}>
+      <PlayoutStatusContext.Provider value={{ isPlaying, progress }}>
+        {children}
+      </PlayoutStatusContext.Provider>
+    </PlayoutStatusUpdateContext.Provider>
   );
 };
 
-export const usePlayoutStatus = () => useContext(PlayoutContext);
+export const usePlayoutStatus = () => useContext(PlayoutStatusContext);
+export const usePlayoutStatusUpdate = () =>
+  useContext(PlayoutStatusUpdateContext);
