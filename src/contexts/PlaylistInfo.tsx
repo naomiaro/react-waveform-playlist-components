@@ -3,6 +3,7 @@ import { createContext, useContext } from 'react';
 export const PlaylistInfoContext = createContext({
   sampleRate: 48000,
   samplesPerPixel: 1000,
+  zoomLevels: [1000, 1500, 2000, 2500],
   waveHeight: 80,
   timeScaleHeight: 15,
   controls: {

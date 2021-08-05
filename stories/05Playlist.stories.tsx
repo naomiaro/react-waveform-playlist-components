@@ -61,6 +61,7 @@ export const TimeScaleAndControls = () => (
     value={{
       sampleRate: 48000,
       samplesPerPixel: 1000,
+      zoomLevels: [1000, 1500, 2000, 2500],
       waveHeight: 100,
       timeScaleHeight: 15,
       controls: {
@@ -86,6 +87,7 @@ export const TimeScaleAndControlsMultipleChannels = () => (
     value={{
       sampleRate: 48000,
       samplesPerPixel: 1000,
+      zoomLevels: [1000, 1500, 2000, 2500],
       waveHeight: 80,
       timeScaleHeight: 15,
       controls: {
@@ -111,6 +113,7 @@ export const TimeScaleAndControlsMultipleTracks = () => (
     value={{
       sampleRate: 48000,
       samplesPerPixel: 1000,
+      zoomLevels: [1000, 1500, 2000, 2500],
       waveHeight: 100,
       timeScaleHeight: 15,
       controls: {
@@ -141,6 +144,7 @@ export const TimeScaleAndControlsMultipleTracksWithMultipleChannels = () => (
     value={{
       sampleRate: 48000,
       samplesPerPixel: 1000,
+      zoomLevels: [1000, 1500, 2000, 2500],
       waveHeight: 80,
       timeScaleHeight: 15,
       controls: {

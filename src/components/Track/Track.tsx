@@ -1,6 +1,7 @@
-import React, { FunctionComponent, ReactNode, useContext } from 'react';
+import React, { FunctionComponent, ReactNode } from 'react';
 import styled from 'styled-components';
-import { PlaylistInfoContext } from '../../contexts/PlaylistInfo';
+import { usePlaylistInfo } from '../../contexts/PlaylistInfo';
+import { useTrackControls } from '../../contexts/TrackControls';
 
 interface ContainerProps {
   readonly numChannels: number;
@@ -31,7 +32,6 @@ const ControlsWrapper = styled.div<ControlsWrapperProps>`
 export interface TrackProps {
   className?: string;
   children?: ReactNode;
-  controls?: ReactNode;
   numChannels: number;
 }
 
@@ -39,12 +39,12 @@ export const Track: FunctionComponent<TrackProps> = ({
   numChannels,
   children,
   className,
-  controls,
 }) => {
   const {
     waveHeight,
     controls: { show, width },
-  } = useContext(PlaylistInfoContext);
+  } = usePlaylistInfo();
+  const controls = useTrackControls();
   return (
     <Container
       numChannels={numChannels}
