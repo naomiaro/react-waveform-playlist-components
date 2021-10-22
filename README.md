@@ -4,4 +4,4 @@ View the current hosted storybook here: https://naomiaro.github.io/react-wavefor
 
 # Installation
 
-`npm install react-waveform-playlist`
+`npm install react-waveform-playlist@beta`
