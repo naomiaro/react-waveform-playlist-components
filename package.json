@@ -1,7 +1,7 @@
 {
   "version": "0.1.0-beta.0",
   "license": "MIT",
-  "website": "https://naomiaro.github.io/react-waveform-playlist-components",
+  "homepage": "https://naomiaro.github.io/react-waveform-playlist-components",
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",
   "files": [
@@ -27,6 +27,12 @@
       "pre-commit": "tsdx lint"
     }
   },
+  "keywords": [
+    "waveform",
+    "audio",
+    "react",
+    "webaudio"
+  ],
   "prettier": {
     "printWidth": 80,
     "semi": true,
