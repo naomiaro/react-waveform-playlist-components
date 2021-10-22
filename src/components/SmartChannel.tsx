@@ -1,5 +1,5 @@
 import React, { FunctionComponent } from 'react';
-import { useDevicePixelRatio, usePlaylistInfo, useTheme } from '../../contexts';
+import { useDevicePixelRatio, usePlaylistInfo, useTheme } from '../contexts';
 import { Channel } from './Channel';
 
 export interface SmartChannelProps {

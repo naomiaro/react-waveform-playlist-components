@@ -1,5 +1,5 @@
 import React from 'react';
-import { SmartChannel } from '../src/components/Channel';
+import { SmartChannel } from '../src/components';
 import BBCWaveformData from '../media/json/vocals_mono_8bit.json';
 
 export default {

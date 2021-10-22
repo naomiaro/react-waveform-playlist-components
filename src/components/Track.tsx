@@ -1,7 +1,7 @@
 import React, { FunctionComponent, ReactNode } from 'react';
 import styled from 'styled-components';
-import { usePlaylistInfo } from '../../contexts/PlaylistInfo';
-import { useTrackControls } from '../../contexts/TrackControls';
+import { usePlaylistInfo } from '../contexts/PlaylistInfo';
+import { useTrackControls } from '../contexts/TrackControls';
 
 interface ContainerProps {
   readonly numChannels: number;

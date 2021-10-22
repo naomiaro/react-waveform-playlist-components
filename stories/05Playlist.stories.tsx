@@ -1,9 +1,6 @@
 import React from 'react';
-import { StyledPlaylist } from '../src/components/Playlist';
-import { SmartTrack } from '../src/components/Track';
-import { SmartScale } from '../src/components/TimeScale';
-import { PlaylistInfoContext } from '../src/contexts/PlaylistInfo';
-import { TrackControlsContext } from '../src/contexts/TrackControls';
+import { StyledPlaylist, SmartTrack, SmartScale } from '../src/components';
+import { PlaylistInfoContext, TrackControlsContext } from '../src/contexts';
 
 import {
   Button,

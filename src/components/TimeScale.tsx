@@ -1,8 +1,8 @@
 import React, { FunctionComponent, useRef, useEffect, useContext } from 'react';
 import styled, { withTheme, DefaultTheme } from 'styled-components';
-import { PlaylistInfoContext } from '../../contexts/PlaylistInfo';
-import { useDevicePixelRatio } from '../../contexts/DevicePixelRatio';
-import { secondsToPixels } from '../../utils/conversions';
+import { PlaylistInfoContext } from '../contexts/PlaylistInfo';
+import { useDevicePixelRatio } from '../contexts/DevicePixelRatio';
+import { secondsToPixels } from '../utils/conversions';
 
 function formatTime(milliseconds: number) {
   const seconds = Math.floor(milliseconds / 1000);

@@ -1,5 +1,5 @@
 import React from 'react';
-import { SmartScale } from '../src/components/TimeScale';
+import { SmartScale } from '../src/components';
 
 export default {
   title: 'Smartscale',

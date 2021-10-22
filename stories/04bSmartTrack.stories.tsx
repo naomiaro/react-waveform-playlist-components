@@ -1,9 +1,6 @@
 import React from 'react';
-import { PlaylistInfoContext } from '../src/contexts/PlaylistInfo';
-import {
-  SmartTrack,
-  SmartTrackProps,
-} from '../src/components/Track/SmartTrack';
+import { PlaylistInfoContext } from '../src/contexts';
+import { SmartTrack, SmartTrackProps } from '../src/components';
 
 export default {
   title: 'SmartTrack',

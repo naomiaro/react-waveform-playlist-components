@@ -1,5 +1,5 @@
 import React, { FunctionComponent, useContext } from 'react';
-import { PlaylistInfoContext } from '../../contexts/PlaylistInfo';
+import { PlaylistInfoContext } from '../contexts/PlaylistInfo';
 import { StyledTimeScale } from './TimeScale';
 
 const timeinfo = new Map([

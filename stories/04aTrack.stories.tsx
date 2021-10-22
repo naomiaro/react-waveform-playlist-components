@@ -1,6 +1,5 @@
 import React from 'react';
-import { SmartChannel } from '../src/components/Channel';
-import { Track } from '../src/components/Track';
+import { SmartChannel, Track } from '../src/components';
 import BBCWaveformData from '../media/json/vocals_mono_8bit.json';
 
 export default {

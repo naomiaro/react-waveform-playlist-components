@@ -1,5 +1,5 @@
 import React from 'react';
-import { Channel, ChannelProps } from '../src/components/Channel';
+import { Channel, ChannelProps } from '../src/components';
 import BBCWaveformData from '../media/json/vocals_mono_8bit.json';
 import { Bits } from 'webaudio-peaks';
 

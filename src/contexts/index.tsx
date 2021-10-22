@@ -1,5 +1,13 @@
 import { useDevicePixelRatio } from './DevicePixelRatio';
-import { usePlaylistInfo } from './PlaylistInfo';
+import { usePlaylistInfo, PlaylistInfoContext } from './PlaylistInfo';
 import { useTheme } from './Theme';
+import { useTrackControls, TrackControlsContext } from './TrackControls';
 
-export { useDevicePixelRatio, usePlaylistInfo, useTheme };
+export {
+  useDevicePixelRatio,
+  usePlaylistInfo,
+  useTheme,
+  useTrackControls,
+  PlaylistInfoContext,
+  TrackControlsContext,
+};

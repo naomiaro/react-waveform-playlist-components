@@ -1,5 +1,5 @@
 import React, { Fragment } from 'react';
-import { BBCWaveformData } from '../src/components/BBCExtractPeaks';
+import { BBCWaveformData } from '../src/components';
 
 export default {
   title: 'BBCWaveformData',

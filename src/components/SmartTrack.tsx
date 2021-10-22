@@ -1,9 +1,9 @@
 import React, { Fragment, FunctionComponent } from 'react';
-import { SmartChannel } from '../Channel';
+import { SmartChannel } from './SmartChannel';
 import { Track } from './Track';
 import WaveformData from 'waveform-data';
-import { useWaveformData } from '../BBCExtractPeaks';
-import { usePlaylistInfo } from '../../contexts/PlaylistInfo';
+import { useWaveformData } from './BBCExtractPeaks';
+import { usePlaylistInfo } from '../contexts/PlaylistInfo';
 
 function parseData(waveform: WaveformData, channel: number) {
   const peakLength = waveform.length;
