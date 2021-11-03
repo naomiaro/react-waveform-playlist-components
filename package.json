@@ -92,8 +92,10 @@
     "@fortawesome/fontawesome-svg-core": "^1.2.27",
     "@fortawesome/free-solid-svg-icons": "^5.12.1",
     "@fortawesome/react-fontawesome": "^0.1.8",
+    "events": "^3.3.0",
     "fade-maker": "^1.0.3",
     "react-async-hook": "^3.6.1",
+    "tone": "^14.7.77",
     "waveform-data": "^4.1.1",
     "webaudio-peaks": "1.0.0"
   }
