@@ -67,6 +67,7 @@
     "@storybook/testing-library": "^0.0.9",
     "@types/events": "^3.0.0",
     "@types/node": "^14.14.22",
+    "@types/puppeteer": "^5.4.5",
     "@types/react": "^17.0.1",
     "@types/react-dom": "^16.9.5",
     "@types/storybook__addon-a11y": "^5.1.2",

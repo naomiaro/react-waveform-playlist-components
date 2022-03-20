@@ -1,28 +1,52 @@
 import initStoryshots from '@storybook/addon-storyshots';
 import { imageSnapshot } from '@storybook/addon-storyshots-puppeteer';
-import { Page } from 'puppeteer';
-import path from 'path';
+import puppeteer, { Page, Browser } from 'puppeteer';
 
-// https://github.com/storybookjs/storybook/issues/5132#issuecomment-736414609
-// const beforeScreenshot = (page: Page) =>
-//   page.$('#root > *').then((root) => root ?? undefined);
+const HOST_IP = process.env.HOST_IP;
+let browser: Browser;
 
-const beforeScreenshot = () => {
-  return new Promise<void>((resolve) =>
-    setTimeout(() => {
-      resolve();
-    }, 600)
-  );
+const testFn = imageSnapshot({
+  storybookUrl: 'file:///opt/storybook-static',
+  getCustomBrowser: async () => {
+    browser = await puppeteer.connect({
+      browserWSEndpoint: (() => {
+        // For CI env's: If running in docker inside docker, you'll need the IP address of the host
+        if (HOST_IP) {
+          return `ws://${HOST_IP}:9222`;
+        }
+        return 'ws://localhost:9222';
+      })(),
+    });
+    return browser;
+  },
+  beforeScreenshot: async (page: Page) => {
+    await page.evaluateHandle('document.fonts.ready');
+    await page.setViewport({ deviceScaleFactor: 2, width: 800, height: 600 });
+  },
+  getScreenshotOptions: () => {
+    return {
+      encoding: 'base64',
+      fullPage: false,
+    };
+  },
+});
+
+// Override 'afterAll' so jest doesn't hang
+testFn.afterAll = async () => {
+  if (browser) {
+    browser.close();
+  }
 };
 
-const customizePage = (page: Page) =>
-  page.setViewport({ width: 1920, height: 1080 });
-
 initStoryshots({
-  suite: 'Image storyshots',
-  test: imageSnapshot({
-    storybookUrl: `file://${path.resolve(__dirname, '../storybook-static')}`,
-    beforeScreenshot,
-    customizePage,
-  }),
+  test: testFn,
 });
+
+/***
+docker run -d --rm \
+  -p 9222:3000 \
+  -e "CONNECTION_TIMEOUT=600000" \
+  -e "ALLOW_FILE_PROTOCOL=true" \
+  -v /Users/naomiaro/Code/react-waveform-playlist-components/storybook-static:/opt/storybook-static \
+  browserless/chrome
+  */
