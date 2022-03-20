@@ -22,7 +22,7 @@ const testFn = imageSnapshot({
     return browser;
   },
   beforeScreenshot: async (page: Page) => {
-    await new Promise((res) => setTimeout(res, 6000));
+    await new Promise((res) => setTimeout(res, 500));
     await page.setViewport(VIEWPORT);
   },
   getScreenshotOptions: () => {

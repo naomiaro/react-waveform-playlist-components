@@ -2,8 +2,6 @@ import React from 'react';
 import { ThemeProvider } from 'styled-components';
 import { DevicePixelRatioProvider } from '../src/contexts/DevicePixelRatio';
 
-// import './iframe.css';
-
 const theme = {
   waveOutlineColor: '#E0EFF1',
   waveFillColor: 'grey',

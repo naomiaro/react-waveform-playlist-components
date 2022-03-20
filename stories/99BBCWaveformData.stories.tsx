@@ -1,9 +1,12 @@
 import React, { Fragment } from 'react';
+import withMock from 'storybook-addon-mock';
 import { BBCWaveformData, Props } from '../src/components';
+import { BBC_DATA_REQUESTS } from './utils/requests';
 
 export default {
   title: 'BBCWaveformData',
   component: BBCWaveformData,
+  decorators: [withMock],
 };
 
 export const Default = (args: Props) => (
@@ -25,8 +28,8 @@ export const Default = (args: Props) => (
 );
 
 Default.args = {
-  location: 'dat/vocals_mono_8bit.dat',
-  type: 'dat',
+  location: 'json/vocals_mono_8bit.json',
+  type: 'json',
 };
 
 Default.argTypes = {
@@ -45,4 +48,8 @@ Default.argTypes = {
       },
     },
   },
+};
+
+Default.parameters = {
+  mockData: BBC_DATA_REQUESTS,
 };

@@ -1,16 +1,19 @@
 import React from 'react';
 import { Story } from '@storybook/react';
+import withMock from 'storybook-addon-mock';
 import { PlaylistInfoContext } from '../src/contexts';
 import { SmartTrack, SmartTrackProps } from '../src/components';
+import { BBC_DATA_REQUESTS } from './utils/requests';
 
 export default {
   title: 'SmartTrack',
   component: SmartTrack,
+  decorators: [withMock],
 };
 
 const args = {
-  dataUri: 'dat/vocals_mono_8bit.dat',
-  type: 'dat',
+  dataUri: 'json/vocals_mono_8bit.json',
+  type: 'json',
 };
 
 const argTypes = {
@@ -37,6 +40,9 @@ export const Default = (args: SmartTrackProps) => (
 
 Default.args = args;
 Default.argTypes = argTypes;
+Default.parameters = {
+  mockData: BBC_DATA_REQUESTS,
+};
 
 export const WithZoom = (args: SmartTrackProps) => (
   <SmartTrack {...args}></SmartTrack>
@@ -64,3 +70,6 @@ WithZoom.decorators = [
     </PlaylistInfoContext.Provider>
   ),
 ];
+WithZoom.parameters = {
+  mockData: BBC_DATA_REQUESTS,
+};
