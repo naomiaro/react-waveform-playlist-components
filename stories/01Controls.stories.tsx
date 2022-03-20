@@ -25,7 +25,7 @@ import {
 const metadata: StoryMetadata = {
   title: 'Track Controls',
   decorators: [
-    storyFn => (
+    (storyFn) => (
       <ThemeProvider theme={{ ...myTheme, controlWidth: 200 }}>
         {storyFn()}
       </ThemeProvider>

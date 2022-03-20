@@ -19,9 +19,9 @@ interface PlaylistTimeScaleScroll {
 }
 const PlaylistTimeScaleScroll = styled.div<PlaylistTimeScaleScroll>`
   position: relative;
-  width: ${props => props.cssWidth}px;
-  margin-left: ${props => props.controlWidth}px;
-  height: ${props => props.timeScaleHeight * 2}px;
+  width: ${(props) => props.cssWidth}px;
+  margin-left: ${(props) => props.controlWidth}px;
+  height: ${(props) => props.timeScaleHeight * 2}px;
 `;
 
 interface TimeTicks {
@@ -30,8 +30,8 @@ interface TimeTicks {
 }
 const TimeTicks = styled.canvas<TimeTicks>`
   position: absolute;
-  width: ${props => props.cssWidth}px;
-  height: ${props => props.timeScaleHeight}px;
+  width: ${(props) => props.cssWidth}px;
+  height: ${(props) => props.timeScaleHeight}px;
   left: 0;
   right: 0;
   bottom: 0;
@@ -41,7 +41,7 @@ interface TimeStamp {
   readonly left: number;
 }
 const TimeStamp = styled.div<TimeStamp>`
-  left: ${props => props.left}px;
+  left: ${(props) => props.left}px;
   position: absolute;
 `;
 
@@ -53,7 +53,7 @@ export interface TimeScaleProps {
   readonly secondStep: number;
 }
 
-export const TimeScale: FunctionComponent<TimeScaleProps> = props => {
+export const TimeScale: FunctionComponent<TimeScaleProps> = (props) => {
   const {
     theme: { timeColor },
     duration,

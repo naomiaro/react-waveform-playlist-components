@@ -158,10 +158,10 @@ class Playout {
   }
   async load() {
     this.buffers = await Promise.all(
-      this.tracks.map(track => load(track, this.ac))
+      this.tracks.map((track) => load(track, this.ac))
     );
     this.sources = this.buffers.map(
-      buffer => new WebAudioPlayoutSource(this.ac, buffer)
+      (buffer) => new WebAudioPlayoutSource(this.ac, buffer)
     );
     this.configure(this.trackConfigs);
   }
@@ -241,7 +241,7 @@ class Playout {
   }
 
   stop() {
-    this.sources.forEach(source => source.stop());
+    this.sources.forEach((source) => source.stop());
   }
 }
 

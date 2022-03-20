@@ -10,7 +10,7 @@ export interface SmartChannelProps {
   length: number;
 }
 
-export const SmartChannel: FunctionComponent<SmartChannelProps> = props => {
+export const SmartChannel: FunctionComponent<SmartChannelProps> = (props) => {
   const theme = useTheme();
   const { waveHeight } = usePlaylistInfo();
   const devicePixelRatio = useDevicePixelRatio();

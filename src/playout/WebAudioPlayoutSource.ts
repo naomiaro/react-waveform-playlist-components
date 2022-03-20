@@ -68,7 +68,7 @@ class WebAudioPlayoutSource {
     // TODO expose this to allow for custom node graphs
     source.connect(this.fadeGain);
 
-    const sourcePromise = new Promise<void>(resolve => {
+    const sourcePromise = new Promise<void>((resolve) => {
       source.onended = () => {
         source.disconnect();
         resolve();

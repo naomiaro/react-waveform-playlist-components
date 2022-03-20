@@ -11,9 +11,9 @@ interface ProgressProps {
 }
 const Progress = styled.div<ProgressProps>`
   position: absolute;
-  background: ${props => props.waveProgressColor};
-  width: ${props => props.progress}px;
-  height: ${props => props.waveHeight}px;
+  background: ${(props) => props.waveProgressColor};
+  width: ${(props) => props.progress}px;
+  height: ${(props) => props.waveHeight}px;
 `;
 
 interface WaveformProps {
@@ -24,8 +24,8 @@ interface WaveformProps {
 const Waveform = styled.canvas<WaveformProps>`
   float: left;
   position: relative;
-  width: ${props => props.cssWidth}px;
-  height: ${props => props.waveHeight}px;
+  width: ${(props) => props.cssWidth}px;
+  height: ${(props) => props.waveHeight}px;
 `;
 
 interface WrapperProps {
@@ -37,10 +37,10 @@ interface WrapperProps {
 
 const Wrapper = styled.div<WrapperProps>`
   position: absolute;
-  top: ${props => props.waveHeight * props.index}px;
-  background: ${props => props.waveFillColor};
-  width: ${props => props.cssWidth}px;
-  height: ${props => props.waveHeight}px;
+  top: ${(props) => props.waveHeight * props.index}px;
+  background: ${(props) => props.waveFillColor};
+  width: ${(props) => props.cssWidth}px;
+  height: ${(props) => props.waveHeight}px;
 `;
 
 export interface ChannelProps {
@@ -57,7 +57,7 @@ export interface ChannelProps {
   waveFillColor?: string;
 }
 
-export const Channel: FunctionComponent<ChannelProps> = props => {
+export const Channel: FunctionComponent<ChannelProps> = (props) => {
   const {
     data,
     bits,

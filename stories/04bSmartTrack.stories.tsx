@@ -44,7 +44,7 @@ export const WithZoom = (args: SmartTrackProps) => (
 WithZoom.args = args;
 WithZoom.argTypes = argTypes;
 WithZoom.decorators = [
-  Story => (
+  (Story) => (
     <PlaylistInfoContext.Provider
       value={{
         sampleRate: 48000,

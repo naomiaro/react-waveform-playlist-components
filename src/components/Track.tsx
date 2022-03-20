@@ -10,8 +10,8 @@ interface ContainerProps {
 }
 
 const Container = styled.div<ContainerProps>`
-  height: ${props => props.waveHeight * props.numChannels}px;
-  margin-left: ${props => props.controlWidth}px;
+  height: ${(props) => props.waveHeight * props.numChannels}px;
+  margin-left: ${(props) => props.controlWidth}px;
 `;
 
 const ChannelContainer = styled.div`
@@ -22,7 +22,7 @@ export interface ControlsWrapperProps {
   readonly controlWidth: number;
 }
 const ControlsWrapper = styled.div<ControlsWrapperProps>`
-  width: ${props => props.controlWidth}px;
+  width: ${(props) => props.controlWidth}px;
   position: absolute;
   z-index: 1;
   left: 0;

@@ -43,13 +43,13 @@ class Loader extends EventEmitter {
     return new Promise((resolve, reject) => {
       this.ac.decodeAudioData(
         audioData,
-        audioBuffer => {
+        (audioBuffer) => {
           this.audioBuffer = audioBuffer;
           this.setStateChange(STATE.FINISHED);
 
           resolve(audioBuffer);
         },
-        err => {
+        (err) => {
           reject(err);
         }
       );

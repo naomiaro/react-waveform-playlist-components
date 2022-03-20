@@ -6,7 +6,7 @@ export default {
   component: BBCWaveformData,
 };
 
-export const Default = args => (
+export const Default = (args) => (
   <BBCWaveformData {...args}>
     {({ data, loading, error }) => {
       return (

@@ -20,7 +20,7 @@ class BlobLoader extends Loader {
 
         fr.readAsArrayBuffer(this.src);
 
-        fr.addEventListener('progress', ev => {
+        fr.addEventListener('progress', (ev) => {
           super.fileProgress(ev);
         });
 
@@ -28,15 +28,15 @@ class BlobLoader extends Loader {
           const decoderPromise = super.fileLoad(fr.result as ArrayBuffer);
 
           decoderPromise
-            .then(audioBuffer => {
+            .then((audioBuffer) => {
               resolve(audioBuffer);
             })
-            .catch(e => {
+            .catch((e) => {
               reject(e);
             });
         });
 
-        fr.addEventListener('error', err => {
+        fr.addEventListener('error', (err) => {
           reject(err);
         });
       } else {

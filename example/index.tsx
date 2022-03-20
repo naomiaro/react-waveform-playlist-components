@@ -6,10 +6,10 @@ import * as ReactDOM from 'react-dom';
 import { ToneSource } from '../src/playout/ToneSource';
 
 const playout = new ToneSource([
-  { id: 'vocals', src: '/media/audio/Vocals30.mp3' },
-  { id: 'guitar', src: '/media/audio/Guitar30.mp3' },
-  { id: 'piano', src: '/media/audio/PianoSynth30.mp3' },
-  { id: 'drums', src: '/media/audio/BassDrums30.mp3' },
+  { id: 'vocals', src: '/media/audio/Vocals30.mp3', pan: 1 },
+  { id: 'guitar', src: '/media/audio/Guitar30.mp3', pan: 1 },
+  { id: 'piano', src: '/media/audio/PianoSynth30.mp3', pan: 1 },
+  { id: 'drums', src: '/media/audio/BassDrums30.mp3', pan: 1 },
 ]);
 
 // const playout1 = new Playout(

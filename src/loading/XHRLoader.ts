@@ -17,17 +17,17 @@ class XHRLoader extends Loader {
       xhr.responseType = 'arraybuffer';
       xhr.send();
 
-      xhr.addEventListener('progress', ev => {
+      xhr.addEventListener('progress', (ev) => {
         super.fileProgress(ev);
       });
 
-      xhr.addEventListener('load', e => {
+      xhr.addEventListener('load', (e) => {
         const decoderPromise = super.fileLoad(
           (e.target as XMLHttpRequest).response
         );
 
         decoderPromise
-          .then(audioBuffer => {
+          .then((audioBuffer) => {
             resolve(audioBuffer);
           })
           .catch((err: Error) => {
@@ -35,7 +35,7 @@ class XHRLoader extends Loader {
           });
       });
 
-      xhr.addEventListener('error', err => {
+      xhr.addEventListener('error', (err) => {
         reject(err);
       });
     });
