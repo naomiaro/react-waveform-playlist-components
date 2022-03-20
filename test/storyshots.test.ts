@@ -43,6 +43,9 @@ initStoryshots({
 });
 
 /***
+ 
+https://github.com/storybookjs/storybook/issues/7587
+
 docker run -d --rm \
   -p 9222:3000 \
   -e "CONNECTION_TIMEOUT=600000" \

@@ -17,7 +17,7 @@
     "size": "size-limit",
     "analyze": "size-limit --why",
     "storybook": "start-storybook -s ./media -p 9001",
-    "build-storybook": "build-storybook && cp -R media storybook-static",
+    "build-storybook": "build-storybook && cp -R ./media/ storybook-static",
     "ghpages": "gh-pages --repo https://$GH_TOKEN@github.com/naomiaro/react-waveform-playlist-components.git -d $npm_config_outputDir",
     "website": "npm run build-storybook && npm run ghpages"
   },
