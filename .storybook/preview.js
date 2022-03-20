@@ -1,7 +1,8 @@
+import React from 'react';
 import { addDecorator } from '@storybook/react';
 import { ThemeProvider } from 'styled-components';
 import { withThemesProvider } from 'storybook-addon-styled-component-theme';
-import { DevicePixelRatioDecorator } from './decorators/devicePixelRatioDecorator';
+import { DevicePixelRatioProvider } from '../src/contexts/DevicePixelRatio';
 
 const base = {
   waveOutlineColor: 'black',
@@ -22,4 +23,11 @@ const themes = [
   Object.assign({}, base, { name: 'Base' }),
 ];
 addDecorator(withThemesProvider(themes, ThemeProvider));
-addDecorator(DevicePixelRatioDecorator);
+
+export const decorators = [
+  (Story) => (
+    <DevicePixelRatioProvider>
+      <Story />
+    </DevicePixelRatioProvider>
+  ),
+];

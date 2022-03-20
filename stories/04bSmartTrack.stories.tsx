@@ -1,4 +1,5 @@
 import React from 'react';
+import { Story } from '@storybook/react';
 import { PlaylistInfoContext } from '../src/contexts';
 import { SmartTrack, SmartTrackProps } from '../src/components';
 
@@ -44,7 +45,7 @@ export const WithZoom = (args: SmartTrackProps) => (
 WithZoom.args = args;
 WithZoom.argTypes = argTypes;
 WithZoom.decorators = [
-  (Story) => (
+  (Story: Story) => (
     <PlaylistInfoContext.Provider
       value={{
         sampleRate: 48000,
@@ -59,7 +60,7 @@ WithZoom.decorators = [
         duration: 30000,
       }}
     >
-      {Story()}
+      <Story />
     </PlaylistInfoContext.Provider>
   ),
 ];

@@ -18,7 +18,7 @@ export default {
   component: StyledPlaylist,
 };
 
-function makeControls(trackName) {
+function makeControls(trackName: string) {
   return (
     <Controls>
       <Header>{trackName}</Header>

@@ -1,12 +1,12 @@
 import React, { Fragment } from 'react';
-import { BBCWaveformData } from '../src/components';
+import { BBCWaveformData, Props } from '../src/components';
 
 export default {
   title: 'BBCWaveformData',
   component: BBCWaveformData,
 };
 
-export const Default = (args) => (
+export const Default = (args: Props) => (
   <BBCWaveformData {...args}>
     {({ data, loading, error }) => {
       return (

@@ -11,7 +11,7 @@ type RenderProps = {
   error?: Error;
 };
 
-type Props = {
+export type Props = {
   location: Location;
   type: Type;
   children: (args: RenderProps) => JSX.Element;
